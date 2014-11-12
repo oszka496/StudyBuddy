@@ -26,6 +26,12 @@
 		}
 	}
 	
+	function createSalt()
+	{
+		$text = md5(uniqid(rand(), true));
+		return substr($text, 0, 3);
+	}
+	
 	function validate($login,$pass,$cpass,$email,$fname,$lname){
 			//Checking password
 			$status = True;

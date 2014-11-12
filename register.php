@@ -1,5 +1,5 @@
 <?php
-	require_once 'functions.php';
+	require_once 'inc/functions.php';
 	
 	if (isset($_POST['user']) && isset($_POST['pass1']) && isset($_POST['pass2']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname'])){
 		$login = s($_POST['user']);

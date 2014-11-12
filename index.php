@@ -19,11 +19,13 @@
 	</header>
 	<section>
 		<aside></aside>
-		<article></article>
+		<article>
+			<a title="Save to StudyBuddy" href="javascript:document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).setAttribute('src','http://localhost/inc/manager.js');">Save to studybuddy</a>
+		</article>
 	</section>
 	<script type="text/javascript">
 		$(document).ready(function(e) {
-			
+
 		});
 	</script>
 </body>

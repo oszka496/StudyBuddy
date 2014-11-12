@@ -18,7 +18,7 @@
 	<section>
 		<aside></aside>
 		<article>
-			<a title="Save to StudyBuddy" href="javascript:document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).setAttribute('src','http://localhost/StudyBuddy/inc/manager.js');">Save to studybuddy</a>
+			<a title="Save to StudyBuddy" href="javascript:document.getElementsByTagName('body')[0].appendChild(document.createElement('script')).setAttribute('src','http://localhost/StudyBuddy/inc/manager.js');">Save to StudyBuddy</a>
 		</article>
 	</section>
 	<script type="text/javascript">

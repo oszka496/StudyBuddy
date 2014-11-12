@@ -1,0 +1,13 @@
+
+
+/* Study buddy manager */
+#study-buddy-manager h1 {
+	display: block;
+	font-family: "Tahoma", sans-serif;
+	font-weight: 100;
+	font-size: 30px;
+	text-align: center;
+	color: #007;
+	margin: 10px;
+	padding: 0;
+}

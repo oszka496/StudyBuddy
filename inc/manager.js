@@ -19,7 +19,7 @@
     // Start polling...
     checkReady(function($) {
         //TODO Check if it already exists!
-        var mgr = $("<div id='study-buddy-manager'></div>");
+        var mgr = $("<div></div>");
         mgr.css({
             'display':'block',
             'position':'fixed',
@@ -31,6 +31,7 @@
             'border':'8px solid rgb(0, 102, 170)',
             'border-radius':'8px'
         });
+        mgr.load("http://localhost/StudyBuddy/manager.php");
         $("body").append(mgr);
     });
 })();

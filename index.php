@@ -21,5 +21,10 @@
 		<aside></aside>
 		<article></article>
 	</section>
+	<script type="text/javascript">
+		$(document).ready(function(e) {
+			
+		});
+	</script>
 </body>
 </html>

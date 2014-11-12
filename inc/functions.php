@@ -1,6 +1,6 @@
 <?php
 	header('Content-type: text/html; charset=utf-8');
-	global mysqli;
+	global $mysqli;
 	$mysqli = mysqli_connect('db4free.net', 'adminer', 'axis!69', 'studybuddy') or die(mysqli_error($mysqli));
 	if(!isset($_SESSION['id'])) {
 	 	session_start();
@@ -19,7 +19,7 @@
 		if(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
 			$tab[0] = $_SESSION['id'];
 			$tab[1] = $_SESSION['firstName'];
-			$tab[2] = $_SESSION['lastName']
+			$tab[2] = $_SESSION['lastName'];
 			return $tab;
 		} else {
 			return "None";

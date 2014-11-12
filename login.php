@@ -1,5 +1,5 @@
 <?php
-	require_once 'functions.php';
+	require_once 'inc/functions.php';
 	
 	if (isset($_POST['username']) && isset($_POST['password'])){
 		

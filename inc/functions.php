@@ -26,6 +26,40 @@
 		}
 	}
 	
+	function logout(){
+		if(isset($_SESSION['id']) or isset($_SESSION['firstName']) or isset($_SESSION['lastName'])){
+			session_destroy();
+		}
+	}
+	
+	//Function for teachers to create courses
+	function createCourse($courseName,$start,$end,$courseAdress){
+		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+			$query = "INSERT INTO `courses`(`name`, `lecturerId`, `courseStart`, `courseEnd`, `courseAdress`) 
+			        VALUES ('$courseName', $_SESSION['id'], '$start', '$end', '$courseAdress')";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		}
+	}
+	
+	//Function for students to add courses they attend
+	function addCourse($courseAdress){
+		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+			$query = "SELECT `id` FROM `courses` WHERE `courseAdress` = '$courseAdress'";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			if(mysqli_num_rows($result) == 0) { // Course not found.
+				echo "Podany kurs nie istnieje w bazie danych";
+			} else {
+				$fetch = mysqli_fetch_row($result);
+				$courseId = $fetch[0];
+				$userId = $_SESSION['id'];
+				
+				$mysqli->next_result();
+				$result->close();
+				$query = "INSERT INTO `enrolled`(`studentId`, `courseId`) VALUES ('$userId','$courseId')";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		}
+	}
+	
 	function createSalt()
 	{
 		$text = md5(uniqid(rand(), true));

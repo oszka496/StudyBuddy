@@ -8,11 +8,11 @@
 </head>
 <body>
 	<form name="loginform" action="login.php" method="post" id="loginform">		
-		<h1>Log in: </h1>
-		<label for="user">Username:</label>
+		<h1>Zaloguj się: </h1>
+		<label for="user">Nazwa użytkownika:</label>
 		<input type="text" name="user" maxlength="20" id = "user" />
 		
-		<label for="pass">Password:</label>
+		<label for="pass">Hasło:</label>
 		<input type="password" name="pass" id = "pass"/>
 		
 	</form>

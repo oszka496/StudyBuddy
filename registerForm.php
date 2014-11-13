@@ -9,22 +9,22 @@
 <body>
 	<form name="regform" action="register.php" method="post" id="regform">		
 		<h1>Register: </h1>
-		<label for="user">Username*:</label>
+		<label for="user">Nazwa użytkownika:</label>
 		<input type="text" name="user" maxlength="20" id = "user" />
 		
-		<label for="user">First name*:</label>
+		<label for="user">Imię:</label>
 		<input type="text" name="fname" maxlength="20" id = "fname" />
 		
-		<label for="user">Last name*:</label>
+		<label for="user">Nazwisko:</label>
 		<input type="text" name="lname" maxlength="40" id = "lname" />
 		
-		<label for="pass1">Password*:</label>
+		<label for="pass1">Hasło:</label>
 		<input type="password" name="pass1" id = "pass1"/>
 		
-		<label for="pass2">Confirm Password*:</label>
+		<label for="pass2">Powtórz hasło:</label>
 		<input type="password" name="pass2" id = "pass2"/>
 		
-		<label for="email">Email*:</label>
+		<label for="email">Email:</label>
 		<input type="email" name="email" id="email"/>
 
 		<input type="submit" value="Register" id="validate" class="button"/>

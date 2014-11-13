@@ -13,11 +13,12 @@
 			$salt = createSalt();
 			$hash = hash('sha256', $pass);
 			$password = hash('sha256', $salt . $hash);
-			$query = "INSERT INTO user ( username, password, salt, firstName, lastName, email) VALUES ('$login', '$password', '$salt', '$fname', '$lname', '$email')";
+			$query = "INSERT INTO `user` ( `username`, `password`, `salt`, `firstName`, `lastName`, `email`) VALUES ('$login', '$password', '$salt', '$fname', '$lname', '$email')";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		} else { 			//invalid data
-		
+			echo "Nieprawidłowe dane";
 		}
 	} else {				//insufficient data
-	
+		echo "Należy uzupełnić wszyskie pola";
 	}
 ?>

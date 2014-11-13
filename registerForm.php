@@ -41,7 +41,7 @@
 			return ok;
 		});
 		
-		$('#regForm').validate({
+		$('#regform').validate({
 			rules:{
 				user: {
 					required: true,

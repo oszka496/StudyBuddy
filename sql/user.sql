@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS `user` (
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`username` VARCHAR(30) NOT NULL,
+	`password` VARCHAR(64) NOT NULL,
+	`salt`	CHAR(128),
+	`fname` VARCHAR(20) NOT NULL,
+	`lname` VARCHAR(40) NOT NULL,
+	`email` VARCHAR(50) NOT NULL,
+	`status` ENUM('teacher','student')
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -13,7 +13,7 @@
 			$salt = createSalt();
 			$hash = hash('sha256', $pass);
 			$password = hash('sha256', $salt . $hash);
-			$query = "INSERT INTO user ( username, password, salt, firstName, lastName) VALUES ('$login', '$password', '$salt', '$fname', 'lname')";
+			$query = "INSERT INTO user ( username, password, salt, firstName, lastName, email) VALUES ('$login', '$password', '$salt', '$fname', 'lname')";
 		} else { 			//invalid data
 		
 		}

@@ -1,0 +1,9 @@
+Piotrek:
+przeszukiwanie tagów i dodawanie ich do bazy danych
+
+Zuza:
+rejestracja, logowanie - debug, obs³uga b³êdów
+loginForm.php
+dodawanie kursów - funkcja i podstrona
+logout
+tabele w BD

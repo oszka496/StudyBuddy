@@ -34,6 +34,6 @@
 			}
 		}	
 	} else { //No username/password
-		echo "Należy uzupełnić wszystkie pola";
+		echo "All fields are required";
 	}
 ?>

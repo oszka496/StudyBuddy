@@ -15,10 +15,11 @@
 			$password = hash('sha256', $salt . $hash);
 			$query = "INSERT INTO `user` ( `email`, `password`, `salt`, `fname`, `lname`, `status`) VALUES ('$email', '$password', '$salt', '$fname', '$lname', '$utype')";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			header('Location: index.php');
 		} else { 			//invalid data
-			echo "Nieprawidłowe dane";
+			echo "Not enough data";
 		}
 	} else {				//insufficient data
-		echo "Należy uzupełnić wszystkie pola";
+		echo "All fields are required";
 	}
 ?>

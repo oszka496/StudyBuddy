@@ -14,6 +14,24 @@
 		$out = mysqli_real_escape_string($mysqli, $out);
 		return $out;
 	}
+
+	function sql_multi_parse($file) {
+		global $mysqli;
+		/* check connection */
+		if (mysqli_connect_errno()) {
+			printf("Unable to connect: %s\n", mysqli_connect_error());
+			exit();
+		}
+
+		$query = file_get_contents($file);
+
+		/* execute multi query */
+		if (mysqli_multi_query($mysqli, $query))
+			 echo "<span style='color: #060;'>Successfully executed query from file ".$file."</span><br>";
+		else {
+			 echo "<span style='color: #600;'>Failed to execute query in ".$file." (" . $mysqli->errno . "):<br><p>" . $mysqli->error."</p></span><br>";
+		}
+	}
 	
 	function getUser(){
 		if(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
@@ -33,10 +51,9 @@
 	}
 	
 	//Function for teachers to create courses
-	function createCourse($courseName,$start,$end,$courseAdress){
-		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
-			$query = "INSERT INTO `courses`(`name`, `lecturerId`, `courseStart`, `courseEnd`, `courseAdress`) 
-			        VALUES ('$courseName', $_SESSION['id'], '$start', '$end', '$courseAdress')";
+	function createCourse($courseName,$start,$end,$courseAdress) {
+		if ( isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
+			$query = "INSERT INTO `courses` (`name`, `lecturerId`, `courseStart`, `courseEnd`, `courseAdress`) VALUES ('$courseName', '{$_SESSION['id']}', '$start', '$end', '$courseAdress')";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		}
 	}
@@ -57,6 +74,7 @@
 				$result->close();
 				$query = "INSERT INTO `enrolled`(`studentId`, `courseId`) VALUES ('$userId','$courseId')";
 				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			}
 		}
 	}
 	

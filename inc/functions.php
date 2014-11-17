@@ -48,6 +48,8 @@
 	function logout(){
 		if(isset($_SESSION['id']) or isset($_SESSION['firstName']) or isset($_SESSION['lastName'])){
 			session_destroy();
+		} else {
+			echo "Session can't be destroyed";
 		}
 	}
 	

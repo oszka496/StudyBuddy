@@ -12,17 +12,17 @@
 		<label for="email">Email:</label>
 		<input type="email" name="email" id="email"/>
 		
-		<label for="pass1">Hasło:</label>
+		<label for="pass1">Password:</label>
 		<input type="password" name="pass1" id = "pass1"/>
 		
-		<label for="pass2">Powtórz hasło:</label>
+		<label for="pass2">Repeat password:</label>
 		<input type="password" name="pass2" id = "pass2"/>
 		
 		
-		<label for="user">Imię:</label>
+		<label for="user">First name:</label>
 		<input type="text" name="fname" maxlength="20" id = "fname" />
 		
-		<label for="user">Nazwisko:</label>
+		<label for="user">Last name:</label>
 		<input type="text" name="lname" maxlength="40" id = "lname" />
 		
 		<input type="radio" name="utype" value="teacher">Teacher<br>
@@ -34,19 +34,20 @@
 	<script type="text/javascript">
 	$(document).ready( function() {
 		var ok = true;
-	//	jQuery.validator.addMethod("check_login", function(value, element){
-	//		$.get( "check_login.php", {'user' :value}).done( function( data ) {
-	//			if(data == "false") ok = false;
-	//			else ok = true;
-	//		});
-	//		return ok;
-	//	});
+		jQuery.validator.addMethod("checkEmail", function(value, element){
+			$.get( "checkEmail.php", {'email' :value}).done( function( data ) {
+				if(data == "false") ok = false;
+				else ok = true;
+			});
+			return ok;
+		});
 		
 		$('#regform').validate({
 			rules:{
 				email: {
 					required: true,
-					email:true
+					email:true,
+					checkEmail: true
 				},
 				fname:{
 					required: true,
@@ -68,7 +69,7 @@
 			}, 
 			messages: {
 				email: {
-				//	check_login: 'zajete'
+					checkEmail: 'Email taken'
 				}
 			}
 		});

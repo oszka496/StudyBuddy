@@ -11,8 +11,15 @@
 </head>
 <body>
 	<header>
-		<h1></h1>
-		<form action="login.php" method="post" id="login-form">
+		<h1></h1><?php
+		if((isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']))){
+			echo "Hello";
+		} else {
+			include 'loginForm.php';
+			include 'registerForm.php';
+		}
+		
+		?>
 		</form>
 	</header>
 	<section>

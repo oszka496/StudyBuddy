@@ -12,7 +12,7 @@
 		<label for="user">Email:</label>
 		<input type="email" name="email" maxlength="50" id = "email" />
 		
-		<label for="pass">Hasło:</label>
+		<label for="pass">Password:</label>
 		<input type="password" name="pass" id = "pass"/>
 		<input type="submit" value="Login" id="login" class="button"/>
 		
@@ -28,14 +28,6 @@
 				pass: {
 					required: true
 				},
-			},
-			messages:{
-				email: {
-					required: "Podaj login"
-				},
-				pass: {
-					required: "Podaj hasło"
-				}
 			}
 		});
 	});

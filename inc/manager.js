@@ -18,8 +18,24 @@
 
     // Start polling...
     checkReady(function($) {
+        var url = document.URL;
+        var hrefs = new Array();
+        var links = $('body').find("a").each(function(){
+            var h = $(this).attr("href");
+            if (h!="#" && typeof h !== "undefined" && h != "") {
+                if (!h.match("^http")) {
+                    console.log(url);
+                    h = url + h;
+                }
+                hrefs.push(h);
+            }
+        });
         //TODO Check if it already exists!
-        var mgr = $("<div></div>");
+        var mgr = $('<iframe />', {
+            id: 'manager',
+            name: 'manager',
+            src: 'http://localhost/StudyBuddy/manager.php'
+        });
         mgr.css({
             'display':'block',
             'position':'fixed',
@@ -31,7 +47,11 @@
             'border':'8px solid rgb(0, 102, 170)',
             'border-radius':'8px'
         });
-        mgr.load("http://localhost/StudyBuddy/manager.php");
-        $("body").append(mgr);
+        mgr.appendTo('body');
+        mgr.load(function(){
+            var other = window.frames['manager'];
+            other.postMessage(hrefs, "*");
+        });
+        
     });
 })();

@@ -25,7 +25,7 @@
             'position':'fixed',
             'right':'30px',
             'top': '30px',
-            'width': '200px',
+            'width': '250px',
             'height': '500px',
             'background':'rgb(127, 177, 227)',
             'border':'8px solid rgb(0, 102, 170)',

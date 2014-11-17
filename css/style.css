@@ -1,6 +1,10 @@
 
 
 /* Study buddy manager */
+#study-buddy-manager {
+	padding: 10px;
+}
+
 #study-buddy-manager h1 {
 	display: block;
 	font-family: "Tahoma", sans-serif;

@@ -1,9 +1,8 @@
 CREATE TABLE IF NOT EXISTS `user` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`email` VARCHAR(50) NOT NULL,
-	`password` VARCHAR(64) NOT NULL,
-	`salt`	CHAR(128),
+	`password` VARCHAR(255) NOT NULL,
 	`fname` VARCHAR(20) NOT NULL,
 	`lname` VARCHAR(40) NOT NULL,
-	`status` ENUM('teacher','student')
+	`status` ENUM('teacher','student') 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

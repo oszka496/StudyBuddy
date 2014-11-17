@@ -10,10 +10,8 @@
 		$utype = s($_POST['utype']);
 		
 		if(validate($email,$pass,$cpass,$fname,$lname,$utype)){
-			$salt = createSalt();
-			$hash = hash('sha256', $pass);
-			$password = hash('sha256', $salt . $hash);
-			$query = "INSERT INTO `user` ( `email`, `password`, `salt`, `fname`, `lname`, `status`) VALUES ('$email', '$password', '$salt', '$fname', '$lname', '$utype')";
+			$ph = password_hash($pass,PASSWORD_DEFAULT);
+			$query = "INSERT INTO `user` ( `email`, `password`, `fname`, `lname`, `status`) VALUES ('$email', '$ph', '$fname', '$lname', '$utype')";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			header('Location: index.php');
 		} else { 			//invalid data

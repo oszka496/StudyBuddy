@@ -6,31 +6,27 @@
 		$login = s($_POST['email']);
 		$pass = s($_POST['pass']);
 		
-		$query = "SELECT `id`, `password`, `salt`, `fname`, `lname` FROM `user` WHERE `email` = '$login'";
+		$query = "SELECT `id`, `password`, `fname`, `lname` FROM `user` WHERE `email` = '$login'";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		
 		if(mysqli_num_rows($result) == 0) { // User not found.
-			echo "Nieprawidłowy login lub hasło";
+			echo "Incorrect login or password";
 		} else {
 			$fetch = mysqli_fetch_row($result);
 			$id = $fetch[0];
-			$password = $fetch[1];
-			$salt = $fetch[2];
-			$fname = $fetch[3];
-			$lname = $fetch[4];
-
-			$hash = hash('sha256', $pass);
-			$hash = hash('sha256', $salt . $hash ); 
+			$hash = $fetch[1];
+			$fname = $fetch[2];
+			$lname = $fetch[3];
 			$mysqli->next_result();
 			$result->close();
 			
-			if($hash != $password) { // Incorrect password:
-				echo "Nieprawidłowy login lub hasło";
-			} else {
+			if(password_verify( $pass, $hash )) { 
 				$_SESSION['id'] = $id;
 				$_SESSION['firstName'] = $fname;
 				$_SESSION['lastName'] = $lname;
 				header('Location: index.php');
+			} else {			 // Incorrect password:
+				echo "Incorrect login or password";
 			}
 		}	
 	} else { //No username/password

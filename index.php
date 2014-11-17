@@ -13,7 +13,8 @@
 	<header>
 		<h1></h1><?php
 		if((isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']))){
-			echo "Hello";
+			echo "<a title='Logout' href='logout.php'>Logout</a>";
+			
 		} else {
 			include 'loginForm.php';
 			include 'registerForm.php';

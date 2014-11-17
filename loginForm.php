@@ -3,17 +3,18 @@
 	<meta charset="utf-8">
 	<title>StudyBuddy</title>
 	<script type="text/javascript" src="inc/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="src/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="inc/jquery.validate.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<form name="loginform" action="login.php" method="post" id="loginform">		
 		<h1>Zaloguj się: </h1>
-		<label for="user">Nazwa użytkownika:</label>
-		<input type="text" name="user" maxlength="20" id = "user" />
+		<label for="user">Email:</label>
+		<input type="email" name="email" maxlength="50" id = "email" />
 		
 		<label for="pass">Hasło:</label>
 		<input type="password" name="pass" id = "pass"/>
+		<input type="submit" value="Login" id="login" class="button"/>
 		
 	</form>
 	
@@ -21,7 +22,7 @@
 	$(document).ready( function() {
 		$('#loginform').validate({
 			rules:{
-				user: {
+				email: {
 					required: true
 				},
 				pass: {
@@ -29,7 +30,7 @@
 				},
 			},
 			messages:{
-				user: {
+				email: {
 					required: "Podaj login"
 				},
 				pass: {

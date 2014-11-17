@@ -7,3 +7,4 @@ loginForm.php
 dodawanie kursów - funkcja i podstrona
 logout
 tabele w BD
+index.php

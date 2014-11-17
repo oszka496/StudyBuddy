@@ -7,6 +7,7 @@
 	}
 	
 	function s($in) {
+		global $mysqli;
 		$out = trim($in);
 		$out = stripslashes($out);
 		$out = htmlspecialchars($out);
@@ -52,6 +53,7 @@
 	
 	//Function for teachers to create courses
 	function createCourse($courseName,$start,$end,$courseAdress) {
+		global $mysqli;
 		if ( isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
 			$query = "INSERT INTO `courses` (`name`, `lecturerId`, `courseStart`, `courseEnd`, `courseAdress`) VALUES ('$courseName', '{$_SESSION['id']}', '$start', '$end', '$courseAdress')";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -60,6 +62,7 @@
 	
 	//Function for students to add courses they attend
 	function addCourse($courseAdress){
+		global $mysqli;
 		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
 			$query = "SELECT `id` FROM `courses` WHERE `courseAdress` = '$courseAdress'";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -84,7 +87,8 @@
 		return substr($text, 0, 3);
 	}
 	
-	function validate($login,$pass,$cpass,$email,$fname,$lname){
+	function validate($email,$pass,$cpass,$fname,$lname, $utype){
+			global $mysqli;
 			//Checking password
 			$status = True;
 			if ($pass != $cpass){													//password different than confirmation
@@ -100,14 +104,6 @@
 				$status = False;
 			}
 			
-			//Checking login
-			$query = "SELECT username FROM user WHERE username = '$login'";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			if(mysqli_num_rows($result) != 0) { 									//username not unique
-				$status = False;
-			}
-			$result->close();
-			
 			//Checking email
 			$query = "SELECT email FROM user WHERE email = '$email'";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -115,6 +111,12 @@
 				$status = False;
 			}
 			// TODO: regex
+			
+			//Checking type
+			if($utype != "teacher" and $utype != "student"){
+				$status = False;
+			}
+			
 			return $status;
 		}
 ?>

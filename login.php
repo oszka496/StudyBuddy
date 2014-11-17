@@ -1,12 +1,12 @@
 <?php
 	require_once 'inc/functions.php';
 	
-	if (isset($_POST['username']) && isset($_POST['password'])){
+	if (isset($_POST['email']) && isset($_POST['pass'])){
 		
-		$login = s($_POST['username']);
-		$pass = s($_POST['password']);
+		$login = s($_POST['email']);
+		$pass = s($_POST['pass']);
 		
-		$query = "SELECT `id`, `password`, `salt`, `firstName`, `lastName` FROM `user` WHERE `username` = '$login'";
+		$query = "SELECT `id`, `password`, `salt`, `fname`, `lname` FROM `user` WHERE `email` = '$login'";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		
 		if(mysqli_num_rows($result) == 0) { // User not found.

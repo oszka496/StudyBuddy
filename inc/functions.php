@@ -2,10 +2,11 @@
 	header('Content-type: text/html; charset=utf-8');
 	global $mysqli;
 	$mysqli = mysqli_connect('db4free.net', 'adminer', 'axis!69', 'studybuddy') or die(mysqli_error($mysqli));
-	if(!isset($_SESSION['id'])) {
-	 	session_start();
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+		session_name("study-buddy");
 	}
-	
+
 	function s($in) {
 		global $mysqli;
 		$out = trim($in);

@@ -1,7 +1,4 @@
-body {
-	font-family: sans-serif;
-	font-size: 10px;
-}
+
 
 /* Study buddy manager */
 #study-buddy-manager {
@@ -21,10 +18,4 @@ body {
 ul, ul li {
 	list-style: none;
 	list-style-type: none;
-	margin-left: 0;
-	padding-left: 0;
-}
-ul li:hover {
-	background: #ddf;
-	cursor: pointer;
 }

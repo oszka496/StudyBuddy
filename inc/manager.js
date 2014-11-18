@@ -25,8 +25,8 @@
             if (h!="#" && typeof h !== "undefined" && h != "") {
                 if (!h.match("^http")) {
                     console.log(url);
-                    if (h.charAt(h.length - 1) != "/")
-                        h = h.substring(0, h.lastIndexOf("/"));
+                    if (h.charAt(h.length-1) != "/")
+                        h = h.substring(0, h.lastIndexOf("/")+1);
                     h = url + h;
                 }
                 hrefs.push(h);

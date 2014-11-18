@@ -15,3 +15,7 @@
 	margin: 10px;
 	padding: 0;
 }
+ul, ul li {
+	list-style: none;
+	list-style-type: none;
+}

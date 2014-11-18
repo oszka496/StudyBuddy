@@ -20,13 +20,14 @@
     checkReady(function($) {
         var url = document.URL;
         var hrefs = new Array();
+        if (url.charAt(url.length-1) != "/")
+            url = url.substring(0, url.lastIndexOf("/")+1);
         var links = $('body').find("a").each(function(){
             var h = $(this).attr("href");
             if (h!="#" && typeof h !== "undefined" && h != "") {
                 if (!h.match("^http")) {
                     console.log(url);
-                    if (h.charAt(h.length-1) != "/")
-                        h = h.substring(0, h.lastIndexOf("/")+1);
+                    console.log(h);
                     h = url + h;
                 }
                 hrefs.push(h);

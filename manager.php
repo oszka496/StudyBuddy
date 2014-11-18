@@ -24,6 +24,7 @@
 				$id = $user[0];
 				$name = $user[1];
 				$surname = $user[2];
+				echo $name." ".$surname;
 			}
 		?>
 		<ul id="links">

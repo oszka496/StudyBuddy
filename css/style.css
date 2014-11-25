@@ -28,3 +28,16 @@ ul li:hover {
 	background: #ddf;
 	cursor: pointer;
 }
+
+label.btn-sm {
+	height: 20px;
+	font-size: 14px !important;
+	line-height: 0px;
+}
+
+.input-group-addon {
+	min-width: 100px;
+}
+.input-group, .btn-group {
+	margin: 10px;
+}

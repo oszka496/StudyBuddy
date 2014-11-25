@@ -7,16 +7,17 @@
 	<link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<form name="loginform" action="login.php" method="post" id="loginform">		
-		<h1>Log in: </h1>
-		<label for="user">Email:</label>
-		<input type="email" name="email" maxlength="50" id = "email" />
-		
-		<label for="pass">Password:</label>
-		<input type="password" name="pass" id = "pass"/>
-		<input type="submit" value="Login" id="login" class="button"/>
-		
-	</form>
+
+
+	<form class="navbar-form navbar-right" role="form" method="post" action="login.php">
+      <div class="form-group">
+        <input type="text" placeholder="Email" class="form-control" name="email" maxlength="50" id = "email">
+      </div>
+      <div class="form-group">
+        <input type="password" placeholder="Password" class="form-control" name="pass" id="pass">
+      </div>
+      <button type="submit" class="btn btn-success" id="login">Sign in</button>
+    </form>
 	
 	<script type="text/javascript">
 	$(document).ready( function() {

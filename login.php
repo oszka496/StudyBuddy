@@ -5,7 +5,7 @@
 		
 		$login = s($_POST['email']);
 		$pass = s($_POST['pass']);
-		
+		//$query = "CALL get_user('$email');";
 		$query = "SELECT `id`, `password`, `fname`, `lname` FROM `user` WHERE `email` = '$login'";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		

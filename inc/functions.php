@@ -1,7 +1,8 @@
 <?php
 	header('Content-type: text/html; charset=utf-8');
 	global $mysqli;
-	$mysqli = mysqli_connect('db4free.net', 'adminer', 'axis!69', 'studybuddy') or die(mysqli_error($mysqli));
+	//$mysqli = mysqli_connect('db4free.net', 'adminer', 'axis!69', 'studybuddy') or die(mysqli_error($mysqli));
+	$mysqli = mysqli_connect('localhost', 'root', 'jakieshaslo', 'studybuddy') or die(mysqli_error($mysqli));
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 		session_name("study-buddy");
@@ -58,6 +59,7 @@
 	function createCourse($courseName,$start,$end,$courseAdress) {
 		global $mysqli;
 		if ( isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
+			//$query = "CALL insert_course('$courseName', '{$_SESSION['id']}', '$start', '$end', '$courseAdress');";
 			$query = "INSERT INTO `courses` (`name`, `lecturerId`, `courseStart`, `courseEnd`, `courseAdress`) VALUES ('$courseName', '{$_SESSION['id']}', '$start', '$end', '$courseAdress')";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		}
@@ -67,6 +69,7 @@
 	function addCourse($courseAdress){
 		global $mysqli;
 		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+			//$query = "CALL check_course('$courseAdress');";
 			$query = "SELECT `id` FROM `courses` WHERE `courseAdress` = '$courseAdress'";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			if(mysqli_num_rows($result) == 0) { // Course not found.
@@ -78,16 +81,11 @@
 				
 				$mysqli->next_result();
 				$result->close();
+				//$query = "CALL choose_course(`studentId`, `courseId`);";
 				$query = "INSERT INTO `enrolled`(`studentId`, `courseId`) VALUES ('$userId','$courseId')";
 				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			}
 		}
-	}
-	
-	function createSalt()
-	{
-		$text = md5(uniqid(rand(), true));
-		return substr($text, 0, 3);
 	}
 	
 	function validate($email,$pass,$cpass,$fname,$lname, $utype){
@@ -108,6 +106,7 @@
 			}
 			
 			//Checking email
+			//$query = "CALL get_user');";
 			$query = "SELECT email FROM user WHERE email = '$email'";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			if(mysqli_num_rows($result) != 0) { 									//email not unique

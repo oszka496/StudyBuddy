@@ -1,10 +1,9 @@
 Piotrek:
 przeszukiwanie tagów i dodawanie ich do bazy danych
+gui
 
 Zuza:
-rejestracja, logowanie - debug, obs³uga b³êdów
-loginForm.php
 dodawanie kursów - funkcja i podstrona
-logout
-tabele w BD
+tabela z kursami, z uczelniami
+modyfikowanie kursów
 index.php

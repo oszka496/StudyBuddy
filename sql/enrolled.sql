@@ -4,3 +4,9 @@ CREATE TABLE IF NOT EXISTS `enrolled` (
 	FOREIGN KEY (`studentId`) REFERENCES user(`id`) ON DELETE CASCADE,
 	FOREIGN KEY (`courseId`) REFERENCES courses(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP PROCEDURE IF EXISTS choose_course;
+CREATE PROCEDURE choose_course(cid INT, sid INT);
+BEGIN
+	INSERT INTO `enrolled`(`studentId`, `courseId`) VALUES (sid,cid);
+END;

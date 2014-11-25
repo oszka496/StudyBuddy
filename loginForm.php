@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form name="loginform" action="login.php" method="post" id="loginform">		
-		<h1>Zaloguj się: </h1>
+		<h1>Log in: </h1>
 		<label for="user">Email:</label>
 		<input type="email" name="email" maxlength="50" id = "email" />
 		

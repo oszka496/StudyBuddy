@@ -3,7 +3,7 @@
 	//global $mysqli;
 	//$mysqli = mysqli_connect('db4free.net', 'adminer', 'axis!69', 'studybuddy') or die(mysqli_error($mysqli));
 	//$mysqli = mysqli_connect('localhost', 'root', 'jakieshaslo', 'studybuddy') or die(mysqli_error($mysqli));
-	require_once 'db_db4free.cfg.php';
+	require_once 'db_openshift.cfg.php';
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 		session_name("study-buddy");

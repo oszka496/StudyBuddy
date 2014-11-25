@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS `courses` (
 	`courseStart` date,
 	`courseEnd` date,
 	`courseAdress` VARCHAR(50) NOT NULL,
-	FOREIGN KEY (`lecturerId`) REFERENCES user(`id`) ON DELETE CASCADE
+	`uniId` INT(11) NOT NULL,
+	FOREIGN KEY (`lecturerId`) REFERENCES user(`id`) ON DELETE CASCADE,
+	FOREIGN KEY (`uniId`) REFERENCES university(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP PROCEDURE IF EXISTS insert_course;

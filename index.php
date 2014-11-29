@@ -21,7 +21,11 @@
     <script type="text/javascript" src="inc/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="inc/jquery-ui.js"></script>
     <script type="text/javascript" src="inc/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="inc/suggest.js" charset="utf-8"></script>
+    <script type="text/javascript" src="inc/jquery.form.js"></script>
+  
     <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -62,7 +66,7 @@
         endif;
       ?>
       <footer class="footer">
-        <p>© Company 2014</p>
+        <p>© Zuzanna Gniewaszewska, Piotr Staniów 2014</p>
       </footer>
 
     </div> <!-- /container -->

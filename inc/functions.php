@@ -40,7 +40,7 @@
 		        }
 		        /* print divider */
 		        if (!$mysqli->more_results()) {
-		        	echo "<p class='ok'></p>";
+		        	echo "<p class='ok'><br></p>";
 		        }
 		        $i += 1;
 		    } while ($mysqli->next_result());

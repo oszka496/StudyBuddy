@@ -1,6 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	font-family: sans-serif;
+	font-size: 11px;
+}
+p {
+	margin: 3px 10px;
+}
+.ok {
+	color: #090;
+}
+.fail {
+	color: #900;
+}
+</style>
+</head>
+<body>
 <?php
 	header('Content-type: text/html; charset=utf-8');
-	require_once 'db_local.cfg.php';
+	require_once 'db_db4free.cfg.php';
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 		session_name("study-buddy");
@@ -16,9 +36,9 @@
 		return $out;
 	}
 
-	function sql_multi_parse($file) {
+	function sql_multi_parse($file)
+	{
 		global $mysqli;
-		/* check connection */
 		if (mysqli_connect_errno()) {
 			printf("Unable to connect: %s\n", mysqli_connect_error());
 			exit();
@@ -26,12 +46,27 @@
 
 		$query = file_get_contents($file);
 
+		$i = 0;
 		/* execute multi query */
-		if (mysqli_multi_query($mysqli, $query))
-			 echo "<span style='color: #060;'>Successfully executed query from file ".$file."</span><br>";
-		else {
-			 echo "<span style='color: #600;'>Failed to execute query in ".$file." (" . $mysqli->errno . "):<br><p>" . $mysqli->error."</p></span><br>";
+		if ($mysqli->multi_query($query)) {
+		    do {
+		        /* store first result set */
+		        printf("<p class='ok'>Processing %d in %s...\n</p>", $i, $file);
+		        if ($result = $mysqli->store_result()) {
+		            while ($row = $result->fetch_row()) {
+		                printf("\t%s\n<br>", $row[0]);
+		            }
+		            $result->free();
+		        }
+		        /* print divider */
+		        if (!$mysqli->more_results()) {
+		        	echo "<br>";
+		        }
+		        $i += 1;
+		    } while ($mysqli->next_result());
 		}
+		else 
+			echo "<p class='fail'>Failed to execute query in ".$file." (" . $mysqli->errno . "):</p><p>" . $mysqli->error."</p>";
 	}
 	
 	function getUser(){
@@ -121,3 +156,5 @@
 			return $status;
 		}
 ?>
+</body>
+</html>

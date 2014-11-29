@@ -32,10 +32,10 @@
 		</div>
 		<div class="btn-group" id="utype" data-toggle="buttons">
 			<label class="btn btn-sm btn-default active" for="utype1">
-				<input type="radio" name="utype" id="utype1" value="teacher" autocomplete="off" checked> Teacher
+				<input type="radio" name="utype" id="utype1" value="1" autocomplete="off" checked> Teacher
 			</label>
 			<label class="btn btn-sm btn-default" for="utype2">
-		    	<input type="radio" name="utype" id="utype2" value="student" autocomplete="off"> Student
+		    	<input type="radio" name="utype" id="utype2" value="2" autocomplete="off"> Student
 			</label>
 		</div>
 		<br>

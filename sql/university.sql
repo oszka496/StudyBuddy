@@ -1,18 +1,17 @@
 CREATE TABLE IF NOT EXISTS `university` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`name` VARCHAR(50) NOT NULL,
-	`uniAddress` VARCHAR(50) NOT NULL,
-	FOREIGN KEY (`lecturerId`) REFERENCES user(`id`) ON DELETE CASCADE
+	`name` VARCHAR(100) NOT NULL,
+	`uniAddress` VARCHAR(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP PROCEDURE IF EXISTS check_uni;
-CREATE PROCEDURE check_uni(adr VARCHAR(50));
+CREATE PROCEDURE check_uni(adr VARCHAR(150))
 BEGIN
 	SELECT `id` FROM `university` WHERE `uniAddress` = adr;
 END;
 
 DROP PROCEDURE IF EXISTS insert_uni;
-CREATE PROCEDURE insert_uni(uname VARCHAR(50), adr VARCHAR(50));
+CREATE PROCEDURE insert_uni(uname VARCHAR(100), adr VARCHAR(150))
 BEGIN
-	INSERT INTO `courses` (`name`, `uniAddress`) VALUES (uname, adr);
+	INSERT INTO `university` (`name`, `uniAddress`) VALUES (uname, adr);
 END;

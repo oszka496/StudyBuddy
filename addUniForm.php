@@ -8,10 +8,10 @@
 	<form name="uniform" action="addUni.php" method="post" id="uniform">		
 		<h1>Add university: </h1>
 		<label for="uniName">Name:</label>
-		<input type="text" name="uniName" maxlength="50" id = "uniName" />
+		<input type="text" name="uniName" maxlength="100" id = "uniName" />
 		
 		<label for="website">Website URL:</label>
-		<input type="text" name="uniAddress" id = "uniAddress"/>
+		<input type="text" name="uniAddress" maxlength="150" id = "uniAddress"/>
 		<input type="submit" value="Add University" id="addUni" class="button"/>
 	</form>
 </body>

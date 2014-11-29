@@ -1,5 +1,6 @@
 <?php
 	require_once 'inc/functions.php';
+	require_once 'inc\password_compat-master\lib\password.php';
 	
 	if (isset($_POST['pass1']) && isset($_POST['pass2']) && isset($_POST['email']) && isset($_POST['fname']) && isset($_POST['lname'])  && isset($_POST['utype'])){
 		$fname = s($_POST['fname']);
@@ -11,8 +12,7 @@
 		
 		if(validate($email,$pass,$cpass,$fname,$lname,$utype)){
 			$ph = password_hash($pass,PASSWORD_DEFAULT);
-			//$query = "CALL insert_user('$email', '$ph', '$fname', '$lname', '$utype');";
-			$query = "INSERT INTO `user` ( `email`, `password`, `fname`, `lname`, `status`) VALUES ('$email', '$ph', '$fname', '$lname', '$utype')";
+			$query = "CALL insert_user('$email', '$ph', '$fname', '$lname', '$utype');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			header('Location: index.php');
 		} else { 			//invalid data

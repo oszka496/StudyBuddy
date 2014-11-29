@@ -1,6 +1,6 @@
 <?php
 	header('Content-type: text/html; charset=utf-8');
-	require_once 'db_db4free.cfg.php';
+	require_once 'db_local.cfg.php';
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 		session_name("study-buddy");
@@ -104,16 +104,17 @@
 			}
 			
 			//Checking email
-			//$query = "CALL get_user');";
-			$query = "SELECT email FROM user WHERE email = '$email'";
+			$query = "CALL get_user('$email');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			if(mysqli_num_rows($result) != 0) { 									//email not unique
 				$status = False;
 			}
+			$result->close();
+			$mysqli->next_result();
 			// TODO: regex
 			
 			//Checking type
-			if($utype != "teacher" and $utype != "student"){
+			if($utype != 0 and $utype != 1  and $utype != 2){
 				$status = False;
 			}
 			

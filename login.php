@@ -1,12 +1,12 @@
 <?php
 	require_once 'inc/functions.php';
+	require_once 'inc\password_compat-master\lib\password.php';
 	
 	if (isset($_POST['email']) && isset($_POST['pass'])){
 		
 		$login = s($_POST['email']);
 		$pass = s($_POST['pass']);
-		//$query = "CALL get_user('$email');";
-		$query = "SELECT `id`, `password`, `fname`, `lname` FROM `user` WHERE `email` = '$login'";
+		$query = "CALL get_user('$login');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		
 		if(mysqli_num_rows($result) == 0) { // User not found.

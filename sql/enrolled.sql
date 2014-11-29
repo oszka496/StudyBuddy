@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `enrolled` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP PROCEDURE IF EXISTS choose_course;
-CREATE PROCEDURE choose_course(cid INT, sid INT);
+CREATE PROCEDURE choose_course(cid INT, sid INT)
 BEGIN
 	INSERT INTO `enrolled`(`studentId`, `courseId`) VALUES (sid,cid);
 END;

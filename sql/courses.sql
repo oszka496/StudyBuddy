@@ -11,9 +11,9 @@ CREATE TABLE IF NOT EXISTS `courses` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP PROCEDURE IF EXISTS insert_course;
-CREATE PROCEDURE insert_course(cname VARCHAR(100), adr VARCHAR(150), uid INT(11))
+CREATE PROCEDURE insert_course(cname VARCHAR(100), lid INT(11), starts date, ends date, adr VARCHAR(150), uid INT(11))
 BEGIN
-	INSERT INTO `courses` (`name`, `courseAddress`, `uniId`) VALUES (cname, adr, uid);
+	INSERT INTO `courses` (`name`, `lecturerId`, `courseStart`, `courseEnd` `courseAddress`, `uniId`) VALUES (cname,lid, starts, ends, adr, uid);
 END;
 
 DROP PROCEDURE IF EXISTS insert_dates;

@@ -15,6 +15,5 @@
 			$query = "CALL insert_uni('$name','$adr', '$tags');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		}
-		echo "</ul>";
 	}
 ?>

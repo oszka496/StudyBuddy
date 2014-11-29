@@ -13,12 +13,13 @@
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="observed">
     Observed courses:<br>
+    <?php include("myCourses.php");?>
   </div>
   <div role="tabpanel" class="tab-pane" id="available">
     Your university: <strong>My UNI</strong>
   </div>
   <div role="tabpanel" class="tab-pane" id="universities">
-    <?php include("university.php")?>
+    <?php include("university.php");?>
   </div>
   <div role="tabpanel" class="tab-pane" id="settings">stg...</div>
 </div>

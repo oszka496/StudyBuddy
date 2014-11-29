@@ -12,6 +12,10 @@
 		
 		<label for="website">Website URL:</label>
 		<input type="text" name="uniAddress" maxlength="150" id = "uniAddress"/>
+
+		<label for="tags">Tags:</label>
+		<input type="text" name="tags" id = "tags"/>
+
 		<input type="submit" value="Add University" id="addUni" class="button"/>
 	</form>
 </body>

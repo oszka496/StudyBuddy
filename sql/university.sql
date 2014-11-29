@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS `university` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`name` VARCHAR(100) NOT NULL,
-	`uniAddress` VARCHAR(150) NOT NULL,
+	`uniAddress` TEXT NOT NULL,
 	`tags` VARCHAR(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -12,9 +12,9 @@ BEGIN
 END;
 
 DROP PROCEDURE IF EXISTS insert_uni;
-CREATE PROCEDURE insert_uni(uname VARCHAR(100), adr VARCHAR(150))
+CREATE PROCEDURE insert_uni(uname VARCHAR(100), adr VARCHAR(150), keyWords TEXT)
 BEGIN
-	INSERT INTO `university` (`name`, `uniAddress`) VALUES (uname, adr);
+	INSERT INTO `university` (`name`, `uniAddress`, `tags`) VALUES (uname, adr, keyWords);
 END;
 
 DROP PROCEDURE IF EXISTS delete_uni;

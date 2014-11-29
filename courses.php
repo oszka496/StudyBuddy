@@ -15,13 +15,14 @@
 		} else {
 			echo "<ul id='courses'>";
 			while ($fetch = mysqli_fetch_row($result)){
+
 				$cid = $fetch[0];
 				$name = $fetch[1];
 				$lid = $fetch[2];
 				$cstart = $fetch[3];
 				$cend = $fetch[4];
 				$adress = $fetch[5];
-				echo "<li>".$name."</li>";
+				echo "<li>".$name." <a href='enroll.php?cid=".$cid."''>Enroll</a></li>";
 			}
 			echo "</ul>";
 		}

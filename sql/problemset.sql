@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `courses` (
+CREATE TABLE IF NOT EXISTS `problemset` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`courseId` INT(11) NOT NULL,
 	`deadline` date,

@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS `problemset`;
+DROP TABLE IF EXISTS `enrolled`;
+DROP TABLE IF EXISTS `courses`;
+DROP TABLE IF EXISTS `university`;
+DROP TABLE IF EXISTS `user`;

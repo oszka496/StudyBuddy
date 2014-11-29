@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `courses` (
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	`courseId` INT(11) NOT NULL,
+	`deadline` date,
+	`psAddress` VARCHAR(150) NOT NULL,
+	FOREIGN KEY (`courseId`) REFERENCES courses(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

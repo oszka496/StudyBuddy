@@ -5,19 +5,31 @@ CREATE TABLE IF NOT EXISTS `courses` (
 	`courseStart` date,
 	`courseEnd` date,
 	`courseAddress` VARCHAR(150) NOT NULL,
-	`uniId` INT(11) NOT NULL,
+	`uniId` INT(11),
 	FOREIGN KEY (`lecturerId`) REFERENCES user(`id`) ON DELETE CASCADE,
 	FOREIGN KEY (`uniId`) REFERENCES university(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP PROCEDURE IF EXISTS insert_course;
-CREATE PROCEDURE insert_course(cname VARCHAR(50), lid INT, startd date, endd date, adr VARCHAR(50))
+CREATE PROCEDURE insert_course(cname VARCHAR(100), adr VARCHAR(150), uid INT(11))
 BEGIN
-	INSERT INTO `courses` (`name`, `lecturerId`, `courseStart`, `courseEnd`, `courseAddress`) VALUES (cname, lid, starts, ends, adr);
+	INSERT INTO `courses` (`name`, `courseAddress`, `uniId`) VALUES (cname, adr, uid);
+END;
+
+DROP PROCEDURE IF EXISTS insert_dates;
+CREATE PROCEDURE insert_dates(cid INT(11), starts date, ends date)
+BEGIN
+	UPDATE `courses` SET `courseStart`=starts AND `courseEnd`=ends WHERE `id`=cid;
+END;
+
+DROP PROCEDURE IF EXISTS insert_lecturer;
+CREATE PROCEDURE insert_dates(cid INT(11), lid INT(11))
+BEGIN
+	UPDATE `courses` SET `lecturerId`=lid WHERE `id`=cid;
 END;
 
 DROP PROCEDURE IF EXISTS check_course;
-CREATE PROCEDURE check_course(adr VARCHAR(50))
+CREATE PROCEDURE check_course(adr VARCHAR(150))
 BEGIN
 	SELECT `id` FROM `courses` WHERE `courseAddress` = adr;
 END;

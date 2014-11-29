@@ -5,4 +5,9 @@
 	//sql_multi_parse('sql/university.sql');
 	sql_multi_parse('sql/courses.sql');
 	//sql_multi_parse('sql/enrolled.sql');
+
+
+	$query = "CALL insert_course('Podstawy wszystkiego', , , , 'some address')";
+	$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+	
 ?>

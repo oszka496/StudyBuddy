@@ -1,23 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-body {
-	font-family: sans-serif;
-	font-size: 11px;
-}
-p {
-	margin: 3px 10px;
-}
-.ok {
-	color: #090;
-}
-.fail {
-	color: #900;
-}
-</style>
-</head>
-<body>
 <?php
 	header('Content-type: text/html; charset=utf-8');
 	require_once 'db_db4free.cfg.php';
@@ -46,7 +26,7 @@ p {
 
 		$query = file_get_contents($file);
 
-		$i = 0;
+		$i = 1;
 		/* execute multi query */
 		if ($mysqli->multi_query($query)) {
 		    do {
@@ -60,13 +40,16 @@ p {
 		        }
 		        /* print divider */
 		        if (!$mysqli->more_results()) {
-		        	echo "<br>";
+		        	echo "<p class='ok'></p>";
 		        }
 		        $i += 1;
 		    } while ($mysqli->next_result());
 		}
 		else 
-			echo "<p class='fail'>Failed to execute query in ".$file." (" . $mysqli->errno . "):</p><p>" . $mysqli->error."</p>";
+		{
+			echo "<p class='fail'>Failed to execute query in ".$file." (Procedure: ".$i.", error no:" . $mysqli->errno . "):</p>";
+			echo "<p class='fail'>" . $mysqli->error."</p>";
+		}
 	}
 	
 	function getUser(){
@@ -156,5 +139,3 @@ p {
 			return $status;
 		}
 ?>
-</body>
-</html>

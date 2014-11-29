@@ -33,3 +33,9 @@ CREATE PROCEDURE check_course(adr VARCHAR(150))
 BEGIN
 	SELECT `id` FROM `courses` WHERE `courseAddress` = adr;
 END;
+
+DROP PROCEDURE IF EXISTS show_course;
+CREATE PROCEDURE show_course(uid INT(11))
+BEGIN
+	SELECT * FROM `courses` WHERE `uniId`=uid;
+END;

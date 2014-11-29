@@ -13,11 +13,12 @@
 	} else {
 		echo "<ul id='universities'>";
 		while ($fetch = mysqli_fetch_row($result)){
-			$id = $fetch[0];
+			$uid = $fetch[0];
 			$name = $fetch[1];
 			$address = $fetch[2];
 			$tags = $fetch[3];
-			echo "<li><a href=''>".$name."</a></li>";
+			$courses = "courses.php?uid=".$uid;
+			echo "<li><a href=".$courses.">".$name."</a></li>";
 		}
 		echo "</ul>";
 	}

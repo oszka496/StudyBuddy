@@ -13,12 +13,14 @@
 		<label for="courseAddress">Website URL:</label>
 		<input type="url" name="courseAddress" maxlength="150" id = "courseAddress"/>
 
+
 <!-- 		<label for="courseStart">Course start:</label>
 		<input type="date" name="courseStart" maxlength="150" id = "courseStart"/>
 
 		<label for="courseEnd">Course end:</label>
 		<input type="date" name="courseEnd" maxlength="150" id = "courseEnd"/>
 -->
+		<input type="hidden" value="1" name="uniId" id="uniId"/>
 		<input type="submit" value="Add Course" id="addCourse" class="button"/>
 	</form>
 </body>

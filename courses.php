@@ -8,7 +8,6 @@
 
 	if(isset($_GET['uid'])){
 		$uid = s($_GET['uid']);
-
 		$query = "CALL show_course('$uid');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 

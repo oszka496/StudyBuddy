@@ -6,18 +6,26 @@
 		header('Location: index.php');
 	}
 
-	if(isset($_POST['courseName']) && isset($_POST['courseAddress'])){
+	if(isset($_POST['courseName']) && isset($_POST['courseAddress']) && isset($_POST['uniId'])){
 		$name = s($_POST['courseName']);
 		$adr = s($_POST['courseAddress']);
-		$uni = '1';
+		$uni = s($_POST['uniId']);
 		$query = "CALL check_course('$adr');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		if(mysqli_fetch_row($result) != 0){		 //Course already exists
-			header('Location: addCourseForm.php');
+			header('Location: index.php');
 		}
 		$result->close();
 		$mysqli->next_result();
-		$query = "CALL insert_course('$name','$adr', '$uni');";
+
+		$starts = '0000-00-00';
+		$ends = '0000-00-00';
+		if(isset($_POST['courseStart']) && isset($_POST['courseEnd'])){
+			$starts = s($_POST['courseStart']);
+			$ends = s($_POST['courseEnd']);
+		}
+
+		$query = "CALL insert_course('$name', '$starts', '$ends', '$adr', '$uni');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		//$result->close();
 		//$mysqli->next_result();
@@ -25,15 +33,6 @@
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		$fetch = mysqli_fetch_row($result);
 		$cid = $fetch[0];
-
-		if(isset($_POST['courseStart']) && isset($_POST['courseEnd'])){
-			$starts = s($_POST['courseStart']);
-			$ends = s($_POST['courseEnd']);
-			$result->close();
-			$mysqli->next_result();
-			$query = "insert_dates('$cid', '$starts', '$ends');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		}
 
 		$result->close();
 		$mysqli->next_result();

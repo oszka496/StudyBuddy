@@ -1,6 +1,4 @@
-DROP TABLE `enrolled`;
 DROP TABLE `courses`;
-DROP TABLE `university`;
 
 CREATE TABLE IF NOT EXISTS `user` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

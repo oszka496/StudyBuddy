@@ -23,7 +23,7 @@ BEGIN
 END;
 
 DROP PROCEDURE IF EXISTS insert_lecturer;
-CREATE PROCEDURE insert_dates(cid INT(11), lid INT(11))
+CREATE PROCEDURE insert_lecturer(cid INT(11), lid INT(11))
 BEGIN
 	UPDATE `courses` SET `lecturerId`=lid WHERE `id`=cid;
 END;
@@ -33,4 +33,3 @@ CREATE PROCEDURE check_course(adr VARCHAR(150))
 BEGIN
 	SELECT `id` FROM `courses` WHERE `courseAddress` = adr;
 END;
-

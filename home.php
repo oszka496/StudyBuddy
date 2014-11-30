@@ -14,7 +14,6 @@
     <?php include("myCourses.php");?>
   </div>
   <div role="tabpanel" class="tab-pane" id="unis">
-    Your university: <strong>My UNI</strong>
     <form id="searchUni">
       <input type="text" size="30" value="" id="suggest" placeholder="Search for people">
     </form>
@@ -28,7 +27,17 @@
 
 <script>
   $(function () {
-    $('#myTab a:first').tab('show')
+    $('#myTab a:first').tab('show');
+    $('.uniLink').click(function(e){
+      var self = $(this);
+      var uni = $("<div class='uniCourses'></div>");
+      var href = self.attr('href');
+      uni.load(href, function() {
+        self.after(uni);  
+      });
+      
+      e.preventDefault();
+    });
   })
 </script>
 <script type="text/javascript" src="inc/getUni.php"></script>

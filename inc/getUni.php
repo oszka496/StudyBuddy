@@ -20,8 +20,7 @@ include 'functions.php';
   echo "\"\"";
 ?> 
     ];
-    $( "#searchUni" ).autocomplete({
+    $( "#suggest" ).autocomplete({
       source: availableTags
     });
-    alert(availableTags);
   });

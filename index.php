@@ -21,7 +21,6 @@
     <script type="text/javascript" src="inc/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="inc/jquery-ui.js"></script>
     <script type="text/javascript" src="inc/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="inc/suggest.js" charset="utf-8"></script>
     <script type="text/javascript" src="inc/jquery.form.js"></script>
   
     <link type="text/css" rel="stylesheet" href="css/style.css">

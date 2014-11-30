@@ -5,12 +5,8 @@
 	} else {								//User not logged in
 		header('Location: index.php');
 	}
-	if(isset($_POST['courseName']) && isset($_POST['courseAddress']) && isset($_POST['uniId'])){
-		echo $_POST['courseName']."<br>";
-		echo $_POST['courseAddress']."<br>";
-		echo $_POST['uniId']."<br>";
-	}
-	/*if(isset($_POST['courseName']) && isset($_POST['courseAddress']) && isset($_POST['uniId'])){
+	
+	if(filled($_POST['courseName']) && filled($_POST['courseAddress']) && filled($_POST['uniId'])){
 		$name = s($_POST['courseName']);
 		$adr = s($_POST['courseAddress']);
 		$uni = s($_POST['uniId']);
@@ -22,5 +18,5 @@
 			$ends = s($_POST['courseEnd']);
 		}
 		createCourse($name,$starts,$ends,$adr,$uni);
-	}*/
+	}
 ?>

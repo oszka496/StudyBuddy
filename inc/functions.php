@@ -71,8 +71,15 @@
 		}
 	}
 	
+	//Function checking if the variable isn't empty
+	function filled($variable)
+	{
+	  return isset($variable) && !empty($variable);
+	}
+
 	//Function to check user's status
 	function checkStatus($id) {
+		global $mysqli;
 		$query = "CALL get_status('$id');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		$fetch = mysqli_fetch_row($result);

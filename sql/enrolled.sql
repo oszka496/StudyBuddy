@@ -14,5 +14,5 @@ END;
 DROP PROCEDURE IF EXISTS show_my_courses;
 CREATE PROCEDURE show_my_courses(uid INT(11))
 BEGIN
-	SELECT `courses`.`name` FROM `enrolled` INNER JOIN `courses` WHERE `studentId`=uid;
+	SELECT `courses`.`name` FROM `enrolled` INNER JOIN `courses` WHERE `enrolled`.`studentId`=uid AND `courses`.`id`=`enrolled`.`courseId`;
 END;

@@ -205,6 +205,7 @@
 	}
 
 	//Function for students to enroll to the courses
+	//Not used yet
 	function enrollToCourse($courseAddress){
 		global $mysqli;
 		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
@@ -227,20 +228,82 @@
 		}
 	}
 	
-	function addProblemSet($courseId, $deadline, $psAddress){
+	function addProblemSet($name, $courseId, $deadline, $psAddress){
 		global $mysqli;
+		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+			return;
+		}
 		//TO DO:
 		//Checking if the psAddress is on courseAddress website
 		$query = "CALL get_course('$courseId');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
-		if(mysqli_num_rows($result) == 0) { // No universities yet
+		if(mysqli_num_rows($result) == 0) { // Course doesn't exist
 				return;
 		}
 		$result->close();
 		$mysqli->next_result();
 
-		$query = "CALL insert_ps('$courseId', '$deadline', '$psAddress');";
+		$query = "CALL check_ps('$psAddress');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+
+		if(mysqli_num_rows($result) != 0) { // List already exists
+				return;
+		}
+		$result->close();
+		$mysqli->next_result();
+
+		$query = "CALL insert_ps('$name', '$courseId', '$deadline', '$psAddress');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+	}
+
+	function editProblemSet($psid, $name, $courseId, $deadline, $psAddress){
+		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+			return;
+		}
+		$query = "CALL check_ps('$psAddress');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result->close();
+		$mysqli->next_result();
+
+		if(mysqli_num_rows($result) == 0) { // List doesn't exists
+				return;
+		}
+		if(filled($name)){
+			$query = "CALL change_ps_name('$psid', '$name');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		}
+		if(filled($courseId)){
+			$query = "CALL change_ps_course('$psid', '$courseId');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		}
+		if(filled($deadline)){
+			$query = "CALL change_ps_deadline('$psid', '$deadline');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		}
+		if(filled($psAddress)){
+			$query = "CALL change_ps_address('$psid', '$psAddress');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		}
+	}
+
+	function deleteProblemSet($psid,$cid){
+		global $mysqli;
+		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+			return;
+		}
+		$query = "CALL check_ps('$psAddress');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+
+		if(mysqli_num_rows($result) == 0) { // List doesn't exists
+				return;
+		}
+		$result->close();
+		$mysqli->next_result();
+
+		$id = s($_SESSION['id']);
+		if(checkStatus($id) > 1) return;
+		$query = "CALL delete_ps('$psid', '$cid');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 	}
 

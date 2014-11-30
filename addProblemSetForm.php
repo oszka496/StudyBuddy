@@ -8,6 +8,9 @@
 	<form name="psform" action="addProblemSet.php" method="post" id="psform">		
 		<h4>Add Problem Set: </h4>
 
+		<label for="psName">Name:</label>
+		<input type="text" name="psName" maxlength="100" id = "psName"/>
+
 		<label for="psAddress">Problem Set URL:</label>
 		<input type="url" name="psAddress" maxlength="150" id = "psAddress"/>
 

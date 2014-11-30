@@ -38,7 +38,7 @@ DROP PROCEDURE IF EXISTS delete_course;
 CREATE PROCEDURE delete_course(cid INT(11))
 BEGIN
 	DELETE FROM `courses` WHERE `id`=cid;
-END
+END;
 
 DROP PROCEDURE IF EXISTS change_start_date;
 CREATE PROCEDURE change_start_date(cid INT(11), starts date)

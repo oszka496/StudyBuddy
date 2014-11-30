@@ -10,12 +10,28 @@
 		$psadr = s($_POST['psAddress']);
 		$cid = s($_POST['courseId']);
 
-		if(filled($_POST['dday']) && filled($_POST['dmonth']) && filled($_POST['dyear'])){
-			$deadline = s($_POST['dyear'])."-".s($_POST['dmonth'])."-".s($_POST['dday']);
+		if(filled($_POST['dyear'])){
+			$deadline = s($_POST['dyear']);
+			if(filled($_POST['dmonth'])){
+				$deadline = $deadline."-".s($_POST['dmonth']);
+			} else {
+				$deadline = $deadline."-01";
+			}
+			if(filled($_POST['dday'])){
+				$deadline = $deadline."-".s($_POST['dday']);
+			} else {
+				$deadline = $deadline."-01";
+			}
+			
 		} else {
 			$deadline = "0000-00-00";
 		}
-		addProblemSet($cid, $deadline, $psadr);
+		if(filled($_POST['psName'])){
+			$name = s($_POST['psName']);
+		} else {
+			$name = "";
+		}
+		addProblemSet($name, $cid, $deadline, $psadr);
 		header("Location: index.php");
 	}
 ?>

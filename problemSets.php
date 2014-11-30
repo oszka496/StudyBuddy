@@ -18,11 +18,14 @@
 			echo "<table id='problemSets'>";
 			while($fetch = mysqli_fetch_row($result)){
 				$psid = $fetch[0];
-				$psdd = $fetch[1];
-				$psadr = $fetch[2];
-				echo "<tl>";
+				$psname = $fetch[1];
+				$psdd = $fetch[2];
+				$psadr = $fetch[3];
+				echo "<tr>";
+				echo "<td>".$psname."</td>";
 				echo "<td>".$psadr."</td>";
 				echo "<td>".$psdd."</td>";
+				echo "</tr>";
 			}
 			echo "</table>";
 		}

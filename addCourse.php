@@ -13,10 +13,9 @@
 		
 		$starts = '0000-00-00';
 		$ends = '0000-00-00';
-		if(isset($_POST['courseStart']) && isset($_POST['courseEnd'])){
-			$starts = s($_POST['courseStart']);
-			$ends = s($_POST['courseEnd']);
-		}
+		
+		//TO DO: getting dates
+
 		createCourse($name,$starts,$ends,$adr,$uni);
 	}
 ?>

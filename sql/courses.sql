@@ -16,18 +16,6 @@ BEGIN
 	INSERT INTO `courses` (`name`, `courseStart`, `courseEnd`, `courseAddress`, `uniId`) VALUES (cname, starts, ends, adr, uid);
 END;
 
-DROP PROCEDURE IF EXISTS insert_dates;
-CREATE PROCEDURE insert_dates(cid INT(11), starts date, ends date)
-BEGIN
-	UPDATE `courses` SET `courseStart`=starts AND `courseEnd`=ends WHERE `id`=cid;
-END;
-
-DROP PROCEDURE IF EXISTS insert_lecturer;
-CREATE PROCEDURE insert_lecturer(cid INT(11), lid INT(11))
-BEGIN
-	UPDATE `courses` SET `lecturerId`=lid WHERE `id`=cid;
-END;
-
 DROP PROCEDURE IF EXISTS check_course;
 CREATE PROCEDURE check_course(adr VARCHAR(150))
 BEGIN
@@ -40,8 +28,44 @@ BEGIN
 	SELECT * FROM `courses` WHERE `uniId`=uid;
 END;
 
+DROP PROCEDURE IF EXISTS get_course;
+CREATE PROCEDURE get_course(cid INT(11))
+BEGIN
+	SELECT * FROM `courses` WHERE `id`=cid;
+END;
+
 DROP PROCEDURE IF EXISTS delete_course;
 CREATE PROCEDURE delete_course(cid INT(11))
 BEGIN
 	DELETE FROM `courses` WHERE `id`=cid;
 END
+
+DROP PROCEDURE IF EXISTS change_start_date;
+CREATE PROCEDURE change_start_date(cid INT(11), starts date)
+BEGIN
+	UPDATE `courses` SET `courseStart`=starts WHERE `id`=cid;
+END;
+
+DROP PROCEDURE IF EXISTS change_end_date;
+CREATE PROCEDURE change_end_date(cid INT(11), ends date)
+BEGIN
+	UPDATE `courses` SET `courseEnd`=ends WHERE `id`=cid;
+END;
+
+DROP PROCEDURE IF EXISTS change_lecturer;
+CREATE PROCEDURE change_lecturer(cid INT(11), lid INT(11))
+BEGIN
+	UPDATE `courses` SET `lecturerId`=lid WHERE `id`=cid;
+END;
+
+DROP PROCEDURE IF EXISTS change_address;
+CREATE PROCEDURE change_address(cid INT(11), adr VARCHAR(150))
+BEGIN
+	UPDATE `courses` SET `courseAddress`=adr WHERE `id`=cid;
+END;
+
+DROP PROCEDURE IF EXISTS change_uni;
+CREATE PROCEDURE change_uni(cid INT(11), uid INT(11))
+BEGIN
+	UPDATE `courses` SET `uniId`=uid WHERE `id`=cid;
+END;

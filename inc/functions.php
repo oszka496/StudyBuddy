@@ -150,11 +150,54 @@
 		}
 	}
 
+	function editCourse($courseId, $lecturerId, $courseName, $courseStart, $courseEnd, $courseAdress, $uniId){
+		global $mysqli;
+		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) and filled($courseId)){
+			$id = s($_SESSION['id']);
+			if(checkStatus($id) == 2){
+				return;
+			}
+			//if($id == $lecturerId){
+				if(filled($courseName)){
+					$query = "CALL change_name('$cid','$courseName');";
+					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+					$result->close();
+					$mysqli->next_result();
+				} 
+				if(filled($courseStart)){
+					$query = "CALL change_start_date('$cid','$courseStart');";
+					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+					$result->close();
+					$mysqli->next_result();
+				}
+				if(filled($courseEnd)){
+					$query = "CALL change_end_date('$cid','$courseEnd');";
+					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+					$result->close();
+					$mysqli->next_result();
+				}
+				if(filled($courseAddress)){
+					$query = "CALL change_address('$cid','$courseAddress');";
+					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+					$result->close();
+					$mysqli->next_result();
+				}
+				if(filled($uniId)){
+					$query = "CALL change_uni('$cid','$uniId');";
+					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+					$result->close();
+					$mysqli->next_result();
+				}
+
+			//}
+		}
+	}
+
 	function addLecturer($id, $cid){
 		global $mysqli;
 		$stat = checkStatus($id);
 			if($stat == 1){
-				$query = "CALL insert_lecturer('$cid','$id');";
+				$query = "CALL change_lecturer('$cid','$id');";
 				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 				$result->close();
 				$mysqli->next_result();
@@ -162,11 +205,11 @@
 	}
 
 	//Function for students to enroll to the courses
-	function enrollToCourse($courseAdress){
+	function enrollToCourse($courseAddress){
 		global $mysqli;
 		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
 			//$query = "CALL check_course('$courseAdress');";
-			$query = "SELECT `id` FROM `courses` WHERE `courseAdress` = '$courseAdress'";
+			$query = "SELECT `id` FROM `courses` WHERE `courseAdress` = '$courseAddress'";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			if(mysqli_num_rows($result) == 0) { // Course not found.
 				echo "Podany kurs nie istnieje w bazie danych";
@@ -184,6 +227,23 @@
 		}
 	}
 	
+	function addProblemSet($courseId, $deadline, $psAddress){
+		global $mysqli;
+		//TO DO:
+		//Checking if the psAddress is on courseAddress website
+		$query = "CALL get_course('$courseId');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+
+		if(mysqli_num_rows($result) == 0) { // No universities yet
+				return;
+		}
+		$result->close();
+		$mysqli->next_result();
+
+		$query = "CALL insert_ps('$courseId', '$deadline', '$psAddress');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+	}
+
 	function validate($email,$pass,$cpass,$fname,$lname, $utype){
 			global $mysqli;
 			//Checking password

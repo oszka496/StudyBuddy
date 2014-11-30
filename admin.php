@@ -32,6 +32,7 @@ p {
 	sql_multi_parse('sql/university.sql');
 	sql_multi_parse('sql/courses.sql');
 	sql_multi_parse('sql/enrolled.sql');
+	sql_multi_parse('sql/problemset.sql');
 ?>
 </body>
 </html>

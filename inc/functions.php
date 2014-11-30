@@ -77,6 +77,30 @@
 	  return isset($variable) && !empty($variable);
 	}
 
+	//Function to create university
+	function createUniversity($uniName, $uniAddress, $tags) {
+		$query = "CALL check_uni('$uniAddress');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		if(mysqli_fetch_row($result) != 0){
+			return;
+		}
+		$result->close();
+		$mysqli->next_result();
+		$query = "CALL insert_uni('$name','$adr', '$tags');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+	}
+
+	function deleteUniversity($universityId){
+		global $mysqli;
+		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
+			$id = s($_SESSION['id']);
+			//if(checkStatus($id) == 0){
+				$query = "CALL delete_uni('$universityId');";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			//}
+		}
+	}
+
 	//Function to check user's status
 	function checkStatus($id) {
 		global $mysqli;
@@ -87,7 +111,7 @@
 		return $stat;
 	}
 
-	//Function for teachers to create courses
+	//Function to create courses
 	function createCourse($courseName,$start,$end,$courseAddress,$uniId) {
 		global $mysqli;
 		if ( isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
@@ -115,6 +139,17 @@
 		}
 	}
 	
+	function deleteCourse($courseId){
+		global $mysqli;
+		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
+			$id = s($_SESSION['id']);
+			//if(checkStatus($id) == 0){
+				$query = "CALL delete_course('$courseId');";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			//}
+		}
+	}
+
 	function addLecturer($id, $cid){
 		global $mysqli;
 		$stat = checkStatus($id);
@@ -126,8 +161,8 @@
 			}
 	}
 
-	//Function for students to add courses they attend
-	function addCourse($courseAdress){
+	//Function for students to enroll to the courses
+	function enrollToCourse($courseAdress){
 		global $mysqli;
 		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
 			//$query = "CALL check_course('$courseAdress');";

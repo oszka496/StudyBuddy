@@ -39,3 +39,9 @@ CREATE PROCEDURE show_course(uid INT(11))
 BEGIN
 	SELECT * FROM `courses` WHERE `uniId`=uid;
 END;
+
+DROP PROCEDURE IF EXISTS delete_course;
+CREATE PROCEDURE delete_course(cid INT(11))
+BEGIN
+	DELETE FROM `courses` WHERE `id`=cid;
+END

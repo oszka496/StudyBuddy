@@ -13,17 +13,22 @@
 
 		if(mysqli_num_rows($result) == 0) { // No universities yet
 		} else {
-			echo "<ul id='courses'>";
+			echo "<table id='courseList'>";
 			while ($fetch = mysqli_fetch_row($result)){
 				$cid = $fetch[0];
 				$name = $fetch[1];
 				$lid = $fetch[2];
 				$cstart = $fetch[3];
 				$cend = $fetch[4];
-				$adress = $fetch[5];
-				echo "<li>".$name." <a href='enroll.php?cid=".$cid."''>Enroll</a></li>";
+				$address = $fetch[5];
+				echo "<tr>";
+				echo "<td>".$name."</td>";
+				echo "<td>".$address."</td>";
+				echo "<td><a href='enroll.php?cid=".$cid."''>Enroll</a></td>";
+				echo "<td><a href='deleteCourse.php?cid=".$cid."''>Delete</a></td>";
+				echo "</tr>";
 			}
-			echo "</ul>";
+			echo "</table>";
 		}
 		include('addCourseForm.php');
 	}

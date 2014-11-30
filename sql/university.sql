@@ -18,9 +18,9 @@ BEGIN
 END;
 
 DROP PROCEDURE IF EXISTS delete_uni;
-CREATE PROCEDURE delete_uni(adr VARCHAR(150))
+CREATE PROCEDURE delete_uni(uid INT(11))
 BEGIN
-	DELETE FROM `university` WHERE `uniAddress` = adr;
+	DELETE FROM `university` WHERE `id` = uid;
 END;
 
 DROP PROCEDURE IF EXISTS show_uni;

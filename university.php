@@ -11,7 +11,7 @@
 	if(mysqli_num_rows($result) == 0) { // No universities yet
 			echo "There's are no universities in the database";
 	} else {
-		echo "<ul id='universities'>";
+		echo "<ul id='universityList'>";
 		while ($fetch = mysqli_fetch_row($result)){
 			$uid = $fetch[0];
 			$name = $fetch[1];

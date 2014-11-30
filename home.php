@@ -24,7 +24,9 @@
    </form>
   </div>
   <div role="tabpanel" class="tab-pane" id="universities">
-    <?php include("university.php");?>
+    <?php $mysqli->next_result();
+      $result->close();
+      include("university.php");?>
   </div>
   <div role="tabpanel" class="tab-pane" id="settings">stg...</div>
 </div>

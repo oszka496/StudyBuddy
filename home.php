@@ -30,12 +30,18 @@
     $('#myTab a:first').tab('show');
     $('.uniLink').click(function(e){
       var self = $(this);
-      var uni = $("<div class='uniCourses'></div>");
-      var href = self.attr('href');
-      uni.load(href, function() {
-        self.after(uni);  
-      });
-      
+      if (!self.next().hasClass('uniCourses'))
+      {
+        var uni = $("<div class='uniCourses'></div>");
+        var href = self.attr('href');
+        uni.load(href, function() {
+          self.after(uni);  
+        });
+      }
+      else
+      {
+        self.next().toggle();
+      }
       e.preventDefault();
     });
   })

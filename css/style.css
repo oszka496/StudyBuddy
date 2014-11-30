@@ -41,3 +41,8 @@ label.btn-sm {
 .input-group, .btn-group {
 	margin: 10px;
 }
+
+#courses li {
+	padding: 3px 10px;
+	border-left: 3px solid #06a;
+}

@@ -15,7 +15,6 @@
 		} else {
 			echo "<ul id='courses'>";
 			while ($fetch = mysqli_fetch_row($result)){
-
 				$cid = $fetch[0];
 				$name = $fetch[1];
 				$lid = $fetch[2];

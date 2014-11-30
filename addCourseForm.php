@@ -6,7 +6,7 @@
 </head>
 <body>
 	<form name="courseform" action="addCourse.php" method="post" id="courseform">		
-		<h1>Add course: </h1>
+		<h4>Add course: </h4>
 		<label for="courseName">Name:</label>
 		<input type="text" name="courseName" maxlength="100" id = "courseName" />
 

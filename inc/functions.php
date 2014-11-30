@@ -71,16 +71,54 @@
 		}
 	}
 	
+	//Function to check user's status
+	function checkStatus($id) {
+		$query = "CALL get_status('$id');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$fetch = mysqli_fetch_row($result);
+		$stat = $fetch[0];
+		return $stat;
+	}
+
 	//Function for teachers to create courses
-	function createCourse($courseName,$start,$end,$courseAdress) {
+	function createCourse($courseName,$start,$end,$courseAddress,$uniId) {
 		global $mysqli;
 		if ( isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
-			//$query = "CALL insert_course('$courseName', '{$_SESSION['id']}', '$start', '$end', '$courseAdress');";
-			$query = "INSERT INTO `courses` (`name`, `lecturerId`, `courseStart`, `courseEnd`, `courseAdress`) VALUES ('$courseName', '{$_SESSION['id']}', '$start', '$end', '$courseAdress')";
+			$id = s($_SESSION['id']);
+			$query = "CALL check_course('$courseAddress');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			if(mysqli_fetch_row($result) != 0){		 //Course already exists
+				return;
+			}
+			$result->close();
+			$mysqli->next_result();
+
+			$query = "CALL insert_course('$courseName', '$start', '$end', '$courseAddress', '$uniId');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			
+			$query = "CALL check_course('$courseAddress');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			$fetch = mysqli_fetch_row($result);
+			$cid = $fetch[0];
+			$result->close();
+			$mysqli->next_result();
+
+			addLecturer($id, $cid);
+				
 		}
 	}
 	
+	function addLecturer($id, $cid){
+		global $mysqli;
+		$stat = checkStatus($id);
+			if($stat == 1){
+				$query = "CALL insert_lecturer('$cid','$id');";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+				$result->close();
+				$mysqli->next_result();
+			}
+	}
+
 	//Function for students to add courses they attend
 	function addCourse($courseAdress){
 		global $mysqli;

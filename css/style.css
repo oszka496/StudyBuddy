@@ -46,3 +46,10 @@ label.btn-sm {
 	padding: 3px 10px;
 	border-left: 3px solid #06a;
 }
+
+#loginForm {
+	margin-right: 0px;
+}
+.list-group-item {
+	line-height: 22px !important;
+}

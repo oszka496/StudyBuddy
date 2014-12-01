@@ -13,7 +13,7 @@
     <title>StudyBuddy</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
@@ -22,6 +22,7 @@
     <script type="text/javascript" src="inc/jquery-ui.js"></script>
     <script type="text/javascript" src="inc/jquery.validate.min.js"></script>
     <script type="text/javascript" src="inc/jquery.form.js"></script>
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>-->
   
     <link type="text/css" rel="stylesheet" href="css/style.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
@@ -37,22 +38,31 @@
 
     <div class="container">
       <div class="header">
-        <div class="navbar">
-        <p class="navbar-text h3">StudyBuddy</p>
+        <nav class="navbar navbar-default" role="navigation">
+        <a href="#" class="navbar-brand">StudyBuddy</a>
         <?php
-          $user = getUser();
+          $user = User::getUser();
       
-          if ($user == "None"):
+          if ($user === null):
           	include 'loginForm.php';
         ?>
         <?php else: ?>
-          <a title='Logout' href='logout.php' class="navbar-text navbar-right">Logout</a>
-          <span class="h4 navbar-text navbar-right"><?php echo "Hello, $user[1] $user[2]"; ?></span>
+          <div class="collapse navbar-collapse navbar-right">
+            <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo "$user[1] $user[2]"; ?> <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="logout.php">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          
         <?php endif; ?>
       </div>
-      </div>
+      </nav>
       <?php
-        if ($user == "None"):
+        if ($user === null):
       ?>
       <div class="jumbotron">
         <?php
@@ -70,4 +80,5 @@
 
     </div> <!-- /container -->
     <script src="inc/bootstrap.min.js"></script>
-</body></html>
+</body>
+</html>

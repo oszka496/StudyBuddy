@@ -9,7 +9,7 @@
 <body>
 
 
-	<form class="navbar-form navbar-right" role="form" method="post" action="login.php">
+	<form class="navbar-form navbar-right" role="form" method="post" action="login.php" id="loginForm">
       <div class="form-group">
         <input type="text" placeholder="Email" class="form-control" name="email" maxlength="50" id = "email">
       </div>

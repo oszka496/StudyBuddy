@@ -1,6 +1,7 @@
 <?php
 	header('Content-type: text/html; charset=utf-8');
 	require_once 'db_db4free.cfg.php';
+	require_once dirname(__FILE__).'\..\api\user.php';
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 		session_name("study-buddy");
@@ -49,25 +50,6 @@
 		{
 			echo "<p class='fail'>Failed to execute query in ".$file." (Procedure: ".$i.", error no:" . $mysqli->errno . "):</p>";
 			echo "<p class='fail'>" . $mysqli->error."</p>";
-		}
-	}
-	
-	function getUser(){
-		if(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
-			$tab[0] = $_SESSION['id'];
-			$tab[1] = $_SESSION['firstName'];
-			$tab[2] = $_SESSION['lastName'];
-			return $tab;
-		} else {
-			return "None";
-		}
-	}
-	
-	function logout(){
-		if(isset($_SESSION['id']) or isset($_SESSION['firstName']) or isset($_SESSION['lastName'])){
-			session_destroy();
-		} else {
-			echo "Session can't be destroyed";
 		}
 	}
 	
@@ -230,7 +212,7 @@
 	
 	function addProblemSet($name, $courseId, $deadline, $psAddress){
 		global $mysqli;
-		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']))) {
 			return;
 		}
 		//TO DO:
@@ -258,7 +240,7 @@
 	}
 
 	function editProblemSet($psid, $name, $courseId, $deadline, $psAddress){
-		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']))){
 			return;
 		}
 		$query = "CALL check_ps('$psAddress');";
@@ -289,7 +271,7 @@
 
 	function deleteProblemSet($psid,$cid){
 		global $mysqli;
-		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
+		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']))){
 			return;
 		}
 		$query = "CALL check_ps('$psAddress');";

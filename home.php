@@ -1,6 +1,6 @@
 <?php
   require_once 'inc/functions.php';
-  if (getUser() == "None")
+  if (User::getUser() === null)
     header("Location: index.php");
 ?>
 <ul class="nav nav-tabs" role="tablist" id="myTab">
@@ -15,14 +15,19 @@
   </div>
   <div role="tabpanel" class="tab-pane" id="unis">
     <form id="searchUni">
-      <input type="text" size="30" value="" id="suggest" placeholder="Search for people">
-    </form>
+      <div class="col-lg-12">
+        <div class="input-group">
+          <input type="text" class="form-control" size="30" value="" id="suggest" placeholder="Search for university">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Go!</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->    </form>
     <?php 
     $mysqli->next_result();
     $result->close();
     include("university.php");?>
   </div>
-  <div role="tabpanel" class="tab-pane" id="settings">stg...</div>
 </div>
 
 <script>

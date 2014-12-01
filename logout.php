@@ -1,5 +1,5 @@
 <?php
 include 'inc/functions.php';
-logout();
+User::logout();
 header('Location: index.php');
 ?>

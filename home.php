@@ -10,37 +10,39 @@
 
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="observed">
-    Observed courses:<br>
     <?php include("myCourses.php");?>
   </div>
+
   <div role="tabpanel" class="tab-pane" id="unis">
     <form id="searchUni">
-      <div class="col-lg-12">
         <div class="input-group">
           <input type="text" class="form-control" size="30" value="" id="suggest" placeholder="Search for university">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Go!</button>
+            <button class="btn btn-info" type="button">Go!</button>
           </span>
         </div><!-- /input-group -->
-      </div><!-- /.col-lg-6 -->    </form>
+    </form>
     <?php 
     $mysqli->next_result();
     $result->close();
     include("university.php");?>
-  </div>
+  </div>  
 </div>
 
 <script>
   $(function () {
     $('#myTab a:first').tab('show');
-    $('.uniLink').click(function(e){
+    $('.listLink').click(function(e){
       var self = $(this);
-      if (!self.next().hasClass('uniCourses'))
+      if (!self.next().hasClass('listContent'))
       {
-        var uni = $("<div class='uniCourses'></div>");
+        var uni = $("<div></div>").addClass('listContent');
         var href = self.attr('href');
         uni.load(href, function() {
-          self.after(uni);  
+          if (!self.hasClass("btn"))
+            self.after(uni);  
+          else
+            self.parent().after(uni);
         });
       }
       else

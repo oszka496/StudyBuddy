@@ -13,7 +13,7 @@
 
 		if(mysqli_num_rows($result) == 0) { // No universities yet
 		} else {
-			echo "<table id='courseList'>";
+			echo "<ul id='courseList' class=\"list-group\">";
 			while ($fetch = mysqli_fetch_row($result)){
 				$cid = $fetch[0];
 				$name = $fetch[1];
@@ -21,14 +21,25 @@
 				$cstart = $fetch[3];
 				$cend = $fetch[4];
 				$address = $fetch[5];
-				echo "<tr>";
-				echo "<td>".$name."</td>";
-				echo "<td>".$address."</td>";
-				echo "<td><a href='enroll.php?cid=".$cid."''>Enroll</a></td>";
-				echo "<td><a href='deleteCourse.php?cid=".$cid."''>Delete</a></td>";
-				echo "</tr>";
+				?>
+					<li class="list-group-item clearfix">
+						<?php echo $name . " (". $address .")"; ?>
+						<small>
+						<div class='btn-group pull-right' style='margin: 0;'>
+							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success'>
+								<span class='glyphicon glyphicon-star-empty'></span>
+								&nbsp;Enroll
+							</a>
+							<a href="deleteCourse.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-danger'>
+								<span class='glyphicon glyphicon-remove'></span>
+								&nbsp;Delete
+							</a>
+						</div>
+						</small>
+					</li>
+				<?php
 			}
-			echo "</table>";
+			echo "</ul>";
 		}
 		include('addCourseForm.php');
 	}

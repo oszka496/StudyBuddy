@@ -15,7 +15,21 @@
 	while ($fetch = mysqli_fetch_row($result)){
 		$name = $fetch[0];
 		$cid = $fetch[1];
-		echo "<li class='list-group-item clearfix'>$name<small><a href='problemSets.php?cid=".$cid."' class='btn btn-xs btn-success pull-right'><span class='glyphicon glyphicon-list'></span>&nbsp;View Problem Sets</a></small></li>";
+		echo "<li class='list-group-item clearfix'>
+				$name
+				<small>
+				<div class='btn-group pull-right' style='margin: 0;'>
+					<a href='problemSets.php?cid=$cid' class='btn btn-xs btn-success listLink'>
+						<span class='glyphicon glyphicon-list'></span>
+						&nbsp;View Problem Sets
+					</a>
+					<a href='#' class='btn btn-xs btn-danger'>
+						<span class='glyphicon glyphicon-remove'></span>
+						&nbsp;Forget it
+					</a>
+				</div>
+				</small>
+			  </li>";
 	}
 	echo "</ul>";
 ?>

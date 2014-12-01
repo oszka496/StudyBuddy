@@ -50,8 +50,9 @@
           <div class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo "$user[1] $user[2]"; ?> <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo "$user[1] $user[2]"; ?> <span class="glyphicon glyphicon-chevron-down"></span></a>
                 <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul>
               </li>

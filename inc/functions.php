@@ -61,6 +61,7 @@
 
 	//Function to create university
 	function createUniversity($uniName, $uniAddress, $tags) {
+		global $mysqli;
 		$query = "CALL check_uni('$uniAddress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		if(mysqli_fetch_row($result) != 0){
@@ -68,7 +69,7 @@
 		}
 		$result->close();
 		$mysqli->next_result();
-		$query = "CALL insert_uni('$name','$adr', '$tags');";
+		$query = "CALL insert_uni('$uniName','$uniAddress', '$tags');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 	}
 

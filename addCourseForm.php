@@ -5,26 +5,40 @@
 	<link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<form name="courseform" action="addCourse.php" method="post" id="courseform">		
+	<form name="courseform" action="addCourse.php" method="post" id="courseform" role="form">		
 		<h4>Add course: </h4>
+		<div class="form-group">
 		<label for="courseName">Name:</label>
-		<input type="text" name="courseName" maxlength="100" id = "courseName" />
+		<input type="text" name="courseName" maxlength="100" id = "courseName" class="form-control input-sm" >
+		</div>
 
+		<div class="form-group">
 		<label for="courseAddress">Website URL:</label>
-		<input type="url" name="courseAddress" maxlength="150" id = "courseAddress"/>
+		<input type="url" name="courseAddress" maxlength="150" id = "courseAddress" class="form-control input-sm" >
+		</div>
 
+		<div class="form-group">
 		<label for="sday">Course start:</label>
-		<input type="number" placeholder="DD" name="sday" id="sday" min="1" max="31" value="">
-		<input type="number" placeholder="MM" name="smonth" min="1" max="12" value="">
-		<input type="number" placeholder="YYYY" name="syear" min="2013" max="2015">
+		<input type="text" placeholder="" name="sday" id="sday" value="" class="form-control input-sm datepicker" >
+		</div>
 
+		<div class="form-group">
 		<label for="eday">Course end:</label>
-		<input type="number" placeholder="DD" name="eday" id="eday" min="1" max="31" value="">
-		<input type="number" placeholder="MM" name="emonth" min="1" max="12" value="">
-		<input type="number" placeholder="YYYY" name="eyear" min="2013" max="2015">
+		<input type="text" placeholder="" name="eday" id="eday" value="" class="form-control input-sm datepicker" >
+		</div>
 
 		<input type="hidden" value="<?php echo $uid ?>" name="uniId" id="uniId"/>
-		<input type="submit" value="Add Course" id="addCourse" class="button"/>
+		<input type="submit" value="Add Course" id="addCourse" class="btn btn-success"/>
 	</form>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('.datepicker').each(function(){
+			$(this).datepicker({
+				showWeek: true,
+				dateFormat: "dd/mm/yyyy"
+			});
+		});
+	});
+	</script>
 </body>
 </html>

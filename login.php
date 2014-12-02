@@ -27,7 +27,6 @@
 			}
 		}
 	} else { //No username/password
-		echo "All fields are required";
+		header("Location: index.php?err=All fields are required");
 	}
-	die("DUPA77");
 ?>

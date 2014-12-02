@@ -20,7 +20,7 @@
 	}
 
 	function isSessionSet(){
-		if(filled($_SESSION['id']) and filled($_SESSION['firstName']) and filled($_SESSION['lastName'])
+		if(filled($_SESSION['id']) and filled($_SESSION['firstName']) and filled($_SESSION['lastName']))
 			return true;
 		return false;
 	}

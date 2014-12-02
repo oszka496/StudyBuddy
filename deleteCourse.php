@@ -1,12 +1,18 @@
 <?php
 	require_once 'inc/functions.php';
-	if(isset($_SESSION['id'])){
-		$id = s($_SESSION['id']);
-	} else {								//User not logged in
+	if(!isset($_SESSION['id'])){
 		header('Location: index.php');
-	}
+	$id = s($_SESSION['id']);	
+
 	if(filled($_GET['cid'])){
 		$cid = s($_GET['cid']);
-		deleteCourse($cid);
+		
+		try {
+			Course::deleteCourse($cid);
+		}
+		catch (Exception $e)
+		{
+			die($e->getMessage());
+		}
 	}
 ?>

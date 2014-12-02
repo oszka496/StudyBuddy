@@ -1,10 +1,10 @@
 <?php
 require_once dirname(__FILE__).'\..\inc\functions.php';
-	class ProblemSet{
-	$PS_EXISTS = 0;
-	$PS_NOT_FOUND = 1;
+	class ProblemSet {
+	public static $PS_EXISTS = 0;
+	public static $PS_NOT_FOUND = 1;
 
-	private static checkPS(){
+	private static function checkPS(){
 		global $mysqli;
 		$query = "CALL check_ps('$psAddress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));

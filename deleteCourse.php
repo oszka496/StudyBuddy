@@ -1,8 +1,7 @@
 <?php
 	require_once 'inc/functions.php';
-	if(!isset($_SESSION['id'])){
-		header('Location: index.php');
-	$id = s($_SESSION['id']);	
+	if(!isSessionSet())
+		throw new Exception("Session wasn't set.");
 
 	if(filled($_GET['cid'])){
 		$cid = s($_GET['cid']);

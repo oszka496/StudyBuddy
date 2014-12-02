@@ -1,14 +1,56 @@
 <?php
+require_once dirname(__FILE__).'\..\inc\password_compat-master\lib\password.php';
+require_once dirname(__FILE__).'\..\inc\functions.php';
 class User
 {
+	public static $LOGIN_SUCCESS = 0;
+	public static $EMPTY_LOGIN_OR_PASSWORD = 1;
+	public static $INCORRECT_LOGIN_OR_PASSWORD = 2;
+
+	public static $REGISTER_SUCCESS = 3;
+	public static $INVALID_DATA = 4;
+
 	public static function login($login, $password)
-	{
-		return null;
+	{	
+		if(!filled($login) || !filled($password)){
+			return $EMPTY_LOGIN_OR_PASSWORD;
+		}
+
+		$query = "CALL get_user('$login');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+
+		if(mysqli_num_rows($result) == 0) { // User not found.
+			return $INCORRECT_LOGIN_OR_PASSWORD;
+		} else {
+			$fetch = mysqli_fetch_row($result);
+			$id = $fetch[0];
+			$hash = $fetch[1];
+			$fname = $fetch[2];
+			$lname = $fetch[3];
+			$mysqli->next_result();
+			$result->close();
+			
+			if(password_verify( $password, $hash )) { 
+				$_SESSION['id'] = $id;
+				$_SESSION['firstName'] = $fname;
+				$_SESSION['lastName'] = $lname;
+				return $LOGIN_SUCCESS;
+			} else {			 // Incorrect password:
+				return $INCORRECT_LOGIN_OR_PASSWORD;
+			}
+		}
 	}
 
-	public static function register()
+	public static function register($email, $password, $password1, $firstName, $lastName, $utype)
 	{
-
+		if(validate($email,$password,$password1,$firstName,$lastName,$utype)){
+			$ph = password_hash($pass,PASSWORD_DEFAULT);
+			$query = "CALL insert_user('$email', '$ph', '$firstName', '$lastName', '$utype');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			return $REGISTER_SUCCESS;
+		} else { 			//invalid data
+			return $INVALID_DATA;
+		}
 	}
 
 	public static function logout()

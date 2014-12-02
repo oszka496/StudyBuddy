@@ -10,14 +10,7 @@
 		$email = s($_POST['email']);
 		$utype = s($_POST['utype']);
 		
-		if(validate($email,$pass,$cpass,$fname,$lname,$utype)){
-			$ph = password_hash($pass,PASSWORD_DEFAULT);
-			$query = "CALL insert_user('$email', '$ph', '$fname', '$lname', '$utype');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			header('Location: index.php');
-		} else { 			//invalid data
-			echo "Not enough data";
-		}
+		register($email, $pass, $cpass, $fname, $lname, $utype)
 	} else {				//insufficient data
 		echo "All fields are required";
 	}

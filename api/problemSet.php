@@ -26,7 +26,8 @@ require_once dirname(__FILE__).'\..\inc\functions.php';
 	}
 	public static function addProblemSet($name, $courseId, $deadline, $psAddress){
 		global $mysqli;
-		if(!isSessionSet()) return;
+		if(!isSessionSet()) 
+			throw new Exception("Session wasn't set.");
 		//TO DO:
 		//Checking if the psAddress is on courseAddress website
 		$query = "CALL get_course('$courseId');";
@@ -43,7 +44,8 @@ require_once dirname(__FILE__).'\..\inc\functions.php';
 
 	public static function editProblemSet($psid, $name, $courseId, $deadline, $psAddress){
 		global $mysqli;
-		if(!isSessionSet()) return;
+		if(!isSessionSet()) 
+			throw new Exception("Session wasn't set.");
 
 		if(ProblemSet::checkPS() == 0) return $PS_NOT_FOUND;
 		updateField("name", $psid, $name);
@@ -54,7 +56,8 @@ require_once dirname(__FILE__).'\..\inc\functions.php';
 
 	function deleteProblemSet($psid,$cid){
 		global $mysqli;
-		if(!isSessionSet()) return;
+		if(!isSessionSet()) 
+			throw new Exception("Session wasn't set.");
 		if(ProblemSet::checkPS() == 0) return $PS_NOT_FOUND;
 
 		$id = s($_SESSION['id']);

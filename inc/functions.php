@@ -17,6 +17,14 @@
 		return $out;
 	}
 
+	function arePostFilled($fields)
+	{
+		foreach ($fields as &$field)
+			if (!filled($_POST[$field]))
+				return false;
+		return true;
+	}
+
 	function sql_multi_parse($file)
 	{
 		global $mysqli;

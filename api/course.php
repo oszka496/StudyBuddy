@@ -26,7 +26,7 @@ class Course
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		$cid = $mysqli->insert_id;
 		
-		addLecturer($id, $cid);
+		Course::addLecturer($id, $cid);
 		return Course::$COURSE_ADDED;
 	}
 
@@ -95,6 +95,17 @@ class Course
 		$query = "CALL choose_course(`studentId`, `courseId`);";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return Course::$COURSE_JOINED;
+	}
+
+	private static function addLecturer($id, $cid){
+		global $mysqli;
+		$stat = checkStatus($id);
+		if($stat == 1){
+			$query = "CALL change_lecturer('$cid','$id');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			$result->close();
+			$mysqli->next_result();
+		}
 	}
 }
 ?>

@@ -110,15 +110,4 @@
 		$stat = $fetch[0];
 		return $stat;
 	}
-
-	function addLecturer($id, $cid){
-		global $mysqli;
-		$stat = checkStatus($id);
-			if($stat == 1){
-				$query = "CALL change_lecturer('$cid','$id');";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-				$result->close();
-				$mysqli->next_result();
-			}
-	}
 ?>

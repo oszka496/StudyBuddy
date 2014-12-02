@@ -101,34 +101,6 @@
 		$stat = $fetch[0];
 		return $stat;
 	}
-
-	//Function to create courses
-	function createCourse($courseName,$start,$end,$courseAddress,$uniId) {
-		global $mysqli;
-		if ( isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
-			$id = s($_SESSION['id']);
-			$query = "CALL check_course('$courseAddress');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			if(mysqli_fetch_row($result) != 0){		 //Course already exists
-				return;
-			}
-			$result->close();
-			$mysqli->next_result();
-
-			$query = "CALL insert_course('$courseName', '$start', '$end', '$courseAddress', '$uniId');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			
-			$query = "CALL check_course('$courseAddress');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			$fetch = mysqli_fetch_row($result);
-			$cid = $fetch[0];
-			$result->close();
-			$mysqli->next_result();
-
-			addLecturer($id, $cid);
-				
-		}
-	}
 	
 	function deleteCourse($courseId){
 		global $mysqli;

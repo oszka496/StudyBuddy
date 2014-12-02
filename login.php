@@ -16,6 +16,10 @@
 				case User::$INCORRECT_LOGIN_OR_PASSWORD:
 					header("Location: index.php?err=Incorrect login or password");
 					break;
+
+				case User::$EMPTY_LOGIN_OR_PASSWORD:
+					header("Location: index.php?err=Empty login or password");
+					break;
 				
 				default:
 					# code...

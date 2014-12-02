@@ -10,7 +10,7 @@
 		$email = s($_POST['email']);
 		$utype = s($_POST['utype']);
 		
-		$out = User::register($email, $pass, $cpass, $fname, $lname, $utype)
+		$out = User::register($email, $pass, $cpass, $fname, $lname, $utype);
 	} else {				//insufficient data
 		echo "All fields are required";
 	}

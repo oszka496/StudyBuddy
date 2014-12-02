@@ -47,7 +47,7 @@ class User
 	{
 		global $mysqli;
 		if(User::validate($email,$password,$password1,$firstName,$lastName,$utype)){
-			$ph = password_hash($pass,PASSWORD_DEFAULT);
+			$ph = password_hash($password, PASSWORD_DEFAULT);
 			$query = "CALL insert_user('$email', '$ph', '$firstName', '$lastName', '$utype');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			return User::$REGISTER_SUCCESS;

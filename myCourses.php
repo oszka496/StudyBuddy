@@ -1,10 +1,8 @@
 <?php
 	require_once 'inc/functions.php';
-	if(isset($_SESSION['id'])){
-		$id = s($_SESSION['id']);
-	} else {								//User not logged in
-		header('Location: index.php');
-	}
+	if(!isSessionSet())
+		throw new Exception("Session wasn't set.");
+	$id = s($_SESSION['id']);
 	$query = "CALL show_my_courses($id);";
 	$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 

@@ -110,59 +110,6 @@
 		$stat = $fetch[0];
 		return $stat;
 	}
-	
-	function deleteCourse($courseId){
-		global $mysqli;
-		if(!isSessionSet()) return;
-		$id = s($_SESSION['id']);
-		//if(checkStatus($id) == 0){
-			$query = "CALL delete_course('$courseId');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		//}
-	}
-
-	function editCourse($courseId, $lecturerId, $courseName, $courseStart, $courseEnd, $courseAdress, $uniId){
-		global $mysqli;
-		if(!isSessionSet()) return;
-		
-		$id = s($_SESSION['id']);
-		if(checkStatus($id) == 2){
-			return;
-		}
-		//if($id == $lecturerId){
-			if(filled($courseName)){
-				$query = "CALL change_name('$cid','$courseName');";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-				$result->close();
-				$mysqli->next_result();
-			} 
-			if(filled($courseStart)){
-				$query = "CALL change_start_date('$cid','$courseStart');";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-				$result->close();
-				$mysqli->next_result();
-			}
-			if(filled($courseEnd)){
-				$query = "CALL change_end_date('$cid','$courseEnd');";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-				$result->close();
-				$mysqli->next_result();
-			}
-			if(filled($courseAddress)){
-				$query = "CALL change_address('$cid','$courseAddress');";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-				$result->close();
-				$mysqli->next_result();
-			}
-			if(filled($uniId)){
-				$query = "CALL change_uni('$cid','$uniId');";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-				$result->close();
-				$mysqli->next_result();
-			}
-
-		//}
-	}
 
 	function addLecturer($id, $cid){
 		global $mysqli;
@@ -173,27 +120,5 @@
 				$result->close();
 				$mysqli->next_result();
 			}
-	}
-
-	//Function for students to enroll to the courses
-	//Not used yet
-	function enrollToCourse($courseAddress){
-		global $mysqli;
-		if(!isSessionSet()) return;
-		
-		$query = "CALL check_course('$courseAdress');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		if(mysqli_num_rows($result) == 0) { // Course not found.
-			echo "Podany kurs nie istnieje w bazie danych";
-		} else {
-			$fetch = mysqli_fetch_row($result);
-			$courseId = $fetch[0];
-			$userId = $_SESSION['id'];
-			
-			$mysqli->next_result();
-			$result->close();
-			$query = "CALL choose_course(`studentId`, `courseId`);";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		}
 	}
 ?>

@@ -9,6 +9,7 @@ class User
 
 	public static $REGISTER_SUCCESS = 3;
 	public static $INVALID_DATA = 4;
+	public static $INSUFFICIENT_PRIVILEGE = 5;
 
 	public static function login($login, $password)
 	{	

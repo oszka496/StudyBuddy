@@ -2,6 +2,8 @@
 	header('Content-type: text/html; charset=utf-8');
 	require_once 'db_db4free.cfg.php';
 	require_once dirname(__FILE__).'\..\api\user.php';
+	require_once dirname(__FILE__).'\..\api\course.php';
+	require_once dirname(__FILE__).'\..\api\problemSet.php';
 	if (session_status() == PHP_SESSION_NONE) {
 		session_start();
 		session_name("study-buddy");
@@ -15,6 +17,12 @@
 		$out = strip_tags($out);
 		$out = mysqli_real_escape_string($mysqli, $out);
 		return $out;
+	}
+
+	function isSessionSet(){
+		if(filled($_SESSION['id']) and filled($_SESSION['firstName']) and filled($_SESSION['lastName'])
+			return true;
+		return false;
 	}
 
 	function arePostFilled($fields)
@@ -70,6 +78,7 @@
 	//Function to create university
 	function createUniversity($uniName, $uniAddress, $tags) {
 		global $mysqli;
+		if(!isSessionSet()) return;
 		$query = "CALL check_uni('$uniAddress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		if(mysqli_fetch_row($result) != 0){
@@ -83,18 +92,18 @@
 
 	function deleteUniversity($universityId){
 		global $mysqli;
-		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
-			$id = s($_SESSION['id']);
-			//if(checkStatus($id) == 0){
-				$query = "CALL delete_uni('$universityId');";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			//}
-		}
+		if(!isSessionSet()) return;
+		$id = s($_SESSION['id']);
+		//if(checkStatus($id) == 0){
+			$query = "CALL delete_uni('$universityId');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		//}
 	}
 
 	//Function to check user's status
 	function checkStatus($id) {
 		global $mysqli;
+		if(!isSessionSet()) return;
 		$query = "CALL get_status('$id');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		$fetch = mysqli_fetch_row($result);
@@ -104,56 +113,55 @@
 	
 	function deleteCourse($courseId){
 		global $mysqli;
-		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) ){
-			$id = s($_SESSION['id']);
-			//if(checkStatus($id) == 0){
-				$query = "CALL delete_course('$courseId');";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			//}
-		}
+		if(!isSessionSet()) return;
+		$id = s($_SESSION['id']);
+		//if(checkStatus($id) == 0){
+			$query = "CALL delete_course('$courseId');";
+			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		//}
 	}
 
 	function editCourse($courseId, $lecturerId, $courseName, $courseStart, $courseEnd, $courseAdress, $uniId){
 		global $mysqli;
-		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']) and filled($courseId)){
-			$id = s($_SESSION['id']);
-			if(checkStatus($id) == 2){
-				return;
-			}
-			//if($id == $lecturerId){
-				if(filled($courseName)){
-					$query = "CALL change_name('$cid','$courseName');";
-					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-					$result->close();
-					$mysqli->next_result();
-				} 
-				if(filled($courseStart)){
-					$query = "CALL change_start_date('$cid','$courseStart');";
-					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-					$result->close();
-					$mysqli->next_result();
-				}
-				if(filled($courseEnd)){
-					$query = "CALL change_end_date('$cid','$courseEnd');";
-					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-					$result->close();
-					$mysqli->next_result();
-				}
-				if(filled($courseAddress)){
-					$query = "CALL change_address('$cid','$courseAddress');";
-					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-					$result->close();
-					$mysqli->next_result();
-				}
-				if(filled($uniId)){
-					$query = "CALL change_uni('$cid','$uniId');";
-					$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-					$result->close();
-					$mysqli->next_result();
-				}
-
-			//}
+		if(!isSessionSet()) return;
+		
+		$id = s($_SESSION['id']);
+		if(checkStatus($id) == 2){
+			return;
 		}
+		//if($id == $lecturerId){
+			if(filled($courseName)){
+				$query = "CALL change_name('$cid','$courseName');";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+				$result->close();
+				$mysqli->next_result();
+			} 
+			if(filled($courseStart)){
+				$query = "CALL change_start_date('$cid','$courseStart');";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+				$result->close();
+				$mysqli->next_result();
+			}
+			if(filled($courseEnd)){
+				$query = "CALL change_end_date('$cid','$courseEnd');";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+				$result->close();
+				$mysqli->next_result();
+			}
+			if(filled($courseAddress)){
+				$query = "CALL change_address('$cid','$courseAddress');";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+				$result->close();
+				$mysqli->next_result();
+			}
+			if(filled($uniId)){
+				$query = "CALL change_uni('$cid','$uniId');";
+				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+				$result->close();
+				$mysqli->next_result();
+			}
+
+		//}
 	}
 
 	function addLecturer($id, $cid){
@@ -171,102 +179,21 @@
 	//Not used yet
 	function enrollToCourse($courseAddress){
 		global $mysqli;
-		if (isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])){
-			//$query = "CALL check_course('$courseAdress');";
-			$query = "SELECT `id` FROM `courses` WHERE `courseAdress` = '$courseAddress'";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			if(mysqli_num_rows($result) == 0) { // Course not found.
-				echo "Podany kurs nie istnieje w bazie danych";
-			} else {
-				$fetch = mysqli_fetch_row($result);
-				$courseId = $fetch[0];
-				$userId = $_SESSION['id'];
-				
-				$mysqli->next_result();
-				$result->close();
-				//$query = "CALL choose_course(`studentId`, `courseId`);";
-				$query = "INSERT INTO `enrolled`(`studentId`, `courseId`) VALUES ('$userId','$courseId')";
-				$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			}
-		}
-	}
-	
-	function addProblemSet($name, $courseId, $deadline, $psAddress){
-		global $mysqli;
-		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']))) {
-			return;
-		}
-		//TO DO:
-		//Checking if the psAddress is on courseAddress website
-		$query = "CALL get_course('$courseId');";
+		if(!isSessionSet()) return;
+		
+		$query = "CALL check_course('$courseAdress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-
-		if(mysqli_num_rows($result) == 0) { // Course doesn't exist
-				return;
-		}
-		$result->close();
-		$mysqli->next_result();
-
-		$query = "CALL check_ps('$psAddress');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-
-		if(mysqli_num_rows($result) != 0) { // List already exists
-				return;
-		}
-		$result->close();
-		$mysqli->next_result();
-
-		$query = "CALL insert_ps('$name', '$courseId', '$deadline', '$psAddress');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-	}
-
-	function editProblemSet($psid, $name, $courseId, $deadline, $psAddress){
-		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']))){
-			return;
-		}
-		$query = "CALL check_ps('$psAddress');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		$result->close();
-		$mysqli->next_result();
-
-		if(mysqli_num_rows($result) == 0) { // List doesn't exists
-				return;
-		}
-		if(filled($name)){
-			$query = "CALL change_ps_name('$psid', '$name');";
+		if(mysqli_num_rows($result) == 0) { // Course not found.
+			echo "Podany kurs nie istnieje w bazie danych";
+		} else {
+			$fetch = mysqli_fetch_row($result);
+			$courseId = $fetch[0];
+			$userId = $_SESSION['id'];
+			
+			$mysqli->next_result();
+			$result->close();
+			$query = "CALL choose_course(`studentId`, `courseId`);";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		}
-		if(filled($courseId)){
-			$query = "CALL change_ps_course('$psid', '$courseId');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		}
-		if(filled($deadline)){
-			$query = "CALL change_ps_deadline('$psid', '$deadline');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		}
-		if(filled($psAddress)){
-			$query = "CALL change_ps_address('$psid', '$psAddress');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		}
-	}
-
-	function deleteProblemSet($psid,$cid){
-		global $mysqli;
-		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName']))){
-			return;
-		}
-		$query = "CALL check_ps('$psAddress');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-
-		if(mysqli_num_rows($result) == 0) { // List doesn't exists
-				return;
-		}
-		$result->close();
-		$mysqli->next_result();
-
-		$id = s($_SESSION['id']);
-		if(checkStatus($id) > 1) return;
-		$query = "CALL delete_ps('$psid', '$cid');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 	}
 ?>

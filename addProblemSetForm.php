@@ -31,7 +31,7 @@
 		$('.datepicker').each(function(){
 			$(this).datepicker({
 				showWeek: true,
-				dateFormat: "dd/mm/yyyy"
+				dateFormat: "dd/mm/yy"
 			});
 		});
 	});

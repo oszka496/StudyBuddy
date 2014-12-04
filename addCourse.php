@@ -1,8 +1,8 @@
 <?php
 	require_once 'inc/functions.php';
 	
-	if(!isset($_SESSION['id']))
-		die("Unable to add course.");
+	if (!isSessionSet())
+		throw new Exception("Session wasn't set.");
 	if (!arePostFilled(['courseName', 'courseAddress', 'uniId']))
 		die("Unable to add course.");
 

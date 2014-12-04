@@ -19,8 +19,8 @@
 		</div>
 
 		<div class="form-group">
-		<label for="sday">Problem Set deadline:</label>
-		<input type="text" placeholder="" name="eday" id="eday" value="" class="form-control input-sm datepicker" >
+		<label for="psdate">Problem Set deadline:</label>
+		<input type="text" placeholder="" name="psdate" id="psdate" value="" class="form-control input-sm datepicker" >
 		</div>
 
 		<input type="hidden" value="<?php echo $cid ?>" name="courseId" id="courseId"/>

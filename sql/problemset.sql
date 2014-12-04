@@ -56,4 +56,3 @@ CREATE PROCEDURE change_ps_course(psid INT(11), cid INT(11))
 BEGIN
 	UPDATE `problemset` SET `courseId`=`cid` WHERE `id`=`psid`;
 END;
-

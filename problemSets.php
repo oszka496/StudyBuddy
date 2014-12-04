@@ -7,6 +7,7 @@
 	
 	if(filled($_GET['cid'])){
 		$cid = s($_GET['cid']);
+		$id = s($_SESSION['id']);
 		$query = "CALL check_enroll($id, $cid);";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		if(mysqli_fetch_row($result) != 0){

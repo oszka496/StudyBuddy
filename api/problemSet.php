@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__).'\..\inc\functions.php';
-	class ProblemSet {
+class ProblemSet {
 	public static $PS_EXISTS = 0;
 	public static $PS_NOT_FOUND = 1;
 
@@ -65,6 +65,6 @@ require_once dirname(__FILE__).'\..\inc\functions.php';
 		$query = "CALL delete_ps('$psid', '$cid');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 	}
-	}
+}
 
 ?>

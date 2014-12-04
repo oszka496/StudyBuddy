@@ -10,6 +10,10 @@ class User
 	public static $REGISTER_SUCCESS = 3;
 	public static $INSUFFICIENT_PRIVILEGE = 5;
 
+	public static $USERTYPE_ADMIN = 0;
+	public static $USERTYPE_TEACHER = 1;
+	public static $USERTYPE_STUDENT = 2;
+
 	public static function login($login, $password)
 	{	
 		global $mysqli;
@@ -36,7 +40,9 @@ class User
 				$_SESSION['firstName'] = $fname;
 				$_SESSION['lastName'] = $lname;
 				return User::$LOGIN_SUCCESS;
-			} else {			 // Incorrect password:
+			}
+			else
+			{
 				return User::$INCORRECT_LOGIN_OR_PASSWORD;
 			}
 		}
@@ -45,7 +51,8 @@ class User
 	public static function register($email, $password, $password1, $firstName, $lastName, $utype)
 	{
 		global $mysqli;
-		if(User::validate($email,$password,$password1,$firstName,$lastName,$utype)){
+		if(User::validate($email,$password,$password1,$firstName,$lastName,$utype))
+		{
 			$ph = password_hash($password, PASSWORD_DEFAULT);
 			$query = "CALL insert_user('$email', '$ph', '$firstName', '$lastName', '$utype');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -65,8 +72,8 @@ class User
 
 	public static function getUser()
 	{
-		if(!isSessionSet()) 
-			throw new Exception("Session wasn't set.");
+		if(!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])))
+			return null;
 		
 		$tab[0] = $_SESSION['id'];
 		$tab[1] = $_SESSION['firstName'];

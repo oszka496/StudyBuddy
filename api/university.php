@@ -13,7 +13,7 @@ class University {
 		global $mysqli;
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
-		$id = = s($_SESSION['id']);
+		$id = s($_SESSION['id']);
 		//if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
 
 		$query = "CALL check_uni('$uniAddress');";
@@ -32,7 +32,7 @@ class University {
 		global $mysqli;
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
-		$id = = s($_SESSION['id']);
+		$id = s($_SESSION['id']);
 		if(!filled($universityId)) return User::$INVALID_DATA;
 		//if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
 
@@ -45,7 +45,7 @@ class University {
 		global $mysqli;
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
-		$id = = s($_SESSION['id']);
+		$id = s($_SESSION['id']);
 		if(!filled($universityId)) return User::$INVALID_DATA;
 		//if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
 		if(filled($uniName)) updateField("name", $uniId, $uniName);

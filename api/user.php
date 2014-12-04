@@ -5,11 +5,13 @@ class User
 {
 	public static $LOGIN_SUCCESS = 0;
 	public static $INVALID_DATA = 1;
-	public static $INCORRECT_LOGIN_OR_PASSWORD = 2;
+	public static $INSUFFICIENT_PRIVILEGE = 2;
 
-	public static $REGISTER_SUCCESS = 3;
-	public static $INSUFFICIENT_PRIVILEGE = 4;
-
+	public static $INCORRECT_LOGIN_OR_PASSWORD = 3;
+	public static $USER_NOT_FOUND = 4;
+	public static $REGISTER_SUCCESS = 5;
+	public static $DELETE_SUCCESS = 6;
+	
 	public static $USERTYPE_ADMIN = 0;
 	public static $USERTYPE_TEACHER = 1;
 	public static $USERTYPE_STUDENT = 2;
@@ -20,34 +22,23 @@ class User
 		if(!filled($login) || !filled($password)){
 			return User::$INVALID_DATA;
 		}
-
-		$query = "CALL get_user('$login');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-
-		if(mysqli_num_rows($result) == 0) { // User not found.
-			return User::$INCORRECT_LOGIN_OR_PASSWORD;
+		$data = User::getUserIdByMail($login);
+		if($data == $USER_NOT_FOUND) return User::$INCORRECT_LOGIN_OR_PASSWORD;		
+		$id = $data[0];
+		$hash = $data[1];
+		$fname = $data[2];
+		$lname = $data[3];
+		$utype = $data[4];
+		if(password_verify( $password, $hash )) { 
+			$_SESSION['id'] = $id;
+			$_SESSION['firstName'] = $fname;
+			$_SESSION['lastName'] = $lname;
+			$_SESSION['uType'] = $utype;
+			return User::$LOGIN_SUCCESS;
 		} else {
-			$fetch = mysqli_fetch_row($result);
-			$id = $fetch[0];
-			$hash = $fetch[1];
-			$fname = $fetch[2];
-			$lname = $fetch[3];
-			$utype = $fetch[4];
-			$mysqli->next_result();
-			$result->close();
-			
-			if(password_verify( $password, $hash )) { 
-				$_SESSION['id'] = $id;
-				$_SESSION['firstName'] = $fname;
-				$_SESSION['lastName'] = $lname;
-				$_SESSION['uType'] = $utype;
-				return User::$LOGIN_SUCCESS;
-			}
-			else
-			{
-				return User::$INCORRECT_LOGIN_OR_PASSWORD;
-			}
+			return User::$INCORRECT_LOGIN_OR_PASSWORD;
 		}
+		
 	}
 
 	public static function register($email, $password, $password1, $firstName, $lastName, $utype)
@@ -118,6 +109,34 @@ class User
 		}
 		
 		return $status;
+	}
+
+	private static function getUserIdByMail($login){
+		global $mysqli;
+		$query = "CALL get_user('$login');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		if(mysqli_num_rows($result) == 0) return User::$USER_NOT_FOUND;
+		$fetch = mysqli_fetch_row($result);
+		$id = $fetch[0];
+		$hash = $fetch[1];
+		$fname = $fetch[2];
+		$lname = $fetch[3];
+		$utype = $fetch[4];
+		$mysqli->next_result();
+		$result->close();
+		$tab = [$id, $hash, $fname, $lname, $utype];
+		return $tab;
+	}
+
+	private static function deleteUser($mail){
+		global $mysqli;
+		if(!isSessionSet()) 
+			throw new Exception("Session wasn't set.");
+		$id = s($_SESSION['id']);
+		if((s($SESSION_['uType']) != 0) && $id != getUserIdByMail($mail)[0]) return $INSUFFICIENT_PRIVILEGE;
+		$query = "CALL delete_user('$mail');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		return $DELETE_SUCCESS;
 	}
 }
 

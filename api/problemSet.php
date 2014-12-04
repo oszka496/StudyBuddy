@@ -9,7 +9,7 @@ class ProblemSet {
 	public static $ADD_PS_SUCCESS = 6;
 	public static $DELETE_PS_SUCCESS = 7;
 
-	private static function checkPS(){
+	private static function checkPS($psAddress){
 		global $mysqli;
 		$query = "CALL check_ps('$psAddress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -46,7 +46,7 @@ class ProblemSet {
 		}
 		$result->close();
 		$mysqli->next_result();
-		if(ProblemSet::checkPS() != 0) return ProblemSet::$PS_EXISTS;
+		if(ProblemSet::checkPS($psAddress) != 0) return ProblemSet::$PS_EXISTS;
 		$query = "CALL insert_ps('$name', '$courseId', '$deadline', '$psAddress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return ProblemSet::$ADD_PS_SUCCESS;
@@ -72,7 +72,7 @@ class ProblemSet {
 		if(ProblemSet::checkPS() == 0) return ProblemSet::$PS_NOT_FOUND;
 
 		$id = s($_SESSION['id']);
-		if(checkStatus($id) > 1) return User::$INSUFICIENT_PRIVIILEGE;
+		//if(checkStatus($id) > 1) return User::$INSUFICIENT_PRIVIILEGE;
 		$query = "CALL delete_ps('$psid', '$cid');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return ProblemSet::$DELETE_PS_SUCCESS;

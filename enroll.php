@@ -4,9 +4,9 @@
 		header('Location: index.php');
 	}
 	
-	if(isset($_GET['cid'])){
+	if(filled($_GET['cid'])){
 		try {
-			Course::enrollToCourse(s($_GET['cid']));
+			echo Course::enrollToCourse(s($_GET['cid']));
 		}
 		catch (Exception $e)
 		{

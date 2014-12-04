@@ -22,7 +22,7 @@ class Course
 		$result->close();
 		$mysqli->next_result();
 
-		$query = "CALL insert_course('$name', '$start', '$end', '$address', '$uniId');";
+		$query = "CALL insert_course('$name', '$startDate', '$endDate', '$address', '$universityId');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		$cid = $mysqli->insert_id;
 		
@@ -81,7 +81,7 @@ class Course
 		if(!isSessionSet())
 			throw new Exception("Session wasn't set.");
 		
-		$query = "CALL check_course('$courseAdress');";
+		$query = "CALL check_course('$courseAddress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		
 		if(mysqli_num_rows($result) == 0) 

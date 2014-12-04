@@ -28,16 +28,12 @@ p {
 	header('Content-Type: text/html; charset=utf-8');
 	include 'inc/functions.php';
 	//sql_multi_parse('sql/drops.sql');
-	// sql_multi_parse('sql/suggest.sql');
+	sql_multi_parse('sql/suggest.sql');
 	sql_multi_parse('sql/user.sql');
-	// sql_multi_parse('sql/university.sql');
-	// sql_multi_parse('sql/courses.sql');
-	// sql_multi_parse('sql/enrolled.sql');
-	// sql_multi_parse('sql/problemset.sql');
-
-	// echo User::register('student@test.com', 'teststudent', 'teststudent', 'Test', 'Student', 2);
-	// echo User::register('teacher@test.com', 'testteacher', 'testteacher', 'Test', 'Teacher', 1);
-	// echo User::register('admin@test.com', 'testadmin', 'testadmin', 'Test', 'Admin', 0);
+	sql_multi_parse('sql/university.sql');
+	sql_multi_parse('sql/courses.sql');
+	sql_multi_parse('sql/enrolled.sql');
+	sql_multi_parse('sql/problemset.sql');
 ?>
 </body>
 </html>

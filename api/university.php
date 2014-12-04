@@ -23,7 +23,7 @@ class University {
 		}
 		$result->close();
 		$mysqli->next_result();
-		$query = "CALL insert_uni('$uniName','$uniAddress', '$tags', $mail);";
+		$query = "CALL insert_uni('$uniName','$uniAddress', '$tags');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return University::$ADD_UNI_SUCCESS;
 	}

@@ -18,7 +18,7 @@
 	//TO DO: getting dates
 	try 
 	{
-		Course::createCourse($name, $adr, $uni, $starts, $ends);
+		Course::addCourse($name, $adr, $uni, $starts, $ends);
 	}
 	catch (Exception $e)
 	{

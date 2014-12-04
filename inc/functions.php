@@ -1,7 +1,8 @@
 <?php
 	header('Content-type: text/html; charset=utf-8');
-	require_once 'db_openshift.cfg.php';
+	require_once 'db_db4free.cfg.php';
 	require_once dirname(__FILE__).'\..\api\user.php';
+	require_once dirname(__FILE__).'\..\api\university.php';
 	require_once dirname(__FILE__).'\..\api\course.php';
 	require_once dirname(__FILE__).'\..\api\problemSet.php';
 	if (session_status() == PHP_SESSION_NONE) {

@@ -128,7 +128,7 @@ class User
 		return $tab;
 	}
 
-	private static function deleteUser($mail){
+	public static function deleteUser($mail){
 		global $mysqli;
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");

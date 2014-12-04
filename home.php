@@ -30,7 +30,7 @@
 </div>
 
 <script>
-  $(function () {
+  $(function() {
     $('#myTab a:first').tab('show');
     $('.listLink').click(function(e){
       var self = $(this);

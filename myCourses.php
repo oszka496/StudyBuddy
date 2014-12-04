@@ -6,9 +6,11 @@
 	$query = "CALL show_my_courses($id);";
 	$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
-	if(mysqli_num_rows($result) == 0) // No universities yet
-		die("<span class='label label-danger'>You have no courses yet.</span>");
-	
+	if(mysqli_num_rows($result) == 0)
+	{
+		echo "<h2 class='center-block'><span class='label label-danger'>You have no courses yet.</span></h2>";
+		return;
+	}
 	echo "<ul id='userCourses' class='list-group'>";
 	while ($fetch = mysqli_fetch_row($result)){
 		$name = $fetch[0];

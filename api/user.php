@@ -32,6 +32,7 @@ class User
 			$hash = $fetch[1];
 			$fname = $fetch[2];
 			$lname = $fetch[3];
+			$utype = $fetch[4];
 			$mysqli->next_result();
 			$result->close();
 			
@@ -39,6 +40,7 @@ class User
 				$_SESSION['id'] = $id;
 				$_SESSION['firstName'] = $fname;
 				$_SESSION['lastName'] = $lname;
+				$_SESSION['uType'] = $utype;
 				return User::$LOGIN_SUCCESS;
 			}
 			else
@@ -72,49 +74,51 @@ class User
 
 	public static function getUser()
 	{
-		if(!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])))
+		if(!isset($_SESSION['id']))
 			return null;
 		
 		$tab[0] = $_SESSION['id'];
 		$tab[1] = $_SESSION['firstName'];
 		$tab[2] = $_SESSION['lastName'];
+		$tab[3] = $_SESSION['uType'];
 		return $tab;
 	}
 
-	private static function validate($email,$pass,$cpass,$fname,$lname, $utype){
-			global $mysqli;
-			//Checking password
-			$status = True;
-			if ($pass != $cpass){													//password different than confirmation
-				$status = False;
-			} else if (strlen($pass) < 8) {											//password too short
-				$status = False;
-			} else if (strlen($pass) > 32) {										//password too long
-				$status = False;
-			}
-			
-			//Checking name
-			if (strlen($fname) == 0 or strlen($lname) == 0){						//empty first or last name
-				$status = False;
-			}
-			
-			//Checking email
-			$query = "CALL get_user('$email');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			if(mysqli_num_rows($result) != 0) { 									//email not unique
-				$status = False;
-			}
-			$result->close();
-			$mysqli->next_result();
-			// TODO: regex
-			
-			//Checking type
-			if($utype != 0 and $utype != 1  and $utype != 2){
-				$status = False;
-			}
-			
-			return $status;
+	private static function validate($email,$pass,$cpass,$fname,$lname, $utype)
+	{
+		global $mysqli;
+		//Checking password
+		$status = True;
+		if ($pass != $cpass){													//password different than confirmation
+			$status = False;
+		} else if (strlen($pass) < 8) {											//password too short
+			$status = False;
+		} else if (strlen($pass) > 32) {										//password too long
+			$status = False;
 		}
+		
+		//Checking name
+		if (strlen($fname) == 0 or strlen($lname) == 0){						//empty first or last name
+			$status = False;
+		}
+		
+		//Checking email
+		$query = "CALL get_user('$email');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		if(mysqli_num_rows($result) != 0) { 									//email not unique
+			$status = False;
+		}
+		$result->close();
+		$mysqli->next_result();
+		// TODO: regex
+		
+		//Checking type
+		if($utype != 0 and $utype != 1  and $utype != 2){
+			$status = False;
+		}
+		
+		return $status;
+	}
 }
 
 ?>

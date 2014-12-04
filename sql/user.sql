@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 DROP PROCEDURE IF EXISTS get_user;
 CREATE PROCEDURE get_user(em  VARCHAR(50))
 BEGIN
-	SELECT `id`, `password`, `fname`, `lname` FROM `user` WHERE `email` = em;
+	SELECT `id`, `password`, `fname`, `lname`, `status` FROM `user` WHERE `email` = em;
 END;
 
 DROP PROCEDURE IF EXISTS get_status;

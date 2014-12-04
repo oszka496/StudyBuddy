@@ -1,7 +1,11 @@
 <?php
 include 'functions.php';
-  $q = "SELECT `name` FROM `university`";
-  $sql = mysqli_query($mysqli,$q) or die(__FILE__." (".__LINE__.")".": ".mysqli_error($mysqli));
+  if(!isSessionSet())
+    throw new Exception("Session wasn't set.");
+  $id = s($_SESSION['id']);
+
+  $query = "CALL show_my_courses($id);";
+  $sql = mysqli_query($mysqli, $query) or die(__FILE__." (".__LINE__.")".": ".mysqli_error($mysqli));
   $i=0;
   $results = array();
   header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
@@ -20,7 +24,7 @@ include 'functions.php';
   echo "\"\"";
 ?> 
     ];
-    $( "#suggestUni" ).autocomplete({
+    $( "#suggestCourse" ).autocomplete({
       source: availableTags
     });
   });

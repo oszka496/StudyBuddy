@@ -10,12 +10,12 @@
 
 		<div class="form-group">
 		<label for="psName">Name:</label>
-		<input type="text" name="psName" maxlength="100" id = "psName" class="form-control input-sm datepicker">
+		<input type="text" name="psName" maxlength="100" id = "psName" class="form-control input-sm">
 		</div>
 
 		<div class="form-group">
 		<label for="psAddress">Problem Set URL:</label>
-		<input type="url" name="psAddress" maxlength="150" id = "psAddress" class="form-control input-sm datepicker">
+		<input type="url" name="psAddress" maxlength="150" id = "psAddress" class="form-control input-sm">
 		</div>
 
 		<div class="form-group">

@@ -1,8 +1,10 @@
 <?php
 	require_once 'inc/functions.php';
 	if(!isSessionSet())
-	throw new Exception("Session wasn't set.");
+		throw new Exception("Session wasn't set.");
 
+	$id = s($_SESSION['id']);
+	
 	if(filled($_GET['cid'])){
 		$cid = s($_GET['cid']);
 		$query = "CALL check_enroll($id, $cid);";

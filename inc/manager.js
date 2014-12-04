@@ -16,6 +16,19 @@
         }
     };
 
+    function parseLink(href)
+    {
+        if (h!="#" && typeof h !== "undefined" && h != "") {
+            if (!h.match("^http")) {
+                console.log(url);
+                console.log(h);
+                h = url + h;
+            }
+            return h;
+        }
+        return "";
+    }
+
     // Start polling...
     checkReady(function($) {
         var url = document.URL;
@@ -24,14 +37,9 @@
             url = url.substring(0, url.lastIndexOf("/")+1);
         var links = $('body').find("a").each(function(){
             var h = $(this).attr("href");
-            if (h!="#" && typeof h !== "undefined" && h != "") {
-                if (!h.match("^http")) {
-                    console.log(url);
-                    console.log(h);
-                    h = url + h;
-                }
+            h = parseLink(h);
+            if (h != "")
                 hrefs.push(h);
-            }
         });
         //TODO Check if it already exists!
         var mgr = $('<iframe />', {

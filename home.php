@@ -16,7 +16,7 @@
   <div role="tabpanel" class="tab-pane" id="unis">
     <form id="searchUni">
         <div class="input-group">
-          <input type="text" class="form-control" size="30" value="" id="suggest" placeholder="Search for university">
+          <input type="text" class="form-control" size="30" value="" id="suggestUni" placeholder="Search for university">
           <span class="input-group-btn">
             <button class="btn btn-info" type="button">Go!</button>
           </span>

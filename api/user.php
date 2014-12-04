@@ -8,7 +8,7 @@ class User
 	public static $INCORRECT_LOGIN_OR_PASSWORD = 2;
 
 	public static $REGISTER_SUCCESS = 3;
-	public static $INSUFFICIENT_PRIVILEGE = 5;
+	public static $INSUFFICIENT_PRIVILEGE = 4;
 
 	public static $USERTYPE_ADMIN = 0;
 	public static $USERTYPE_TEACHER = 1;

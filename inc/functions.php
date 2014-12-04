@@ -75,31 +75,6 @@
 	  return isset($variable) && !empty($variable);
 	}
 
-	//Function to create university
-	function createUniversity($uniName, $uniAddress, $tags) {
-		global $mysqli;
-		if(!isSessionSet()) return;
-		$query = "CALL check_uni('$uniAddress');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		if(mysqli_fetch_row($result) != 0){
-			return;
-		}
-		$result->close();
-		$mysqli->next_result();
-		$query = "CALL insert_uni('$uniName','$uniAddress', '$tags');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-	}
-
-	function deleteUniversity($universityId){
-		global $mysqli;
-		if(!isSessionSet()) return;
-		$id = s($_SESSION['id']);
-		//if(checkStatus($id) == 0){
-			$query = "CALL delete_uni('$universityId');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		//}
-	}
-
 	//Function to check user's status
 	function checkStatus($id) {
 		global $mysqli;
@@ -110,4 +85,6 @@
 		$stat = $fetch[0];
 		return $stat;
 	}
+
+
 ?>

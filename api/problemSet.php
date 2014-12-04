@@ -58,10 +58,10 @@ class ProblemSet {
 			throw new Exception("Session wasn't set.");
 
 		if(ProblemSet::checkPS() == 0) return ProblemSet::$PS_NOT_FOUND;
-		updateField("name", $psid, $name);
-		updateField("course", $psid, $courseId);
-		updateField("deadline", $psid, $deadline);
-		updateField("address", $psid, $psAddress);
+		if(filled($name))updateField("name", $psid, $name);
+		if(filled($courseId))updateField("course", $psid, $courseId);
+		if(filled($deadline))updateField("deadline", $psid, $deadline);
+		if(filled($psAddress))updateField("address", $psid, $psAddress);
 		return ProblemSet::$UPDATE_PS_SUCCESS;
 	}
 

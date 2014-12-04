@@ -74,8 +74,21 @@ class Course
 		//}
 	}
 
+	public static function getAdressById($cid){
+		global $mysqli;
+		$query = "CALL get_course('$cid');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		
+		if(mysqli_num_rows($result) == 0) 
+			return Course::$COURSE_NOT_FOUND;
+		
+		$out = mysqli_fetch_row($result)[5];
+		$mysqli->next_result();
+		$result->close();
+		return $out;
+	}
+
 	//Function for students to enroll to the courses
-	//Not used yet
 	public static function enrollToCourse($courseAddress){
 		global $mysqli;
 		if(!isSessionSet())
@@ -92,7 +105,7 @@ class Course
 		
 		$mysqli->next_result();
 		$result->close();
-		$query = "CALL choose_course(`studentId`, `courseId`);";
+		$query = "CALL choose_course('$userId', '$courseId');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return Course::$COURSE_JOINED;
 	}

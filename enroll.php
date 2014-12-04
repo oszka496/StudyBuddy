@@ -6,7 +6,8 @@
 	
 	if(filled($_GET['cid'])){
 		try {
-			echo Course::enrollToCourse(s($_GET['cid']));
+			$cid = s($_GET['cid']);
+			echo Course::enrollToCourse(Course::getAdressById($cid));
 		}
 		catch (Exception $e)
 		{

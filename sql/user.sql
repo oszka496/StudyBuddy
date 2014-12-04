@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP PROCEDURE IF EXISTS get_user;
-CREATE PROCEDURE get_user(em  VARCHAR(50))
+CREATE PROCEDURE get_user(em VARCHAR(50))
 BEGIN
 	SELECT `id`, `password`, `fname`, `lname`, `status` FROM `user` WHERE `email` = em;
 END;

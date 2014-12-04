@@ -4,18 +4,17 @@ require_once dirname(__FILE__).'\..\inc\functions.php';
 class User
 {
 	public static $LOGIN_SUCCESS = 0;
-	public static $EMPTY_LOGIN_OR_PASSWORD = 1;
+	public static $INVALID_DATA = 1;
 	public static $INCORRECT_LOGIN_OR_PASSWORD = 2;
 
 	public static $REGISTER_SUCCESS = 3;
-	public static $INVALID_DATA = 4;
 	public static $INSUFFICIENT_PRIVILEGE = 5;
 
 	public static function login($login, $password)
 	{	
 		global $mysqli;
 		if(!filled($login) || !filled($password)){
-			return User::$EMPTY_LOGIN_OR_PASSWORD;
+			return User::$INVALID_DATA;
 		}
 
 		$query = "CALL get_user('$login');";
@@ -66,8 +65,8 @@ class User
 
 	public static function getUser()
 	{
-		if (!(isset($_SESSION['id']) and isset($_SESSION['firstName']) and isset($_SESSION['lastName'])))
-			return null;
+		if(!isSessionSet()) 
+			throw new Exception("Session wasn't set.");
 		
 		$tab[0] = $_SESSION['id'];
 		$tab[1] = $_SESSION['firstName'];

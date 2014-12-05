@@ -45,3 +45,4 @@ Temporary Items
 
 #Excluded files
 credentials.txt
+inc/db_local.cfg.php

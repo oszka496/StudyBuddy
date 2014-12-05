@@ -12,10 +12,8 @@
 	$adr = s($_POST['courseAddress']);
 	$uni = s($_POST['uniId']);
 	
-	$starts = '0000-00-00';
-	$ends = '0000-00-00';
-	
-	//TO DO: getting dates
+	$starts = parseDate(s($_POST['sdate']));
+	$ends = parseDate(s($_POST['edate']));
 	try 
 	{
 		Course::addCourse($name, $adr, $uni, $starts, $ends);

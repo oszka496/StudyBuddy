@@ -87,5 +87,13 @@
 		return $stat;
 	}
 
+	function parseDate($date){
+		if(!filled($date)){
+			return "0000-00-00";
+		}
+		$h = explode('/',$date);
+		return $h[2]."-".$h[1]."-".$h[0];
+	}
+
 
 ?>

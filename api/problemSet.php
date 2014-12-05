@@ -72,7 +72,7 @@ class ProblemSet {
 		if(ProblemSet::checkPS() == 0) return ProblemSet::$PS_NOT_FOUND;
 
 		$id = s($_SESSION['id']);
-		//if(checkStatus($id) > 1) return User::$INSUFICIENT_PRIVIILEGE;
+		if(checkStatus($id) > 1) return User::$INSUFICIENT_PRIVIILEGE;
 		$query = "CALL delete_ps('$psid', '$cid');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return ProblemSet::$DELETE_PS_SUCCESS;

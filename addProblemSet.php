@@ -11,7 +11,7 @@
 		$cid = s($_POST['courseId']);
 		$name = s($_POST['psName']);
 
-		$date = getDate(s($_POST['psdate']));
+		$date = parseDate(s($_POST['psdate']));
 		echo problemSet::addProblemSet($name, $cid, $date, $psadr);
 		//header("Location: index.php");
 	}

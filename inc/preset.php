@@ -7,5 +7,6 @@
 	// echo User::register('admin@test.com', 'testadmin', 'testadmin', 'Test', 'Admin', 0);
 
 	University::createUniversity('Politechnika Wrocławska', 'http://www.pwr.wroc.pl/index.dhtml', 'Politechnika, Wrocławska', '@pwr.edu.pl')
+	
 ?>
 

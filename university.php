@@ -1,7 +1,7 @@
 <?php
 	require_once 'inc/functions.php';
 	if(!isSessionSet())
-	throw new Exception("Session wasn't set.");
+		throw new Exception("Session wasn't set.");
 
 	$query = "CALL show_uni();";
 	$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -19,6 +19,7 @@
 			echo "<li class='list-group-item'><a href=".$courses." class='listLink'>".$name."</a></li>";
 		}
 		echo "</ul>";
+		if(s($_SESSION['uType']) == 0) include('addUniForm.php');
 	}
 
 ?>

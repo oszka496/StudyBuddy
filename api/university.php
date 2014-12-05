@@ -14,7 +14,7 @@ class University {
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);
-		//if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
+		if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
 
 		$query = "CALL check_uni('$uniAddress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -34,7 +34,7 @@ class University {
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);
 		if(!filled($universityId)) return User::$INVALID_DATA;
-		//if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
+		if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
 
 		$query = "CALL delete_uni('$universityId');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -47,7 +47,8 @@ class University {
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);
 		if(!filled($universityId)) return User::$INVALID_DATA;
-		//if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
+		if(checkStatus($id) != 0) return User::$INSUFFICIENT_PRIVILEGE;
+		
 		if(filled($uniName)) updateField("name", $uniId, $uniName);
 		if(filled($uniAddress)) updateField("address", $uniId, $uniAddress);
 		if(filled($tags)) updateField("tags", $uniId, $tags);

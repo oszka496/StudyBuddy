@@ -16,6 +16,9 @@
 		<label for="tags">Tags:</label>
 		<input type="text" name="tags" id = "tags"/>
 
+		<label for="uniMail">Mail:</label>
+		<input type="text" name="uniMail" id = "uniMail" placeholder="@example.com"/>
+
 		<input type="submit" value="Add University" id="addUni" class="button"/>
 	</form>
 </body>

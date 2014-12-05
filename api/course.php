@@ -62,16 +62,17 @@ class Course
 			throw new Exception("Session wasn't set.");
 		
 		$id = s($_SESSION['id']);
-		if(checkStatus($id) == 2){
+		$utype = s($_SESSION['uType']);
+		if($utype == 2){
 			return User::$INSUFFICIENT_PRIVILEGE;
 		}
-		//if($id == $lecturerId){
+		if($id == $lecturerId || $utype == 0){
 			Course::updateField("name", $cid, $courseName);
 			Course::updateField("start_date", $cid, $courseStart);
 			Course::updateField("end_date", $cid, $courseEnd);
 			Course::updateField("address", $cid, $courseAddress);
 			Course::updateField("uni", $cid, $uniId);
-		//}
+		}
 	}
 
 	public static function getAdressById($cid){

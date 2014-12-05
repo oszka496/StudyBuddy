@@ -18,13 +18,13 @@
 		</div>
 
 		<div class="form-group">
-		<label for="sday">Course start:</label>
-		<input type="text" placeholder="" name="sday" id="sday" value="" class="form-control input-sm datepicker" >
+		<label for="sdate">Course start:</label>
+		<input type="text" placeholder="" name="sdate" id="sdate" value="" class="form-control input-sm datepicker" >
 		</div>
 
 		<div class="form-group">
-		<label for="eday">Course end:</label>
-		<input type="text" placeholder="" name="eday" id="eday" value="" class="form-control input-sm datepicker" >
+		<label for="edate">Course end:</label>
+		<input type="text" placeholder="" name="edate" id="edate" value="" class="form-control input-sm datepicker" >
 		</div>
 
 		<input type="hidden" value="<?php echo $uid ?>" name="uniId" id="uniId"/>

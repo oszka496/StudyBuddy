@@ -140,14 +140,12 @@
 			}
 			break;
 
-		case 'createuniversity':
+		case 'addproblemset':
 			$credentials = $requestData["credentials"];
 			auth($credentials['login'], $credentials['hash']);
 			try
 			{
-				$result = Course::createUniversity($requestContent["universityname"],
-					$requestContent["universityaddress"], $requestContent["tags"],
-					$requestContent["universitymail"]);
+				$result = ProblemSet::addProblemSet($requestContent["name"],$requestContent["courseid"],$requestContent["deadline"],$requestContent["adress"]);
 				respond($result, "");
 			}
 			catch (Exception $e)
@@ -156,12 +154,12 @@
 			}
 			break;
 
-		case 'deleteuniversity':
+		case 'deleteproblemset':
 			$credentials = $requestData["credentials"];
 			auth($credentials['login'], $credentials['hash']);
 			try
 			{
-				$result = Course::deleteUniversity($requestContent["universityid"]);
+				$result = ProblemSet::deleteProblemSet($requestContent["problemsetid"],$requestContent["courseid"]);
 				respond($result, "");
 			}
 			catch (Exception $e)
@@ -170,14 +168,12 @@
 			}
 			break;
 
-		case 'edituniversity':
+		case 'editproblemset':
 			$credentials = $requestData["credentials"];
 			auth($credentials['login'], $credentials['hash']);
 			try
 			{
-				$result = Course::editUniversity($requestContent["universityid"].
-					$requestContent["universityname"], $requestContent["universityaddress"],
-					$requestContent["tags"], $requestContent["universitymail"]);
+				$result = ProblemSet::editProblemSet($requestContent["problemsetid"],$requestContent["name"],$requestContent["courseid"],$requestContent["deadline"],$requestContent["adress"]);
 				respond($result, "");
 			}
 			catch (Exception $e)
@@ -185,6 +181,7 @@
 				respond("-1", "EXCEPTION: ".$e->getMessage());
 			}
 			break;
+		
 
 		default:
 			# code...

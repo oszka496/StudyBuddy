@@ -65,7 +65,7 @@ class ProblemSet {
 		return ProblemSet::$UPDATE_PS_SUCCESS;
 	}
 
-	function deleteProblemSet($psid,$cid){
+	public static function deleteProblemSet($psid,$cid){
 		global $mysqli;
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");

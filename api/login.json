@@ -1,0 +1,40 @@
+{
+	"request" : {
+		"type" : "login",
+		"content" : {
+			"login" : "staniowp@gmail.com",
+			"password" : "3890446+"
+		}
+	}
+}
+
+{
+	"credentials" : {
+		"login" : "a@b.com",
+		"hash" : "1234"
+	},
+	"request" : {
+		"type" : "deleteuser",
+		"content" : {
+			"email" : "a@b.com"
+		}
+	}
+}
+
+
+$.ajax({
+  type: "POST",
+  url: "../api/request.php",
+  data: { 
+  			"request": {
+	  			"type": "login",
+	  			"content": {
+	  				"login" : "student@test.com",
+	  				"password": "teststudent"
+	  			}
+  			}
+  		}
+})
+  .done(function( msg ) {
+    alert( "Data Saved: " + msg );
+  });

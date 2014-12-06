@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<button id='login'>Login</button>
+<p id='loginresult'></p>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#login").on("click", function(){
+			$.ajax({
+			  type: "POST",
+			  url: "../api/request.php",
+			  data: { 
+			  			"request": {
+				  			"type": "login",
+				  			"content": {
+				  				"login" : "student@test.com",
+				  				"password": "teststudent"
+				  			}
+			  			}
+			  		}
+			})
+			.done(function( msg ) {
+		    	$("#loginresult").text( "Login result: " + msg );
+		  	});
+
+		});
+		
+	});
+</script>
+</body>
+</html>

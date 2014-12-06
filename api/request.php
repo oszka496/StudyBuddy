@@ -21,8 +21,6 @@
 
 	$requestVar = s($_POST['request']);
 	$requestData = json_decode($requestVar, true);
-
-	$credentials = $requestData["credentials"];
 	$request = $requestData["request"];
 	$requestType = $request["type"];
 	$requestContent = $request["content"];
@@ -42,6 +40,7 @@
 			break;
 
 		case 'userdelete':
+			$credentials = $requestData["credentials"];
 			auth($credentials['login'], $credentials['hash']);
 			try
 			{

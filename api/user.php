@@ -1,6 +1,6 @@
 <?php
 require_once dirname(__FILE__).'\..\inc\password_compat-master\lib\password.php';
-require_once dirname(__FILE__).'\..\inc\functions.php';
+
 class User
 {
 	public static $LOGIN_SUCCESS = 0;
@@ -16,14 +16,22 @@ class User
 	public static $USERTYPE_TEACHER = 1;
 	public static $USERTYPE_STUDENT = 2;
 
-	public static function login($login, $password)
+	public static $AUTHENTICATION_SUCCESS = 0;
+	public static $AUTHENTICATION_FAILURE = 1;
+
+	public static function login($login, $password, $api = false)
 	{	
 		global $mysqli;
 		if(!filled($login) || !filled($password)){
-			return User::$INVALID_DATA;
+			if (!$api)
+				return User::$INVALID_DATA;
+			return array(User::$INVALID_DATA, "INVALID_DATA");
 		}
 		$data = User::getUserIdByMail($login);
-		if($data == $USER_NOT_FOUND) return User::$INCORRECT_LOGIN_OR_PASSWORD;		
+		if($data == $USER_NOT_FOUND)
+			if (!$api)
+				return User::$INCORRECT_LOGIN_OR_PASSWORD;
+			return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "INCORRECT_LOGIN_OR_PASSWORD");
 		$id = $data[0];
 		$hash = $data[1];
 		$fname = $data[2];
@@ -34,11 +42,30 @@ class User
 			$_SESSION['firstName'] = $fname;
 			$_SESSION['lastName'] = $lname;
 			$_SESSION['uType'] = $utype;
-			return User::$LOGIN_SUCCESS;
-		} else {
-			return User::$INCORRECT_LOGIN_OR_PASSWORD;
+			if (!$api)
+				return User::$LOGIN_SUCCESS;
+			return array(User::$LOGIN_SUCCESS, $hash);
+		} else
+		{
+			if (!$api)
+				return User::$INCORRECT_LOGIN_OR_PASSWORD;
+			return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "INCORRECT_LOGIN_OR_PASSWORD");
+		}	
+	}
+
+	public static function authenticate($login, $hash)
+	{
+		global $mysqli;
+		if(!filled($login) || !filled($hash)){
+			return array(User::$INVALID_DATA, "");
 		}
-		
+		$data = User::getUserIdByMail($login);
+		if($data == $USER_NOT_FOUND)
+			return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "");
+		$dbhash = $data[1];
+		if ($hash === $dbhash)
+			return User::$AUTHENTICATION_SUCCESS;
+		return User::$AUTHENTICATION_FAILURE;
 	}
 
 	public static function register($email, $password, $password1, $firstName, $lastName, $utype)
@@ -115,7 +142,8 @@ class User
 		global $mysqli;
 		$query = "CALL get_user('$login');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		if(mysqli_num_rows($result) == 0) return User::$USER_NOT_FOUND;
+		if (mysqli_num_rows($result) == 0)
+			return User::$USER_NOT_FOUND;
 		$fetch = mysqli_fetch_row($result);
 		$id = $fetch[0];
 		$hash = $fetch[1];

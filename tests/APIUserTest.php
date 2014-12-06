@@ -1,36 +1,40 @@
 <?php
-include dirname(__FILE__).'/../inc/functions.php';
+require_once dirname(__FILE__).'/../inc/functions.php';
 
 class APIUserTest extends PHPUnit_Framework_TestCase
 {
     private $student;
 
-    public static function setUpBeforeClass()
+    public function setUp()
     {
         // FIXTURES
-        $student = array(
+        $this->student = array(
             "email"     => "tester@phpunit.xxx",
             "password"  => "ganymede.IO",
             "firstName" => "Ganymede",
             "lastName"  => "Jupiterson",
             "userType"  =>  User::$USERTYPE_STUDENT
         );
+        
+        if (!extension_loaded('mysqli')) {
+            $this->markTestSkipped(
+                'The MySQLi extension is not available.'
+            );
+        }
     }
 
     public function test_shouldRegisterNewStudent()
     {
-        $result = User::register($student['email'], $student['password'], $student['password'],
-            $student['firstName'], $student['lastName'], $student['userType']);
+        $result = User::register($this->student['email'], $this->student['password'], $this->student['password'],
+            $this->student['firstName'], $this->student['lastName'], $this->student['userType']);
 
         $this->assertEquals($result, User::$REGISTER_SUCCESS);
     }
-
-    /**
-     *  @depends test_shouldRegisterNewStudent()   
-     */
+    
     public function test_shouldLoginAsStudent()
     {
-        $result = User::login($student['login'], $student['password']);
+        global $mysqli;
+        $result = User::login($this->student['email'], $this->student['password']);
 
         $this->assertEquals($result, User::$LOGIN_SUCCESS);
 
@@ -38,12 +42,9 @@ class APIUserTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($userdata, User::$USERTYPE_STUDENT);
     }
 
-    /**
-     * @depends test_shouldLoginAsStudent()
-    */
-    public static function deleteUser()
+    public function deleteUser()
     {
-        $result = User::deleteUser($student['email']);
+        $result = User::deleteUser($this->student['email']);
         $this->assertEquals($result, User::$DELETE_SUCCESS);
     }
 }

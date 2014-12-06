@@ -19,13 +19,11 @@
 		}
 	}
 
-	$requestVar = s($_POST['request']);
+	$requestVar = $_POST['request'];
 	$requestData = json_decode($requestVar, true);
 	$request = $requestData["request"];
 	$requestType = $request["type"];
 	$requestContent = $request["content"];
-
-	
 
 	switch ($requestType) {
 		case 'login':

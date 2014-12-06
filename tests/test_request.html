@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<title>StudyBuddy</title>
+<script type="text/javascript" src="../inc/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 <button id='login'>Login</button>
@@ -8,10 +11,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").on("click", function(){
-			$.ajax({
-			  type: "POST",
-			  url: "../api/request.php",
-			  data: { 
+			var r =  { 
 			  			"request": {
 				  			"type": "login",
 				  			"content": {
@@ -19,10 +19,21 @@
 				  				"password": "teststudent"
 				  			}
 			  			}
-			  		}
+			  		};
+			var str = JSON.stringify(r);
+
+			$.ajax({
+			  type: "POST",
+			  url: "../api/request.php",
+			  data: {
+			  	"request": str
+			  }
 			})
 			.done(function( msg ) {
 		    	$("#loginresult").text( "Login result: " + msg );
+		  	})
+		  	.fail(function(jqXHR, textStatus ) {
+				alert( "Request failed: " + textStatus );
 		  	});
 
 		});

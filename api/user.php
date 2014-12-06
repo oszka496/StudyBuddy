@@ -28,7 +28,7 @@ class User
 			return array(User::$INVALID_DATA, "INVALID_DATA");
 		}
 		$data = User::getUserIdByMail($login);
-		if($data == $USER_NOT_FOUND)
+		if($data == User::$USER_NOT_FOUND)
 			if (!$api)
 				return User::$INCORRECT_LOGIN_OR_PASSWORD;
 			return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "INCORRECT_LOGIN_OR_PASSWORD");

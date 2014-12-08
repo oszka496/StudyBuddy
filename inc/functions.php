@@ -8,6 +8,7 @@
 	require_once PATH.'/../api/course.php';
 	require_once PATH.'/../api/problemSet.php';
 	if (session_status() == PHP_SESSION_NONE) {
+		header('P3P: CP="CAO PSA OUR"');
 		session_start();
 		session_name("study-buddy");
 	}

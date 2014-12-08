@@ -8,7 +8,7 @@ include 'functions.php';
   header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modified
   header ("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
   header ("Pragma: no-cache"); // HTTP/1.0
-  header("Content-Type: text/javascript; charset=utf-8");
+  header("Content-Type: application/x-javascript; charset=utf-8");
 ?>
   $(function() {
       var availableTags = [

@@ -1,14 +1,17 @@
 <?php
 	require_once 'inc/functions.php';
 	
-	if (arePostFilled(['email','pass'])){
+	if(!arePostFilled(['email','pass'])){
+		echo("Error: All fields are required");
+		exit();
+	}
 		
-		$login = s($_POST['email']);
-		$pass = s($_POST['pass']);
-
-		$out = User::login($login, $pass);
-		var_dump($out);
-		if($out == User::$LOGIN_SUCCESS){
+	$login = s($_POST['email']);
+	$pass = s($_POST['pass']);
+	
+	$out = User::login($login, $pass);
+	
+	if($out == User::$LOGIN_SUCCESS){
 			header("Location: index.php");
 		}
 		else {
@@ -26,7 +29,5 @@
 					break;
 			}
 		}
-	} else { //No username/password
-		header("Location: index.php?err=All fields are required");
-	}
+	
 ?>

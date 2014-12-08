@@ -33,7 +33,7 @@
 			if(data.lastIndexOf("Success",0) === 0) msg.addClass("alert alert-success");
 			sp.text(data);
 			$("#uniform").before(msg);
-		})
+		});
 	});
 	</script>
 </body>

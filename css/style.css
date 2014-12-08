@@ -16,7 +16,17 @@ body {
 	text-align: center;
 	color: #007;
 	margin: 10px;
-	padding: 0;
+}
+#study-buddy-manager span {
+	padding: 15px;
+	display: block;
+}
+#study-buddy-manager input,
+#study-buddy-manager select {
+	margin: 5px 0;
+}
+#study-buddy-manager input[type="submit"] {
+	width: 100%;
 }
 ul, ul li {
 	list-style: none;
@@ -52,4 +62,63 @@ label.btn-sm {
 }
 .list-group-item {
 	line-height: 22px !important;
+}
+/* apple colors */
+[class*='-dark'] {
+	background-color:#02243C;
+    color:#f0f0f0;
+}
+[class*='-light'] {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+[class*='-blue'] {
+	background-color:#5195ce;
+    color:#fff;
+}
+[class*='-apple'] {
+	background-color:#005DB3;
+    color:#f8f8f8;
+}
+[class*='-gray'] {
+	background-color:#e6e6e6;
+    color:#666;
+}
+[class*='-green'] {
+	background-color:#5BC236;
+    color:#fff;
+}
+
+/* hover and active */
+[class*='-dark']:hover,[class*='-dark']:focus {
+	background-color:#12254d;
+    color:#fff;
+}
+[class*='-light']:hover,[class*='-light']:active {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+[class*='-blue']:hover,[class*='-blue']:active {
+	background-color:#62a6df;
+    color:#fff;
+}
+[class*='-apple']:hover,[class*='-apple']:active {
+	background-color:#116ec4;
+    color:#fff;
+}
+[class*='-gray']:hover,[class*='-gray']:active {
+	background-color:#d5d5d5;
+    color:#fff;
+}
+[class*='-green']:hover,[class*='-green']:active {
+	background-color:#6cd347;
+    color:#fff;
+}
+#regform {
+	text-align: center;
+}
+#mgrform .input-group {
+	display: block;
 }

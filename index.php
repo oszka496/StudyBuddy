@@ -70,7 +70,17 @@
       <?php
         if ($user === null):
       ?>
-      <div class="jumbotron">
+      <div class="jumbotron" style="text-align: left;">
+        <h1>Register</h1>
+        <p>
+          StudyBuddy is your best buddy at University!<br>
+          We keep track of your latest assignments and problem sets to help you schedule your duties.<br>
+          <span class="h5">Just drag a link to your bookmarks bar and then click it whenever you are on lecturer's
+          website to add link to your course or find it in our database.</span>
+          <br>
+          <br>
+          Study, buddy!
+        </p>
         <?php
           include 'registerForm.php';
         ?>

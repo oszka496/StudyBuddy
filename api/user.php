@@ -174,7 +174,7 @@ class User
 		return $tab;
 	}
 
-	private static function getUserById($id){
+	public static function getUserById($id){
 		global $mysqli;
 		$id = s($id);
 		$query = "CALL get_user_by_id('$id');";

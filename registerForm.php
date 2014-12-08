@@ -9,32 +9,31 @@
 </head>
 <body>
 	<form name="regform" action="register.php" method="post" id="regform">		
-		<h1>Register</h1>
 		<div class="input-group">
-			<span class="input-group-addon">Email</span>
+			<span class="input-group-addon input-light">Email</span>
 			<input type="text" class="form-control" placeholder="john.doe@example.com" name="email" id="email">
 		</div>
 		<div class="input-group">
-			<span class="input-group-addon">Password</span>
+			<span class="input-group-addon input-light">Password</span>
 			<input type="password" class="form-control" placeholder="At least 8 characters" name="pass1" id="pass1">
 		</div>
 		<div class="input-group">
-			<span class="input-group-addon">Retype</span>
+			<span class="input-group-addon input-light">Retype</span>
 			<input type="password" class="form-control" placeholder="Retype the above one" name="pass2" id="pass2">
 		</div>
 		<div class="input-group">
-			<span class="input-group-addon">First name</span>
+			<span class="input-group-addon input-light">First name</span>
 			<input type="text" class="form-control" placeholder="Your first name" name="fname" id="fname">
 		</div>
 		<div class="input-group">
-			<span class="input-group-addon">Surname</span>
+			<span class="input-group-addon input-light">Surname</span>
 			<input type="text" class="form-control" placeholder="Your surname" name="lname" id="lname">
 		</div>
 		<div class="btn-group" id="utype" data-toggle="buttons">
-			<label class="btn btn-sm btn-default active" for="utype1">
+			<label class="btn btn-sm btn-info active" for="utype1">
 				<input type="radio" name="utype" id="utype1" value="1" autocomplete="off" checked> Teacher
 			</label>
-			<label class="btn btn-sm btn-default" for="utype2">
+			<label class="btn btn-sm btn-info" for="utype2">
 		    	<input type="radio" name="utype" id="utype2" value="2" autocomplete="off"> Student
 			</label>
 		</div>

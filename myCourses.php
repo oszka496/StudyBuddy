@@ -15,6 +15,7 @@
 	while ($fetch = mysqli_fetch_row($result)){
 		$name = $fetch[0];
 		$cid = $fetch[1];
+		$url = $fetch[2];
 		echo "<li class='list-group-item clearfix'>
 				$name
 				<small>
@@ -22,6 +23,10 @@
 					<a href='problemSets.php?cid=$cid' class='btn btn-xs btn-success listLink'>
 						<span class='glyphicon glyphicon-list'></span>
 						&nbsp;View Problem Sets
+					</a>
+					<a href='$url' class='btn btn-xs btn-info'>
+						<span class='glyphicon glyphicon-link'></span>
+						&nbsp;Visit website
 					</a>
 					<a href='#' class='btn btn-xs btn-danger'>
 						<span class='glyphicon glyphicon-remove'></span>

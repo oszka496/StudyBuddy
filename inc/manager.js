@@ -16,12 +16,28 @@
         }
     };
 
-    function parseLink(href)
+    function getLinks()
+    {
+        var url = document.URL;
+        if (url.charAt(url.length-1) != "/")
+            url = url.substring(0, url.lastIndexOf("/")+1);
+
+        var tuples = new Array();
+        $('body').find("a").each(function(){
+            var h = $(this).attr("href");
+            var t = $(this).text();
+            h = parseLink(h, url);
+            if (h != "" && (h.indexOf("pdf") > -1 || h.indexOf("txt") > -1 || h.indexOf("doc") > -1 || h.indexOf("docx") > -1))
+                tuples.push([h, t]);
+        });
+
+        return tuples;
+    }
+
+    function parseLink(h, url)
     {
         if (h!="#" && typeof h !== "undefined" && h != "") {
             if (!h.match("^http")) {
-                console.log(url);
-                console.log(h);
                 h = url + h;
             }
             return h;
@@ -31,37 +47,28 @@
 
     // Start polling...
     checkReady(function($) {
-        var url = document.URL;
-        var hrefs = new Array();
-        if (url.charAt(url.length-1) != "/")
-            url = url.substring(0, url.lastIndexOf("/")+1);
-        var links = $('body').find("a").each(function(){
-            var h = $(this).attr("href");
-            h = parseLink(h);
-            if (h != "")
-                hrefs.push(h);
-        });
+        var links = getLinks();
         //TODO Check if it already exists!
         var mgr = $('<iframe />', {
             id: 'manager',
             name: 'manager',
-            src: 'http://localhost/StudyBuddy/manager.php'
+            src: 'http://localhost/StudyBuddy/manager.php?id=' + $('#sbid').text()
         });
         mgr.css({
             'display':'block',
             'position':'fixed',
-            'right':'30px',
-            'top': '30px',
-            'width': '250px',
+            'right':'20px',
+            'top': '20px',
+            'width': '300px',
             'height': '500px',
             'background':'rgb(127, 177, 227)',
-            'border':'8px solid rgb(0, 102, 170)',
+            'border':'5px solid rgb(0, 102, 170)',
             'border-radius':'8px'
         });
         mgr.appendTo('body');
         mgr.load(function(){
             var other = window.frames['manager'];
-            other.postMessage(hrefs, "*");
+            other.postMessage(links, "*");
         });
         
     });

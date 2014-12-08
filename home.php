@@ -4,11 +4,32 @@
     header("Location: index.php");
 ?>
 <ul class="nav nav-tabs" role="tablist" id="myTab">
+  <li role="presentation"><a href="#manager" aria-controls="manager" role="tab" data-toggle="tab">Getting started</a></li>
   <li role="presentation" class="active"><a href="#observed" aria-controls="observed" role="tab" data-toggle="tab">Observed courses</a></li>
   <li role="presentation"><a href="#unis" aria-controls="unis" role="tab" data-toggle="tab">Universities</a></li>
 </ul>
 
 <div class="tab-content">
+  <div role="tabpanel" class="tab-pane" id="manager">
+    <h2>Getting started</h2>
+    <p>
+    If you want to keep track of your recent assignments and problem sets simply drag this link to your bookmarks bar
+    and click it whenever you are at lecturer's website.<br>
+    Our magnificent manager will pop up and you'll be able to add course to your <i>Observed list</i>.
+    </p>
+    <a title="Save to StudyBuddy"
+      href="javascript:document.getElementsByTagName('body')[0]
+            .appendChild(document.createElement('script'))
+            .setAttribute('src','http://localhost/StudyBuddy/inc/manager.js');
+            var p;
+            document.getElementsByTagName('body')[0]
+            .appendChild(p = document.createElement('p'))
+            .setAttribute('id','sbid');
+            var t = document.createTextNode('<?php echo User::getUser()[0]; ?>');
+            p.appendChild(t);
+            p.setAttribute('style', 'display: none;')"
+      class="btn btn-warning" style="margin: 10px auto; display: block; width: auto;">Save to StudyBuddy</a>
+  </div>
   <div role="tabpanel" class="tab-pane active" id="observed">
     <?php include("myCourses.php");?>
   </div>

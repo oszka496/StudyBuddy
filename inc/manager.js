@@ -52,7 +52,7 @@
         var mgr = $('<iframe />', {
             id: 'manager',
             name: 'manager',
-            src: 'http://localhost/StudyBuddy/manager.php?id=' + $('#sbid').text()
+            src: 'http://studybuddy-atpwr.rhcloud.com/manager.php?id=' + $('#sbid').text()
         });
         mgr.css({
             'display':'block',

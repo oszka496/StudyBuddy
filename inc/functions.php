@@ -1,6 +1,6 @@
 <?php
 	header('Content-type: text/html; charset=utf-8');
-	require_once 'db_db4free.cfg.php';
+	require_once 'db_interoperate.cfg.php';
 	define("PATH", str_replace("\\", "/", dirname(__FILE__)));
 	require_once PATH.'/../inc/password_compat-master/lib/password.php';
 	require_once PATH.'/../api/user.php';

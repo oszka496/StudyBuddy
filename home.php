@@ -20,7 +20,7 @@
     <a title="Save to StudyBuddy"
       href="javascript:document.getElementsByTagName('body')[0]
             .appendChild(document.createElement('script'))
-            .setAttribute('src','inc/manager.js');
+            .setAttribute('src','http://studybuddy-atpwr.rhcloud.com/inc/manager.js');
             var p;
             document.getElementsByTagName('body')[0]
             .appendChild(p = document.createElement('p'))

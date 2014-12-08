@@ -1,7 +1,8 @@
 <?php
 	require_once 'inc/functions.php';
 	if (!isSessionSet())
-		throw new Exception("Session wasn't set.");
+		die("Session not found");
+		//throw new Exception("Session wasn't set.");
 
 	if(!arePostFilled(['psAddress','courseId','psName'])){
 		echo("Unable to add Problem Set.");

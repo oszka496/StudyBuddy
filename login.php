@@ -7,7 +7,7 @@
 		$pass = s($_POST['pass']);
 
 		$out = User::login($login, $pass);
-
+		var_dump($out);
 		if($out == User::$LOGIN_SUCCESS){
 			header("Location: index.php");
 		}
@@ -17,7 +17,7 @@
 					header("Location: index.php?err=Incorrect login or password");
 					break;
 
-				case User::$EMPTY_LOGIN_OR_PASSWORD:
+				case User::$INVALID_DATA:
 					header("Location: index.php?err=Empty login or password");
 					break;
 				

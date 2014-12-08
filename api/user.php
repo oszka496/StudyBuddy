@@ -1,6 +1,4 @@
 <?php
-require_once dirname(__FILE__).'/../inc/password_compat-master/lib/password.php';
-
 class User
 {
 	public static $LOGIN_SUCCESS = 0;
@@ -31,7 +29,8 @@ class User
 		if($data == User::$USER_NOT_FOUND)
 			if (!$api)
 				return User::$INCORRECT_LOGIN_OR_PASSWORD;
-			return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "INCORRECT_LOGIN_OR_PASSWORD");
+			else
+				return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "INCORRECT_LOGIN_OR_PASSWORD");
 		$id = $data[0];
 		$hash = $data[1];
 		$fname = $data[2];
@@ -49,7 +48,8 @@ class User
 		{
 			if (!$api)
 				return User::$INCORRECT_LOGIN_OR_PASSWORD;
-			return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "INCORRECT_LOGIN_OR_PASSWORD");
+			else
+				return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "INCORRECT_LOGIN_OR_PASSWORD");
 		}	
 	}
 

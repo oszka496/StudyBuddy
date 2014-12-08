@@ -20,7 +20,7 @@
     <a title="Save to StudyBuddy"
       href="javascript:document.getElementsByTagName('body')[0]
             .appendChild(document.createElement('script'))
-            .setAttribute('src','<?php echo PATH;?>/manager.js');
+            .setAttribute('src','inc/manager.js');
             var p;
             document.getElementsByTagName('body')[0]
             .appendChild(p = document.createElement('p'))

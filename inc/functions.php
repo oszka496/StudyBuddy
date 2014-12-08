@@ -2,6 +2,7 @@
 	header('Content-type: text/html; charset=utf-8');
 	require_once 'db_interoperate.cfg.php';
 	define("PATH", str_replace("\\", "/", dirname(__FILE__)));
+	define("LINK", str_replace("\\", "/", "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"));
 	require_once PATH.'/../inc/password_compat-master/lib/password.php';
 	require_once PATH.'/../api/user.php';
 	require_once PATH.'/../api/university.php';

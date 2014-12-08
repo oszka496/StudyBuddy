@@ -39,7 +39,7 @@
 			}
 		?>
 		</span>
-		<form id="mgrform" method="post" action="<?php echo PATH;?>/addProblemSet.php">
+		<form id="mgrform" method="post" action="<?php echo LINK;?>/addProblemSet.php">
 		<h4>Add assignment to course</h4>
 		<div class="alert alert-warning" style="display: none;" id="mgrresult"></div>
 		<div class="input-group input-group-sm">

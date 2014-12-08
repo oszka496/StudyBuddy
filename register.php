@@ -1,6 +1,6 @@
 <?php
 	require_once 'inc/functions.php';
-	require_once 'inc\password_compat-master\lib\password.php';
+	require_once 'inc/password_compat-master/lib/password.php';
 	
 	if (arePostFilled(['pass1','pass2','email','fname','lname','utype'])){
 		$fname = s($_POST['fname']);

@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'\..\inc\functions.php';
+require_once dirname(__FILE__).'/../inc/functions.php';
 class ProblemSet {
 
 	public static $PS_EXISTS = 2;

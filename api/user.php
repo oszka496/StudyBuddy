@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'\..\inc\password_compat-master\lib\password.php';
+require_once dirname(__FILE__).'/../inc/password_compat-master/lib/password.php';
 
 class User
 {

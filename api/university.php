@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__FILE__).'\..\inc\functions.php';
+require_once dirname(__FILE__).'/../inc/functions.php';
 class University {
 
 	public static $UNI_EXISTS = 2;

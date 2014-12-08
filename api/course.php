@@ -43,10 +43,10 @@ class Course
 			throw new Exception("Session wasn't set.");
 
 		$id = s($_SESSION['id']);
-		//if(checkStatus($id) == 0){
+		if(checkStatus($id) == 0){
 			$query = "CALL delete_course('$courseId');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		//}
+		}
 
 		return Course::$COURSE_DELETED;
 	}

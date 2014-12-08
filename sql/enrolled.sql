@@ -21,6 +21,9 @@ DROP PROCEDURE IF EXISTS check_enroll;
 CREATE PROCEDURE check_enroll(sid INT(11), cid INT(11))
 BEGIN
 	SELECT * FROM `enrolled` WHERE `studentId`=sid AND `courseId`=cid;
-END
+END;
 
-
+DROP PROCEDURE IF EXISTS resign_from_course;
+CREATE PROCEDURE resign_from_course(sid INT(11), cid INT(11))
+	DELETE FROM `enrolled` WHERE `studentId`=sid AND `courseId`=cid;
+END;

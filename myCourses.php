@@ -28,7 +28,7 @@
 						<span class='glyphicon glyphicon-link'></span>
 						&nbsp;Visit website
 					</a>
-					<a href='#' class='btn btn-xs btn-danger'>
+					<a href='resign.php?cid=$cid' class='btn btn-xs btn-danger'>
 						<span class='glyphicon glyphicon-remove'></span>
 						&nbsp;Forget it
 					</a>

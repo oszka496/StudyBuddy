@@ -4,6 +4,7 @@
 	<title>StudyBuddy</title>
 	<script type="text/javascript" src="inc/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="inc/jquery-ui.js"></script>
+	<script type="text/javascript" src="inc/jquery.form.js"></script>
 	<script type="text/javascript" src="inc/jquery.validate.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="css/style.css">
 </head>

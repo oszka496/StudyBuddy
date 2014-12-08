@@ -6,6 +6,7 @@ class Course
 	public static $COURSE_NOT_FOUND = 3;
 	public static $COURSE_DELETED = 4;
 	public static $COURSE_JOINED = 5;
+	public static $COURSE_LEAVED = 6;
 
 	public static function addCourse($name, $address, $universityId, $startDate, $endDate)
 	{
@@ -139,6 +140,17 @@ class Course
 			$result->close();
 			$mysqli->next_result();
 		}
+	}
+
+	public static function resignFromCourse($cid){
+		global $mysqli;
+		if(!isSessionSet())
+			throw new Exception("Session wasn't set.");
+		$id = s($_SESSION['id']);
+		$cid = s($cid);
+		$query = "CALL resign_from_course('$id', '$cid');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		return Course::$COURSE_LEAVED;
 	}
 }
 ?>

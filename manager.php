@@ -82,6 +82,7 @@
 					class: 'link'
 				});
 				link.text(event.data[i][1]);
+				console.log(event.data[i][0]);
 				link.attr("value", event.data[i][0]);
 				link.appendTo(list);
 			}

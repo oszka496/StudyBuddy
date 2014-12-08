@@ -37,10 +37,10 @@
   <body>
     <div class="container">
       <?php if (isset($_GET['msg'])): ?>
-        <div class="alert alert-success" role="alert"><h3><?php echo s($_GET['msg']); ?></h3></div>
+        <div class="alert alert-success" role="alert"><span class="h4"><?php echo s($_GET['msg']); ?></span></div>
       <?php endif; ?>
       <?php if (isset($_GET['err'])): ?>
-        <div class="alert alert-danger" role="alert"><h3><?php echo s($_GET['err']); ?></h3></div>
+        <div class="alert alert-danger" role="alert"><span class="h4"><?php echo s($_GET['err']); ?></span></div>
       <?php endif; ?>
       <div class="header">
         <nav class="navbar navbar-default" role="navigation">

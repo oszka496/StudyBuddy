@@ -3,8 +3,10 @@
 	
 	if (!isSessionSet())
 		throw new Exception("Session wasn't set.");
-	if (!arePostFilled(['courseName', 'courseAddress', 'uniId']))
-		die("Unable to add course.");
+	if (!arePostFilled(['courseName', 'courseAddress', 'uniId'])){
+		echo("Unable to add course.");
+		exit();
+	}
 
 	$id = s($_SESSION['id']);
 
@@ -14,12 +16,22 @@
 	
 	$starts = parseDate(s($_POST['sdate']));
 	$ends = parseDate(s($_POST['edate']));
+	$msg = "";
 	try 
 	{
-		Course::addCourse($name, $adr, $uni, $starts, $ends);
+		$msg = Course::addCourse($name, $adr, $uni, $starts, $ends);
 	}
 	catch (Exception $e)
 	{
 		die($e->getMessage());
+	}
+
+	switch ($msg){
+		case Course::$COURSE_ALREADY_EXISTS: 
+			echo "Error: Course already exists";
+			break;
+		case Course::$COURSE_ADDED:
+			echo "Success: Course added";
+			break;
 	}
 ?>

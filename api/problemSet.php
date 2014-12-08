@@ -24,7 +24,8 @@ class ProblemSet {
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 
-		if(!(filled($field)&&filled($psid)&&filled($value))) return User::$INVALID_DATA;
+		if(!(filled($field)&&filled($psid)&&filled($value)))
+			return User::$INVALID_DATA;
 
 		$query = "CALL change_ps_".$field."('$psid', '$value');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -37,6 +38,10 @@ class ProblemSet {
 		global $mysqli;
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
+		$name = s($name);
+		$courseId = s($courseId);
+		$deadline = s($deadline);
+		$psAddress = s($psAddress);
 		//TO DO:
 		//Checking if the psAddress is on courseAddress website
 		$query = "CALL get_course('$courseId');";
@@ -46,33 +51,44 @@ class ProblemSet {
 		}
 		$result->close();
 		$mysqli->next_result();
-		if(ProblemSet::checkPS($psAddress) != 0) return ProblemSet::$PS_EXISTS;
+		if(ProblemSet::checkPS($psAddress) != 0)
+			return ProblemSet::$PS_EXISTS;
 		$query = "CALL insert_ps('$name', '$courseId', '$deadline', '$psAddress');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return ProblemSet::$ADD_PS_SUCCESS;
 	}
 
-	public static function editProblemSet($psid, $name, $courseId, $deadline, $psAddress){
+	public static function editProblemSet($psid, $name = "", $courseId = "", $deadline = "", $psAddress = ""){
 		global $mysqli;
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
+		$psid = s($psid);
+		$name = s($name);
+		$courseId = s($courseId);
+		$deadline = s($deadline);
+		$psAddress = s($psAddress);
 
-		if(ProblemSet::checkPS() == 0) return ProblemSet::$PS_NOT_FOUND;
-		if(filled($name))updateField("name", $psid, $name);
-		if(filled($courseId))updateField("course", $psid, $courseId);
-		if(filled($deadline))updateField("deadline", $psid, $deadline);
-		if(filled($psAddress))updateField("address", $psid, $psAddress);
+		if(ProblemSet::checkPS() == 0) 
+			return ProblemSet::$PS_NOT_FOUND;
+		updateField("name", $psid, $name);
+		updateField("course", $psid, $courseId);
+		updateField("deadline", $psid, $deadline);
+		updateField("address", $psid, $psAddress);
 		return ProblemSet::$UPDATE_PS_SUCCESS;
 	}
 
 	public static function deleteProblemSet($psid,$cid){
 		global $mysqli;
+		$psid = s($psid);
+		$cid = s($cid);
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
-		if(ProblemSet::checkPS() == 0) return ProblemSet::$PS_NOT_FOUND;
+		if(ProblemSet::checkPS() == 0) 
+			return ProblemSet::$PS_NOT_FOUND;
 
 		$id = s($_SESSION['id']);
-		if(checkStatus($id) > 1) return User::$INSUFICIENT_PRIVIILEGE;
+		if(checkStatus($id) > 1) 
+			return User::$INSUFICIENT_PRIVIILEGE;
 		$query = "CALL delete_ps('$psid', '$cid');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return ProblemSet::$DELETE_PS_SUCCESS;

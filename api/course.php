@@ -10,6 +10,11 @@ class Course
 	public static function addCourse($name, $address, $universityId, $startDate, $endDate)
 	{
 		global $mysqli;
+		$name = s($name);
+		$address = s($address);
+		$universityId = s($universityId);
+		$startDate = s($startDate);
+		$endDate = s($endDate);
 		if (!isSessionSet())
 			throw new Exception("Session wasn't set.");
 
@@ -33,14 +38,15 @@ class Course
 	public static function deleteCourse($courseId)
 	{
 		global $mysqli;
+		$courseId = s($courseId);
 		if (!isSessionSet())
 			throw new Exception("Session wasn't set.");
 
 		$id = s($_SESSION['id']);
-		//if(checkStatus($id) == 0){
+		if(checkStatus($id) == 0){
 			$query = "CALL delete_course('$courseId');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		//}
+		}
 
 		return Course::$COURSE_DELETED;
 	}
@@ -48,8 +54,8 @@ class Course
 	private static function updateField($field, $cid, $value)
 	{
 		global $mysqli;
-		if (!filled($value))
-			return;
+		if(!(filled($field)&&filled($psid)&&filled($value)))
+			return User::$INVALID_DATA;
 
 		$query = "CALL change_".$field."('$cid','$value');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
@@ -57,12 +63,21 @@ class Course
 		$mysqli->next_result();
 	}
 
-	public static function editCourse($courseId, $lecturerId, $courseName, $courseStart, $courseEnd, $courseAdress, $uniId){
+	public static function editCourse($courseId, $lecturerId = "", $courseName = "", $courseStart = "",
+														$courseEnd = "", $courseAdress = "", $uniId = ""){
 		if(!isSessionSet())
 			throw new Exception("Session wasn't set.");
 		
 		$id = s($_SESSION['id']);
 		$utype = s($_SESSION['uType']);
+
+		$courseId = s($courseId);
+		$lecturerId = s($lecturerId);
+		$courseName = s($courseName);
+		$courseEnd = s($courseEnd);
+		$courseAdress = s($courseAdress);
+		$uniId = s($uniId);
+
 		if($utype == 2){
 			return User::$INSUFFICIENT_PRIVILEGE;
 		}
@@ -77,6 +92,8 @@ class Course
 
 	public static function getAdressById($cid){
 		global $mysqli;
+		$cid = s($cid);
+
 		$query = "CALL get_course('$cid');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		
@@ -92,6 +109,7 @@ class Course
 	//Function for students to enroll to the courses
 	public static function enrollToCourse($courseAddress){
 		global $mysqli;
+		$courseAddress = s($courseAddress);
 		if(!isSessionSet())
 			throw new Exception("Session wasn't set.");
 		

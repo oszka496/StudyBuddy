@@ -90,6 +90,7 @@
 	}
 
 	function parseDate($date){
+		$date = s($date);
 		if(!filled($date)){
 			return "0000-00-00";
 		}

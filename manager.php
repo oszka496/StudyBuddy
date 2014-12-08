@@ -39,7 +39,7 @@
 			}
 		?>
 		</span>
-		<form id="mgrform" method="post" action="<?php echo PATH;?>addProblemSet.php">
+		<form id="mgrform" method="post" action="<?php echo PATH;?>/addProblemSet.php">
 		<h4>Add assignment to course</h4>
 		<div class="alert alert-warning" style="display: none;" id="mgrresult"></div>
 		<div class="input-group input-group-sm">
@@ -49,8 +49,8 @@
 		<div class="input-group input-group-sm">
 			<input type="text" class="form-control" placeholder="Name of course" id="suggestCourse" name="courseId">
 		</div>
-		<div class="form-group">
-			<input type="text" placeholder="" name="psdate" id="psdate" value="" class="form-control input-sm datepicker" placeholder="Problem set deadline" >
+		<div class="input-group input-group-sm">
+			<input type="text" name="psdate" id="psdate" value="" class="form-control input-sm datepicker" placeholder="Problem set deadline" >
 		</div>
 
 		<div class="input-group input-group-sm">
@@ -74,7 +74,7 @@
 				dateFormat: "dd/mm/yy"
 			});
 		});
-		
+
 		function receiveMessage(event)
 		{
 			for (var i=0; i<event.data.length; i+=1) {

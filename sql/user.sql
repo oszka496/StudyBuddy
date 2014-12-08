@@ -32,3 +32,9 @@ CREATE PROCEDURE delete_user(em  VARCHAR(50))
 BEGIN
 	DELETE FROM `user` WHERE `email` = em;
 END;
+
+DROP PROCEDURE IF EXISTS get_user_by_id;
+CREATE PROCEDURE get_user_by_id(uid INT(11))
+BEGIN
+	SELECT `fname`, `lname` FROM `user` WHERE `id` = uid;
+END

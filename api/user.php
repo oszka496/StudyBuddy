@@ -174,6 +174,19 @@ class User
 		return $tab;
 	}
 
+	private static function getUserById($id){
+		global $mysqli;
+		$id = s($id);
+		$query = "CALL get_user_by_id('$id');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		if (mysqli_num_rows($result) == 0)
+			return User::$USER_NOT_FOUND;
+		$fetch = mysqli_fetch_row($result);
+		$fname = $fetch[0];
+		$lname = $fetch[1];
+		return [$fname,$lname];
+	}
+
 	public static function deleteUser($mail){
 		global $mysqli;
 		$mail = s($mail);

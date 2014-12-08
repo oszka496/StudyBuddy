@@ -193,7 +193,8 @@ class User
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);
-		if((s($SESSION_['uType']) != 0) && $id != getUserIdByMail($mail)[0]) return User::$INSUFFICIENT_PRIVILEGE;
+		if((s($SESSION_['uType']) != 0) && $id != getUserIdByMail($mail)[0]) 
+			return User::$INSUFFICIENT_PRIVILEGE;
 		$query = "CALL delete_user('$mail');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		return User::$DELETE_SUCCESS;

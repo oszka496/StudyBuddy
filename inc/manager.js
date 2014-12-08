@@ -2,7 +2,7 @@
 (function manager() {
     // Load the script
     var script = document.createElement("script");
-    script.src = 'http://localhost/StudyBuddy/inc/jquery-1.11.1.min.js';
+    script.src = 'https://code.jquery.com/jquery-1.11.1.min.js';
     script.type = 'text/javascript';
     document.getElementsByTagName("head")[0].appendChild(script);
 

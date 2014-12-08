@@ -63,11 +63,11 @@
 	$(document).ready(function(){
 		var list = $("#links");
 		window.addEventListener("message", receiveMessage, false);
-
+		/*
 		$("#mgrform").ajaxForm(function(data) {
 			$("#mgrresult").text(data).show(5000);//.hide(4000);
 		});
-
+		*/
 		$('.datepicker').each(function(){
 			$(this).datepicker({
 				showWeek: true,

@@ -23,7 +23,7 @@
 				$address = $fetch[5];
 				?>
 					<li class="list-group-item clearfix">
-						<?php echo $name . " (". $address .")"; ?>
+						<?php echo $name . " (". substr($address, 0, 50) .")"; ?>
 						<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
 							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success'>

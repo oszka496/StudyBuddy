@@ -35,7 +35,12 @@
   </head>
 
   <body>
-
+  <?php if (isset($_GET['msg'])): ?>
+    <div class="alert alert-success"><?php s($_GET['msg']) ?></div>
+  <?php endif; ?>
+  <?php if (isset($_GET['err'])): ?>
+    <div class="alert alert-danger"><?php s($_GET['err']) ?></div>
+  <?php endif; ?>
     <div class="container">
       <div class="header">
         <nav class="navbar navbar-default" role="navigation">

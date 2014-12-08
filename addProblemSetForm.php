@@ -36,7 +36,11 @@
 		});
 
 		$('#psform').ajaxForm(function(data){
-			alert("Thank you for your input" + data);
+			var msg = $('<div role="alert"></div>');
+			if(data.lastIndexOf("Error",0) === 0) msg.addClass("alert alert-danger");
+			if(data.lastIndexOf("Success",0) === 0) msg.addClass("alert alert-success");
+			msg.text(data);
+			$("#psform").before(msg);
 		})
 	});
 	</script>

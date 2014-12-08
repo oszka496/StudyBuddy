@@ -12,7 +12,17 @@
 		$name = s($_POST['psName']);
 
 		$date = parseDate(s($_POST['psdate']));
-		echo ProblemSet::addProblemSet($name, $cid, $date, $psadr);
-		//header("Location: index.php");
+		$msg = ProblemSet::addProblemSet($name, $cid, $date, $psadr);
+		switch ($msg){
+			case Course::$COURSE_NOT_FOUND: 
+				echo "Error: Course doesn't exist";
+				break;
+			case ProblemSet::$PS_EXISTS:
+				echo "Error: Problem set already exists";
+				break;
+			case ProblemSet::$ADD_PS_SUCCESS:
+				echo "Success: Problem set added";
+				break;
+		}
 	}
 ?>

@@ -39,7 +39,7 @@
 			}
 		?>
 		</span>
-		<form id="mgrform" method="post" action="<?php echo LINK;?>/addProblemSet.php">
+		<form id="mgrform" method="post" action="<?php echo LINK;?>/addProblemSet.php" target="manager">
 		<h4>Add assignment to course</h4>
 		<div class="alert alert-warning" style="display: none;" id="mgrresult"></div>
 		<div class="input-group input-group-sm">
@@ -63,11 +63,11 @@
 	$(document).ready(function(){
 		var list = $("#links");
 		window.addEventListener("message", receiveMessage, false);
-		/*
+		
 		$("#mgrform").ajaxForm(function(data) {
 			$("#mgrresult").text(data).show(5000);//.hide(4000);
 		});
-		*/
+		
 		$('.datepicker').each(function(){
 			$(this).datepicker({
 				showWeek: true,

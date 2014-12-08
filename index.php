@@ -35,13 +35,13 @@
   </head>
 
   <body>
-  <?php if (isset($_GET['msg'])): ?>
-    <div class="alert alert-success"><?php echo s($_GET['msg']); ?></div>
-  <?php endif; ?>
-  <?php if (isset($_GET['err'])): ?>
-    <div class="alert alert-danger"><?php echo s($_GET['err']); ?></div>
-  <?php endif; ?>
     <div class="container">
+      <?php if (isset($_GET['msg'])): ?>
+        <div class="alert alert-success" role="alert"><h3><?php echo s($_GET['msg']); ?></h3></div>
+      <?php endif; ?>
+      <?php if (isset($_GET['err'])): ?>
+        <div class="alert alert-danger" role="alert"><h3><?php echo s($_GET['err']); ?></h3></div>
+      <?php endif; ?>
       <div class="header">
         <nav class="navbar navbar-default" role="navigation">
         <a href="#" class="navbar-brand">StudyBuddy</a>

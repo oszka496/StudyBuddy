@@ -49,6 +49,9 @@
 		<div class="input-group input-group-sm">
 			<input type="text" class="form-control" placeholder="Name of course" id="suggestCourse" name="courseId">
 		</div>
+		<div class="form-group">
+			<input type="text" placeholder="" name="psdate" id="psdate" value="" class="form-control input-sm datepicker" placeholder="Problem set deadline" >
+		</div>
 
 		<div class="input-group input-group-sm">
 			<select id="links" class="form-control" name="psAddress"/>
@@ -65,6 +68,13 @@
 			$("#mgrresult").text(data).show(5000);//.hide(4000);
 		});
 
+		$('.datepicker').each(function(){
+			$(this).datepicker({
+				showWeek: true,
+				dateFormat: "dd/mm/yy"
+			});
+		});
+		
 		function receiveMessage(event)
 		{
 			for (var i=0; i<event.data.length; i+=1) {

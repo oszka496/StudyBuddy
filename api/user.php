@@ -20,6 +20,9 @@ class User
 	public static function login($login, $password, $api = false)
 	{	
 		global $mysqli;
+		$login = s($login);
+		$password = s($password);
+		$api = s($api);
 		if(!filled($login) || !filled($password)){
 			if (!$api)
 				return User::$INVALID_DATA;
@@ -56,6 +59,8 @@ class User
 	public static function authenticate($login, $hash)
 	{
 		global $mysqli;
+		$login = s($login);
+		$hash = s($hash);
 		if(!filled($login) || !filled($hash)){
 			return array(User::$INVALID_DATA, "");
 		}
@@ -71,6 +76,11 @@ class User
 	public static function register($email, $password, $password1, $firstName, $lastName, $utype)
 	{
 		global $mysqli;
+		$email = s($email);
+		$password = s($password);
+		$password1 = s($password1);
+		$firstName = s($firstName);
+		$lastName = s($lastName);
 		if(User::validate($email,$password,$password1,$firstName,$lastName,$utype))
 		{
 			$ph = password_hash($password, PASSWORD_DEFAULT);
@@ -105,6 +115,13 @@ class User
 	private static function validate($email,$pass,$cpass,$fname,$lname, $utype)
 	{
 		global $mysqli;
+		$email = s($email);
+		$pass = s($pass);
+		$cpass = s($cpass);
+		$fname = s($fname);
+		$lname = s($lname);
+		$utype = s($utype);
+
 		//Checking password
 		$status = True;
 		if ($pass != $cpass){													//password different than confirmation
@@ -140,6 +157,7 @@ class User
 
 	private static function getUserIdByMail($login){
 		global $mysqli;
+		$login = s($login);
 		$query = "CALL get_user('$login');";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		if (mysqli_num_rows($result) == 0)
@@ -158,6 +176,7 @@ class User
 
 	public static function deleteUser($mail){
 		global $mysqli;
+		$mail = s($mail);
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);

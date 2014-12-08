@@ -10,6 +10,18 @@
 		$utype = s($_POST['utype']);
 		if($utype != 1 && $utype != 2) die();
 		$out = User::register($email, $pass, $cpass, $fname, $lname, $utype);
+		switch ($out) {
+			case User::$INVALID_DATA:
+				header("Location: index.php?msg=Invalid data");
+				break;
+			case User::$REGISTER_SUCCESS:
+				header("Location: index.php?msg=Register success");
+				break;
+			default:
+				# code
+				break;
+		}
+
 	} else {				//insufficient data
 		echo "All fields are required";
 	}

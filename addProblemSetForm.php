@@ -44,7 +44,7 @@
 			if(data.lastIndexOf("Success",0) === 0) msg.addClass("alert alert-success");
 			sp.text(data);
 			$("#psform").before(msg);
-		})
+		});
 	});
 	</script>
 </body>

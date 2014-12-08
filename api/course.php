@@ -46,7 +46,8 @@ class Course
 		if(checkStatus($id) == 0){
 			$query = "CALL delete_course('$courseId');";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		}
+		} else 
+			return User::$INSUFFICIENT_PRIVILEGE;
 
 		return Course::$COURSE_DELETED;
 	}

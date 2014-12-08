@@ -34,6 +34,10 @@
 				dateFormat: "dd/mm/yy"
 			});
 		});
+
+		$('#psform').ajaxForm(function(data){
+			alert("Thank you for your input" + data);
+		})
 	});
 	</script>
 </body>

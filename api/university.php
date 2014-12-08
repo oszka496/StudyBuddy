@@ -11,6 +11,10 @@ class University {
 	//Function to create university
 	public static function createUniversity($uniName, $uniAddress, $tags, $mail) {
 		global $mysqli;
+		$uniName = s($uniName);
+		$uniAddress = s($uniAddress);
+		$tags = s($tags);
+		$mail = s($mail);
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);
@@ -30,6 +34,7 @@ class University {
 
 	public static function deleteUniversity($universityId){
 		global $mysqli;
+		$universityId = s($universityId);
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);
@@ -43,6 +48,11 @@ class University {
 
 	public static function editUniversity($uniId, $uniName, $uniAddress, $tags, $mail){
 		global $mysqli;
+		$uniId = s($uniId);
+		$uniName = s($uniName);
+		$uniAddress = s($uniAddress);
+		$tags = s($tags);
+		$mail = s($mail);
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);
@@ -58,6 +68,9 @@ class University {
 
 	private static function updateField($field, $uniId, $value){
 		global $mysqli;
+		$field = s($field);
+		$uniId = s($uniId);
+		$value = s($value);
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 

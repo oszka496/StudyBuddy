@@ -12,7 +12,7 @@
 		$name = s($_POST['psName']);
 
 		$date = parseDate(s($_POST['psdate']));
-		echo problemSet::addProblemSet($name, $cid, $date, $psadr);
+		echo ProblemSet::addProblemSet($name, $cid, $date, $psadr);
 		//header("Location: index.php");
 	}
 ?>

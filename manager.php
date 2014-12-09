@@ -1,11 +1,11 @@
 <?php
 	header('P3P: CP="CAO PSA OUR"');
 	include 'inc/functions.php';
-
-	if (isset($_GET['id'])) 
+	$id = $_SESSION['id'];
+	/*if (isset($_GET['id'])) 
 	{
 		$id = intval(s($_GET['id']));
-	}
+	}*/
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -82,7 +82,7 @@
 					class: 'link'
 				});
 				link.text(event.data[i][1]);
-				console.log(event.data[i][0]);
+				console.log(event.data[i]);
 				link.attr("value", event.data[i][0]);
 				link.appendTo(list);
 			}

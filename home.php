@@ -66,7 +66,8 @@
       e.preventDefault();
     });
 
-    $(document).on("click", ".enroll", function(e){
+    $(document).on("click", ".course-action", function(e){
+      var t = $(this);
       var d = $("<div></div>");
       var href = $(this).attr("href");
       d.load(href, function(data){
@@ -77,7 +78,8 @@
         if(data.lastIndexOf("Error",0) === 0) msg.addClass("alert alert-danger");
         if(data.lastIndexOf("Success",0) === 0) msg.addClass("alert alert-success");
         sp.text(data);
-        $("#courseList").before(msg);
+        t.closest(".list-group").before(msg);
+        msg.delay(3000).slideUp(5000);
       });
       e.preventDefault();
     });

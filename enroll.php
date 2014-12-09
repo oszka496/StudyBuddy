@@ -4,14 +4,12 @@
 		throw new Exception("Session wasn't set.");
 
 	if(!isset($_GET['cid'])){
-		header("Location: index.php");
 		return;
 	}
 	$msg = "";
 	try {
 		$cid = s($_GET['cid']);
 		$msg = Course::enrollToCourse(Course::getAdressById($cid));
-		header("Location: index.php");
 	}
 	catch (Exception $e)
 	{

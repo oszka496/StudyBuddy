@@ -3,8 +3,8 @@
 	if(!isSessionSet())
 		throw new Exception("Session wasn't set.");
 
-	if(filled($_GET['cid'])){
-		echo("Unable to delete course.");
+	if(!filled($_GET['cid'])){
+		echo("Error: Unable to delete course.");
 		exit();
 	}
 	

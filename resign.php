@@ -4,7 +4,6 @@
 		throw new Exception("Session wasn't set.");
 
 	if(!isset($_GET['cid'])){
-		header("Location: index.php");
 		return;
 	}
 
@@ -12,10 +11,17 @@
 	try {
 		$cid = s($_GET['cid']);
 		$msg = Course::resignFromCourse($cid);
-		header("Location: index.php");
 	}
 	catch (Exception $e)
 	{
 		die($e->getMessage());
+	}
+	switch ($msg){
+		case Course::$COURSE_LEAVED:
+			echo "Success: You have left the course";
+			break;
+		case Course::$NOT_ENROLLED:
+			echo "Error: You haven't enrolled to the course";
+			break;
 	}
 ?>

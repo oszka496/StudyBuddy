@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS `courses` (
 DROP PROCEDURE IF EXISTS insert_course;
 CREATE PROCEDURE insert_course(cname VARCHAR(100), starts date, ends date, adr VARCHAR(150), uid INT(11))
 BEGIN
-	INSERT INTO `courses` (`name`, `courseStart`, `courseEnd`, `courseAddress`, `uniId`) VALUES (cname, starts, ends, adr, uid);
+	INSERT INTO `courses` (`name`, `courseStart`, `courseEnd`, `courseAddress`, `uniId`) 
+	VALUES (cname, starts, ends, adr, uid);
 END;
 
 DROP PROCEDURE IF EXISTS check_course;

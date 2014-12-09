@@ -7,6 +7,7 @@ class Course
 	public static $COURSE_DELETED = 4;
 	public static $COURSE_JOINED = 5;
 	public static $COURSE_LEAVED = 6;
+	public static $ALREADY_ENROLLED = 7;
 
 	public static function addCourse($name, $address, $universityId, $startDate, $endDate)
 	{
@@ -124,6 +125,13 @@ class Course
 		$courseId = mysqli_fetch_row($result)[0];
 		$userId = s($_SESSION['id']);
 		
+		$mysqli->next_result();
+		$result->close();
+		$query = "CALL check_enroll('$userId', '$courseId');";
+		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		if(mysqli_num_rows($result) != 0) 
+			return Course::$ALREADY_ENROLLED;
+
 		$mysqli->next_result();
 		$result->close();
 		$query = "CALL choose_course('$userId', '$courseId');";

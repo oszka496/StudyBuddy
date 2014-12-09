@@ -25,7 +25,7 @@
 				echo "$psname $psdd";
 				echo "<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
-							<a href=\"$psadr\" class='btn btn-xs btn-info'>
+							<a href=\"$psadr\" class='btn btn-xs btn-info' target='_newtab'>
 								View&nbsp;<span class='glyphicon glyphicon-chevron-right'></span>
 					  		</a>
 					  	</div>

@@ -65,6 +65,23 @@
       }
       e.preventDefault();
     });
-  })
+
+    $(document).on("click", ".enroll", function(e){
+      var d = $("<div></div>");
+      var href = $(this).attr("href");
+      d.load(href, function(data){
+        var msg = $('<div role="alert"></div>');
+        var sp = $('<span></span>');
+        sp.addClass("h4");
+        msg.append(sp);
+        if(data.lastIndexOf("Error",0) === 0) msg.addClass("alert alert-danger");
+        if(data.lastIndexOf("Success",0) === 0) msg.addClass("alert alert-success");
+        sp.text(data);
+        $("#courseList").before(msg);
+      });
+      e.preventDefault();
+    });
+
+  });
 </script>
 <script type="text/javascript" src="inc/getUni.php"></script>

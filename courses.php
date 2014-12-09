@@ -26,7 +26,7 @@
 						<?php echo $name . " (". substr($address, 0, 50) .")"; ?>
 						<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
-							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success'>
+							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success enroll'>
 								<span class='glyphicon glyphicon-star-empty'></span>
 								&nbsp;Enroll
 							</a>

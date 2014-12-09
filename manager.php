@@ -64,8 +64,14 @@
 		var list = $("#links");
 		window.addEventListener("message", receiveMessage, false);
 		
-		$("#mgrform").ajaxForm(function(data) {
-			$("#mgrresult").text(data).show(5000);//.hide(4000);
+		$("#mgrform").ajaxForm({
+			success: function(data) {
+				$("#mgrresult").text(data).show(5000);//.hide(4000);
+			},
+			beforeSerialize: function($form, options) { 
+    			var sc = $("#suggestCourse");
+    			sc.val(sc.attr("cid"));
+			}
 		});
 		
 		$('.datepicker').each(function(){
@@ -82,7 +88,6 @@
 					class: 'link'
 				});
 				link.text(event.data[i][1]);
-				console.log(event.data[i]);
 				link.attr("value", event.data[i][0]);
 				link.appendTo(list);
 			}

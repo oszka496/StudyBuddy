@@ -26,7 +26,7 @@
     $( "#suggestCourse" ).autocomplete({
       source: availableTags,
       select: function(event, ui) {
-        $('#suggestCourse').attr("value", ui.item.id);
+        $('#suggestCourse').attr("cid", ui.item.id);
       }
     });
   });

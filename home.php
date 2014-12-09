@@ -20,14 +20,7 @@
     <a title="Save to StudyBuddy"
       href="javascript:document.getElementsByTagName('body')[0]
             .appendChild(document.createElement('script'))
-            .setAttribute('src','http://studybuddy-atpwr.rhcloud.com/inc/manager.js');
-            var p;
-            document.getElementsByTagName('body')[0]
-            .appendChild(p = document.createElement('p'))
-            .setAttribute('id','sbid');
-            var t = document.createTextNode('<?php echo User::getUser()[0]; ?>');
-            p.appendChild(t);
-            p.setAttribute('style', 'display: none;')"
+            .setAttribute('src','http://studybuddy-atpwr.rhcloud.com/inc/manager.js');"
       class="btn btn-warning" style="margin: 10px auto; display: block; width: auto;">Save to StudyBuddy</a>
   </div>
   <div role="tabpanel" class="tab-pane active" id="observed">

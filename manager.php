@@ -35,7 +35,7 @@
 			{
 				$name = $user[1];
 				$surname = $user[2];
-				echo "<p style='text-align: center;'>Working as: ".$name." ".$surname."</p>";
+				echo "<p style='text-align: center;'>Hello, : ".$name." ".$surname."</p>";
 			}
 		?>
 		</span>

@@ -69,8 +69,11 @@
 				$("#mgrresult").text(data).show(5000);//.hide(4000);
 			},
 			beforeSerialize: function($form, options) { 
-    			var sc = $("#suggestCourse");
-    			sc.val(sc.attr("cid"));
+				options.data = {
+					courseId: $("#suggestCourse").attr("cid")
+				}
+    			/*var sc = $("#suggestCourse");
+    			sc.val(sc.attr("cid"));*/
 			}
 		});
 		

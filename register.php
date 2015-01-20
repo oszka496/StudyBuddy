@@ -1,7 +1,7 @@
 <?php
 	require_once 'inc/functions.php';
 	
-	if (arePostFilled(['pass1','pass2','email','fname','lname','utype'])){
+	if (!arePostFilled(['pass1','pass2','email','fname','lname','utype'])){
 		echo("Error: All fields are required");
 		exit();
 	}

@@ -19,6 +19,9 @@ class User
 	public static $AUTHENTICATION_SUCCESS = 0;
 	public static $AUTHENTICATION_FAILURE = 1;
 
+	public static $CONFIRMATION_SUCCESS = 7;
+	public static $ACCOUNT_NOT_CONFIRMED = 8;
+
 	public static function login($login, $password, $api = false)
 	{	
 		global $mysqli;
@@ -41,6 +44,13 @@ class User
 		$fname = $data[2];
 		$lname = $data[3];
 		$utype = $data[4];
+		$conf = $data[5];
+		if($conf == 0)
+			if(!$api)
+				return User::$ACCOUNT_NOT_CONFIRMED;
+			else
+				return array(User::$ACCOUNT_NOT_CONFIRMED, "ACCOUNT_NOT_CONFIRMED");
+
 		if(password_verify( $password, $hash )) { 
 			$_SESSION['id'] = $id;
 			$_SESSION['firstName'] = $fname;
@@ -75,6 +85,18 @@ class User
 		return User::$AUTHENTICATION_FAILURE;
 	}
 
+	public static function confirmUser($conf)
+	{
+		global $mysqli;
+		if(!filled($conf))
+			return User::$INVALID_DATA;
+		$conf = s($conf);
+		$query = "CALL confirm_email('$conf')";
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		mysqli_next_result($mysqli);
+		return User::$CONFIRMATION_SUCCESS;
+	}
+
 	public static function register($email, $password, $password1, $firstName, $lastName, $utype)
 	{
 		global $mysqli;
@@ -83,12 +105,13 @@ class User
 		$password1 = s($password1);
 		$firstName = s($firstName);
 		$lastName = s($lastName);
+		$conf = sha1(rand());
+		echo "$conf";
 		if(User::validate($email,$password,$password1,$firstName,$lastName,$utype))
 		{
 			$ph = password_hash($password, PASSWORD_DEFAULT);
-			$query = "CALL insert_user('$email', '$ph', '$firstName', '$lastName', '$utype')";
+			$query = "CALL insert_user('$email', '$ph', '$firstName', '$lastName', '$utype', '$conf')";
 			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-			mysqli_free_result($result);
 			mysqli_next_result($mysqli);
 
 			return User::$REGISTER_SUCCESS;
@@ -171,15 +194,9 @@ class User
 		if (mysqli_num_rows($result) == 0)
 			return User::$USER_NOT_FOUND;
 		$fetch = mysqli_fetch_row($result);
-		$id = $fetch[0];
-		$hash = $fetch[1];
-		$fname = $fetch[2];
-		$lname = $fetch[3];
-		$utype = $fetch[4];
 		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
-		$tab = [$id, $hash, $fname, $lname, $utype];
-		return $tab;
+		return $fetch;
 	}
 
 	public static function getUserById($id){

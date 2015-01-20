@@ -24,6 +24,10 @@
 					header("Location: index.php?err=Empty login or password");
 					break;
 				
+				case User::$ACCOUNT_NOT_CONFIRMED:
+					header("Location: index.php?err=Please confirm your account");
+					break;
+
 				default:
 					# code...
 					break;

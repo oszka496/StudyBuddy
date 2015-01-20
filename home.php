@@ -45,7 +45,7 @@
         var href = self.attr('href');
         uni.load(href, function() {
           if (!self.hasClass("btn"))
-            self.next().after(uni);
+            self.parent().append(uni);
           else
             self.parent().after(uni);
         });

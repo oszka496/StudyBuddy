@@ -21,9 +21,10 @@
 				$cstart = $fetch[3];
 				$cend = $fetch[4];
 				$address = $fetch[5];
+				$courseInfo = "courseDetails.php?cid=".$cid;
 				?>
 					<li class="list-group-item clearfix">
-						<?php echo $name; ?>
+						<a href="<?php echo $courseInfo ?>" class='listLink'><?php echo $name ?></a>
 						<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
 							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success list-action'>

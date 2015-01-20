@@ -3,7 +3,7 @@
 	if(!isSessionSet())
 		throw new Exception("Session wasn't set.");
 
-	$query = "CALL show_uni();";
+	$query = "CALL show_uni()";
 	$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
 	if(mysqli_num_rows($result) == 0) { // No universities yet
@@ -21,5 +21,6 @@
 		echo "</ul>";
 		if(s($_SESSION['uType']) == 0) include('addUniForm.php');
 	}
-
+	mysqli_free_result($result);
+	mysqli_next_result($mysqli);
 ?>

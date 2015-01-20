@@ -37,7 +37,7 @@
         </div><!-- /input-group -->
     </form>
     <?php 
-    $mysqli->next_result();
+    mysqli_next_result($mysqli);
     $result->close();
     include("university.php");?>
   </div>  

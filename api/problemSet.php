@@ -11,11 +11,11 @@ class ProblemSet {
 
 	private static function checkPS($psAddress){
 		global $mysqli;
-		$query = "CALL check_ps('$psAddress');";
+		$query = "CALL check_ps('$psAddress')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		$out = mysqli_num_rows($result);
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		return $out;
 	}
 
@@ -27,10 +27,10 @@ class ProblemSet {
 		if(!(filled($field)&&filled($psid)&&filled($value)))
 			return User::$INVALID_DATA;
 
-		$query = "CALL change_ps_".$field."('$psid', '$value');";
+		$query = "CALL change_ps_".$field."('$psid', '$value')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		return ProblemSet::$UPDATE_FIELD_SUCCESS;
 	}
 
@@ -44,19 +44,19 @@ class ProblemSet {
 		$psAddress = s($psAddress);
 		//TO DO:
 		//Checking if the psAddress is on courseAddress website
-		$query = "CALL get_course('$courseId');";
+		$query = "CALL get_course('$courseId')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if(mysqli_num_rows($result) == 0) { // Course doesn't exist
 				return Course::$COURSE_NOT_FOUND;
 		}
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		if(ProblemSet::checkPS($psAddress) != 0)
 			return ProblemSet::$PS_EXISTS;
-		$query = "CALL insert_ps('$name', '$courseId', '$deadline', '$psAddress');";
+		$query = "CALL insert_ps('$name', '$courseId', '$deadline', '$psAddress')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		return ProblemSet::$ADD_PS_SUCCESS;
 	}
 
@@ -91,10 +91,10 @@ class ProblemSet {
 		$id = s($_SESSION['id']);
 		if(checkStatus($id) > 1) 
 			return User::$INSUFICIENT_PRIVIILEGE;
-		$query = "CALL delete_ps('$psid', '$cid');";
+		$query = "CALL delete_ps('$psid', '$cid')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		return ProblemSet::$DELETE_PS_SUCCESS;
 	}
 }

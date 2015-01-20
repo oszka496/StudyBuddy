@@ -3,12 +3,14 @@
 	if(!isSessionSet())
 		throw new Exception("Session wasn't set.");
 	$id = s($_SESSION['id']);
-	$query = "CALL show_my_courses($id);";
+	$query = "CALL show_my_courses($id)";
 	$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
 	if(mysqli_num_rows($result) == 0)
 	{
 		echo "<h2 class='center-block'><span class='label label-danger'>You have no courses yet.</span></h2>";
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		return;
 	}
 	echo "<ul id='userCourses' class='list-group'>";

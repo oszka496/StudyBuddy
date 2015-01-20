@@ -8,12 +8,12 @@
 	if(filled($_GET['cid'])){
 		$cid = s($_GET['cid']);
 		$id = s($_SESSION['id']);
-		$query = "CALL check_enroll($id, $cid);";
+		$query = "CALL check_enroll($id, $cid)";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		if(mysqli_fetch_row($result) != 0){
-			$result->close();
-			$mysqli->next_result();
-			$query = "CALL show_ps($cid);";
+			mysqli_free_result($result);
+			mysqli_next_result($mysqli);
+			$query = "CALL show_ps($cid)";
 			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 			echo "<ul id='problemSets' class='list-group' style='margin-top: 10px;'>";
 			while($fetch = mysqli_fetch_row($result)){
@@ -33,6 +33,8 @@
 				echo "</li>";
 			}
 			echo "</ul>";
+			mysqli_free_result($result);
+			mysqli_next_result($mysqli);
 		}
 		include("addProblemSetForm.php");
 	}

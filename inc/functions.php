@@ -58,7 +58,7 @@
 		            while ($row = $result->fetch_row()) {
 		                printf("\t%s\n<br>", $row[0]);
 		            }
-		            $result->free();
+		            mysqli_free_result($result);
 		        }
 		        /* print divider */
 		        if (!$mysqli->more_results()) {
@@ -84,10 +84,12 @@
 	function checkStatus($id) {
 		global $mysqli;
 		if(!isSessionSet()) return;
-		$query = "CALL get_status('$id');";
+		$query = "CALL get_status('$id')";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 		$fetch = mysqli_fetch_row($result);
 		$stat = $fetch[0];
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		return $stat;
 	}
 

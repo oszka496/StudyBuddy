@@ -18,6 +18,8 @@ include 'functions.php';
     $i++;
   }
   echo "\"\"";
+  mysqli_free_result($sql);
+  mysqli_next_result($mysqli);
 ?> 
     ];
     $( "#suggestUni" ).autocomplete({

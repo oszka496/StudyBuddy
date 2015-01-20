@@ -8,7 +8,7 @@
 
 	if(isset($_GET['uid'])){
 		$uid = s($_GET['uid']);
-		$query = "CALL show_course('$uid');";
+		$query = "CALL show_course('$uid')";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
 		if(mysqli_num_rows($result) == 0) { // No universities yet
@@ -41,6 +41,8 @@
 			}
 			echo "</ul>";
 		}
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		include('addCourseForm.php');
 	}
 ?>

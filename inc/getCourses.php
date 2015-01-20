@@ -2,7 +2,7 @@
   require_once 'functions.php';
   $id = s($_GET['id']);
   $id = intval($id);
-  $query = "CALL show_my_courses($id);";
+  $query = "CALL show_my_courses($id)";
   $sql = mysqli_query($mysqli, $query) or die(__FILE__." (".__LINE__.")".": ".mysqli_error($mysqli));
   $i=0;
   $results = array();
@@ -21,6 +21,8 @@
     $i++;
   }
   echo "\"\"";
+  mysqli_free_result($sql);
+  mysqli_next_result($mysqli);
 ?> 
     ];
     $( "#suggestCourse" ).autocomplete({

@@ -86,10 +86,10 @@ class User
 		if(User::validate($email,$password,$password1,$firstName,$lastName,$utype))
 		{
 			$ph = password_hash($password, PASSWORD_DEFAULT);
-			$query = "CALL insert_user('$email', '$ph', '$firstName', '$lastName', '$utype');";
+			$query = "CALL insert_user('$email', '$ph', '$firstName', '$lastName', '$utype')";
 			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-			$result->free();
-			$mysqli->next_result();
+			mysqli_free_result($result);
+			mysqli_next_result($mysqli);
 
 			return User::$REGISTER_SUCCESS;
 		} else { 			//invalid data
@@ -146,13 +146,13 @@ class User
 		}
 		
 		//Checking email
-		$query = "CALL get_user('$email');";
+		$query = "CALL get_user('$email')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if(mysqli_num_rows($result) != 0) { 									//email not unique
 			$status = False;
 		}
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		// TODO: regex
 		
 		//Checking type
@@ -166,7 +166,7 @@ class User
 	private static function getUserIdByMail($login){
 		global $mysqli;
 		$login = s($login);
-		$query = "CALL get_user('$login');";
+		$query = "CALL get_user('$login')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if (mysqli_num_rows($result) == 0)
 			return User::$USER_NOT_FOUND;
@@ -176,8 +176,8 @@ class User
 		$fname = $fetch[2];
 		$lname = $fetch[3];
 		$utype = $fetch[4];
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		$tab = [$id, $hash, $fname, $lname, $utype];
 		return $tab;
 	}
@@ -185,18 +185,18 @@ class User
 	public static function getUserById($id){
 		global $mysqli;
 		$id = s($id);
-		$query = "CALL get_user_by_id('$id');";
+		$query = "CALL get_user_by_id('$id')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if (mysqli_num_rows($result) == 0) {
-			$result->free();
-			$mysqli->next_result();
+			mysqli_free_result($result);
+			mysqli_next_result($mysqli);
 			return User::$USER_NOT_FOUND;
 		}
 		$fetch = mysqli_fetch_row($result);
 		$fname = $fetch[0];
 		$lname = $fetch[1];
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		return [$fname,$lname];
 	}
 
@@ -208,10 +208,10 @@ class User
 		$id = s($_SESSION['id']);
 		if((s($SESSION_['uType']) != 0) && $id != getUserIdByMail($mail)[0]) 
 			return User::$INSUFFICIENT_PRIVILEGE;
-		$query = "CALL delete_user('$mail');";
+		$query = "CALL delete_user('$mail')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		$result->free();
-		$mysqli->next_result();
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
 		return User::$DELETE_SUCCESS;
 	}
 }

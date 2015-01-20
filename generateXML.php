@@ -10,7 +10,7 @@ else
 	exit();
 
 echo "<user id=\"$id\">\n";
-$query = "CALL get_xml_data($id);";
+$query = "CALL get_xml_data($id)";
 $result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
 $uid = 0;
@@ -38,6 +38,8 @@ while ($fetch = mysqli_fetch_assoc($result)){
 echo "</course>\n";
 echo "</university>\n";
 echo "</user>";
+mysqli_free_result($result);
+mysqli_next_result($mysqli);
 ?>
 
 

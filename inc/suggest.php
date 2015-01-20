@@ -1,6 +1,6 @@
 <?php
 	include 'functions.php';
-	$q = "CALL suggest('".s($_GET['input'])."');";
+	$q = "CALL suggest('".s($_GET['input'])."')";
 	$sql = mysqli_query($mysqli,$q) or die(__FILE__." (".__LINE__.")".": ".mysqli_error($mysqli));
 	$i=0;
 	$results = array();
@@ -8,6 +8,9 @@
 		$results[$i] = $r;
 		$i++;
 	}
+
+	mysqli_free_result($sql);
+	mysqli_next_result($mysqli);
 
 	$input = strtolower( $_GET['input'] );
 	$len = strlen($input);

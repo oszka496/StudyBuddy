@@ -8,7 +8,7 @@
 
 	if(mysqli_num_rows($result) == 0)
 	{
-		echo "<h2 class='center-block'><span class='label label-danger'>You have no courses yet.</span></h2>";
+		echo "<div class='alert alert-danger margin'><span class=\"h4\">You have no courses yet.</span></div>";
 		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 		return;

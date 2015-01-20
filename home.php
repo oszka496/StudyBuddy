@@ -12,11 +12,11 @@
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane" id="manager">
     <h2>Getting started</h2>
-    <p>
+    <blockquote>
     If you want to keep track of your recent assignments and problem sets simply drag this link to your bookmarks bar
     and click it whenever you are at lecturer's website.<br>
     Our magnificent manager will pop up and you'll be able to add course to your <i>Observed list</i>.
-    </p>
+    </blockquote>
     <a title="Save to StudyBuddy"
       href="javascript:document.getElementsByTagName('body')[0]
             .appendChild(document.createElement('script'))
@@ -28,14 +28,7 @@
   </div>
   
   <div role="tabpanel" class="tab-pane" id="unis">
-    <form id="searchUni">
-        <div class="input-group">
-          <input type="text" class="form-control" size="30" value="" id="suggestUni" placeholder="Search for university">
-          <span class="input-group-btn">
-            <button class="btn btn-info" type="button">Go!</button>
-          </span>
-        </div><!-- /input-group -->
-    </form>
+    
     <?php 
     include("university.php");?>
   </div>  
@@ -46,20 +39,21 @@
     $('#myTab a:first').tab('show');
     $('.listLink').click(function(e){
       var self = $(this);
-      if (!self.next().hasClass('listContent'))
+      if (!self.hasClass("loaded"))
       {
         var uni = $("<div></div>").addClass('listContent');
         var href = self.attr('href');
         uni.load(href, function() {
           if (!self.hasClass("btn"))
-            self.after(uni);  
+            self.next().after(uni);
           else
             self.parent().after(uni);
         });
+        self.addClass("loaded");
       }
       else
       {
-        self.next().toggle();
+        self.nextAll(".listContent").toggle();
       }
       e.preventDefault();
     });
@@ -87,4 +81,3 @@
 
   });
 </script>
-<script type="text/javascript" src="inc/getUni.php"></script>

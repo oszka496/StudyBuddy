@@ -122,3 +122,12 @@ label.btn-sm {
 #mgrform .input-group {
 	display: block;
 }
+.center-block {
+	margin: 0 auto;
+}
+.tab-pane {
+	padding: 10px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	min-height: 400px;
+}

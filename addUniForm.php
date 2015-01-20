@@ -28,11 +28,17 @@
 			var msg = $('<div role="alert"></div>');
 			var sp = $('<span></span>');
 			sp.addClass("h4");
+			msg.attr("id", "msg-uniadd")
 			msg.append(sp);
 			if(data.lastIndexOf("Error",0) === 0) msg.addClass("alert alert-danger");
 			if(data.lastIndexOf("Success",0) === 0) msg.addClass("alert alert-success");
 			sp.text(data);
 			$("#uniform").before(msg);
+			setTimeout(function() {
+				msg.hide(1500, function() {
+					msg.remove();	
+				});
+			}, 3000);
 		});
 	});
 	</script>

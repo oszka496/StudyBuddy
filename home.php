@@ -64,7 +64,7 @@
       e.preventDefault();
     });
 
-    $(document).on("click", ".course-action", function(e){
+    $(document).on("click", ".list-action", function(e){
       var t = $(this);
       var d = $("<div></div>");
       var href = $(this).attr("href");
@@ -72,12 +72,15 @@
         var msg = $('<div role="alert"></div>');
         var sp = $('<span></span>');
         sp.addClass("h4");
+        msg.attr("id", "msg-listaction")
         msg.append(sp);
         if(data.lastIndexOf("Error",0) === 0) msg.addClass("alert alert-danger");
         if(data.lastIndexOf("Success",0) === 0) msg.addClass("alert alert-success");
         sp.text(data);
         t.closest(".list-group").before(msg);
-        msg.delay(3000).slideUp(5000);
+        msg.delay(3000).slideUp(5000, function(){
+          msg.remove();
+        });
       });
       e.preventDefault();
     });

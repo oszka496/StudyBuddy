@@ -26,11 +26,11 @@
 						<?php echo $name . " (". substr($address, 0, 50) .")"; ?>
 						<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
-							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success course-action'>
+							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success list-action'>
 								<span class='glyphicon glyphicon-star-empty'></span>
 								&nbsp;Enroll
 							</a>
-							<a href="deleteCourse.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-danger course-action'>
+							<a href="deleteCourse.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-danger list-action'>
 								<span class='glyphicon glyphicon-remove'></span>
 								&nbsp;Delete
 							</a>

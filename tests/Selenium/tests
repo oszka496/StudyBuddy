@@ -11,6 +11,10 @@
 <tr><td><a href="shouldLogInAsAdmin.html">shouldLogInAsAdmin</a></td></tr>
 <tr><td><a href="shouldAddUniversity.html">shouldAddUniversity</a></td></tr>
 <tr><td><a href="shouldLogOut.html">shouldLogOut</a></td></tr>
+<tr><td><a href="shouldLogInAsStudent.html">shouldLogInAsStudent</a></td></tr>
+<tr><td><a href="shouldAddCourse.html">shouldAddCourse</a></td></tr>
+<tr><td><a href="tests">shouldLogInAsAdmin</a></td></tr>
+<tr><td><a href="shouldRemoveUniversity.html">shouldRemoveUniversity</a></td></tr>
 </tbody></table>
 </body>
 </html>

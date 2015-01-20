@@ -34,7 +34,6 @@ class Course
 		$query = "CALL insert_course('$name', '$startDate', '$endDate', '$address', '$universityId')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		$cid = $mysqli->insert_id;
-		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 		Course::addLecturer($id, $cid);
 		return Course::$COURSE_ADDED;
@@ -51,7 +50,6 @@ class Course
 		if(s($_SESSION['uType']) == 0){
 			$query = "CALL delete_course('$courseId')";
 			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-			mysqli_free_result($result);
 			mysqli_next_result($mysqli);
 		} else 
 			return User::$INSUFFICIENT_PRIVILEGE;
@@ -154,7 +152,6 @@ class Course
 		if($stat == 1){
 			$query = "CALL change_lecturer('$cid','$id')";
 			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-			mysqli_free_result($result);
 			mysqli_next_result($mysqli);
 		}
 	}

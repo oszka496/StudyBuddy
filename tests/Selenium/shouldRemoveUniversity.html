@@ -4,12 +4,12 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost/" />
-<title>shouldAddCourse</title>
+<title>shouldRemoveUniversity</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">shouldAddCourse</td></tr>
+<tr><td rowspan="1" colspan="3">shouldRemoveUniversity</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -23,53 +23,18 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=University of Tests</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td></td>
-	<td>500</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=courseName</td>
-	<td>Computer Science (TEST Course)</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=courseAddress</td>
-	<td>http://example.com/university/cs00</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=sdate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=edate</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=22</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>id=addCourse</td>
+	<td>//ul[@id='universityList']/li/small/div/a[@text='University of Tests']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>id=msg-courseadd</td>
-	<td>Success: Course added</td>
+	<td>id=msg-listaction</td>
+	<td>Success: University deleted</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td></td>
+	<td>1000</td>
 </tr>
 
 </tbody></table>

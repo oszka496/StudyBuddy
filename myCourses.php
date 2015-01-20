@@ -30,9 +30,9 @@
 						<span class='glyphicon glyphicon-link'></span>
 						&nbsp;Visit
 					</a>
-					<a href='resign.php?cid=$cid' class='btn btn-xs btn-danger course-action'>
+					<a href='resign.php?cid=$cid' class='btn btn-xs btn-danger list-action'>
 						<span class='glyphicon glyphicon-remove'></span>
-						&nbsp;Forget it
+						&nbsp;Withdraw
 					</a>
 				</div>
 				</small>

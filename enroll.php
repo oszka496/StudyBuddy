@@ -17,13 +17,13 @@
 	}
 	switch ($msg){
 		case Course::$COURSE_NOT_FOUND:
-			echo "Error: Course not founds";
+			echo "Error: Course not found";
 			break;
 		case Course::$ALREADY_ENROLLED:
-			echo "Error: You have already enrolled to the course";
+			echo "Error: You have already enrolled on the course";
 			break;
 		case Course::$COURSE_JOINED:
-			echo "Success: Course joined";
+			echo "Success: Enrolled on the course.";
 			break;
 	}
 ?>

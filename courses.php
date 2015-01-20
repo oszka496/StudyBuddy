@@ -8,7 +8,7 @@
 
 	if(isset($_GET['uid'])){
 		$uid = s($_GET['uid']);
-		$query = "CALL show_course('$uid')";
+		$query = "CALL show_course('$uid', '$id')";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
 		if(mysqli_num_rows($result) == 0) { // No universities yet
@@ -17,28 +17,33 @@
 			while ($fetch = mysqli_fetch_row($result)){
 				$cid = $fetch[0];
 				$name = $fetch[1];
-				$lid = $fetch[2];
-				$cstart = $fetch[3];
-				$cend = $fetch[4];
-				$address = $fetch[5];
+				$address = $fetch[2];
+				$isEnrolled = $fetch[3];
 				$courseInfo = "courseDetails.php?cid=".$cid;
 				?>
 					<li class="list-group-item clearfix">
 						<a href="<?php echo $courseInfo ?>" class='listLink'><?php echo $name ?></a>
 						<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
+							<?php if ($isEnrolled == 'N'): ?>
 							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success list-action'>
 								<span class='glyphicon glyphicon-star-empty'></span>
-								&nbsp;Enroll
+								&nbsp;Enroll 
+							</a>
+							<?php else: ?>
+							<a href='resign.php?cid=<?php echo $cid; ?>' class='btn btn-xs btn-warning list-action'>
+								<span class='glyphicon glyphicon-remove'></span>
+								&nbsp;Withdraw
 							</a>
 							<?php
+							endif;
 							if($_SESSION['uType'] == 1)
 								echo "<a href='confirmCourse.php?cid=<?php echo $cid; ?>' class='btn btn-xs btn-success list-action'>
 								<span class='glyphicon glyphicon-star-empty'></span>
 								&nbsp;Adopt
 								</a>"
 							?>
-							<a href='$address' class='btn btn-xs btn-info'>
+							<a href='<?php echo $address; ?>' class='btn btn-xs btn-info'>
 								<span class='glyphicon glyphicon-link'></span>
 								&nbsp;Visit
 							</a>

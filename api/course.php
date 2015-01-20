@@ -142,7 +142,6 @@ class Course
 
 		$query = "CALL choose_course('$userId', '$courseId')";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error(__FILE__.' @'.__LINE__.$mysqli));
-		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 		return Course::$COURSE_JOINED;
 	}
@@ -184,7 +183,6 @@ class Course
 
 		$query = "CALL resign_from_course('$id', '$cid')";
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error(__FILE__.' @'.__LINE__.$mysqli));
-		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 		return Course::$COURSE_LEAVED;
 	}

@@ -4,9 +4,9 @@
     header("Location: index.php");
 ?>
 <ul class="nav nav-tabs" role="tablist" id="myTab">
-  <li role="presentation"><a href="#manager" aria-controls="manager" role="tab" data-toggle="tab">Getting started</a></li>
-  <li role="presentation" class="active"><a href="#observed" aria-controls="observed" role="tab" data-toggle="tab">Observed courses</a></li>
-  <li role="presentation"><a href="#unis" aria-controls="unis" role="tab" data-toggle="tab">Universities</a></li>
+  <li role="presentation"><a href="#manager" aria-controls="manager" role="tab" data-toggle="tab" id="getstartedTab">Getting started</a></li>
+  <li role="presentation" class="active"><a href="#observed" aria-controls="observed" role="tab" data-toggle="tab" id="observedTab">Observed courses</a></li>
+  <li role="presentation"><a href="#unis" aria-controls="unis" role="tab" data-toggle="tab" id="universitiesTab">Universities</a></li>
 </ul>
 
 <div class="tab-content">

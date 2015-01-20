@@ -51,7 +51,8 @@
 			$("#courseform").before(msg);
 			setTimeout(function() {
 				msg.hide(1500, function() {
-					msg.remove();	
+					msg.remove();
+					$("#unis").load("university.php");	
 				});
 			}, 3000);
 		});

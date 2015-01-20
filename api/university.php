@@ -22,14 +22,16 @@ class University {
 			return User::$INSUFFICIENT_PRIVILEGE;
 
 		$query = "CALL check_uni('$uniAddress');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if(mysqli_fetch_row($result) != 0)
 			return University::$UNI_EXISTS;
 		
-		$result->close();
+		$result->free();
 		$mysqli->next_result();
 		$query = "CALL insert_uni('$uniName','$uniAddress', '$tags');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		$result->free();
+		$mysqli->next_result();
 		return University::$ADD_UNI_SUCCESS;
 	}
 
@@ -45,7 +47,9 @@ class University {
 			return User::$INSUFFICIENT_PRIVILEGE;
 
 		$query = "CALL delete_uni('$universityId');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		$result->free();
+		$mysqli->next_result();
 		return University::$DELETE_UNI_SUCCESS;
 	}
 
@@ -83,8 +87,8 @@ class University {
 			return User::$INVALID_DATA;
 
 		$query = "CALL change_uni_".$field."('$uniId', '$value');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		$result->close();
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		$result->free();
 		$mysqli->next_result();
 		return University::$UPDATE_FIELD_SUCCESS;
 	}

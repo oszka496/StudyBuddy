@@ -2,10 +2,6 @@
 	header('P3P: CP="CAO PSA OUR"');
 	include 'inc/functions.php';
 	$id = $_SESSION['id'];
-	/*if (isset($_GET['id'])) 
-	{
-		$id = intval(s($_GET['id']));
-	}*/
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -66,14 +62,12 @@
 		
 		$("#mgrform").ajaxForm({
 			success: function(data) {
-				$("#mgrresult").text(data).show(5000);//.hide(4000);
+				$("#mgrresult").text(data).show(5000).hide(4000);
 			},
 			beforeSerialize: function($form, options) { 
 				options.data = {
 					courseId: $("#suggestCourse").attr("cid")
 				}
-    			/*var sc = $("#suggestCourse");
-    			sc.val(sc.attr("cid"));*/
 			}
 		});
 		

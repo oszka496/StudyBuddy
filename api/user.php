@@ -4,6 +4,8 @@ class User
 	public static $LOGIN_SUCCESS = 0;
 	public static $INVALID_DATA = 1;
 	public static $INSUFFICIENT_PRIVILEGE = 2;
+	public static $LOGOUT_SUCCESS = 3;
+	public static $NOT_LOGGED_IN = 4;
 
 	public static $INCORRECT_LOGIN_OR_PASSWORD = 3;
 	public static $USER_NOT_FOUND = 4;
@@ -85,7 +87,10 @@ class User
 		{
 			$ph = password_hash($password, PASSWORD_DEFAULT);
 			$query = "CALL insert_user('$email', '$ph', '$firstName', '$lastName', '$utype');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+			$result->free();
+			$mysqli->next_result();
+
 			return User::$REGISTER_SUCCESS;
 		} else { 			//invalid data
 			return User::$INVALID_DATA;
@@ -94,10 +99,13 @@ class User
 
 	public static function logout()
 	{
-		if(isset($_SESSION))
+		if(isset($_SESSION)) {
 			session_destroy();
-		else
-			die("<span class='label label-danger'>You're not logged in.</span>");
+			return User::$LOGOUT_SUCCESS;
+		}
+		else {
+			return User::$NOT_LOGGED_IN;
+		}
 	}
 
 	public static function getUser()
@@ -139,11 +147,11 @@ class User
 		
 		//Checking email
 		$query = "CALL get_user('$email');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if(mysqli_num_rows($result) != 0) { 									//email not unique
 			$status = False;
 		}
-		$result->close();
+		$result->free();
 		$mysqli->next_result();
 		// TODO: regex
 		
@@ -159,7 +167,7 @@ class User
 		global $mysqli;
 		$login = s($login);
 		$query = "CALL get_user('$login');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if (mysqli_num_rows($result) == 0)
 			return User::$USER_NOT_FOUND;
 		$fetch = mysqli_fetch_row($result);
@@ -168,8 +176,8 @@ class User
 		$fname = $fetch[2];
 		$lname = $fetch[3];
 		$utype = $fetch[4];
+		$result->free();
 		$mysqli->next_result();
-		$result->close();
 		$tab = [$id, $hash, $fname, $lname, $utype];
 		return $tab;
 	}
@@ -178,12 +186,17 @@ class User
 		global $mysqli;
 		$id = s($id);
 		$query = "CALL get_user_by_id('$id');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		if (mysqli_num_rows($result) == 0)
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		if (mysqli_num_rows($result) == 0) {
+			$result->free();
+			$mysqli->next_result();
 			return User::$USER_NOT_FOUND;
+		}
 		$fetch = mysqli_fetch_row($result);
 		$fname = $fetch[0];
 		$lname = $fetch[1];
+		$result->free();
+		$mysqli->next_result();
 		return [$fname,$lname];
 	}
 
@@ -196,7 +209,9 @@ class User
 		if((s($SESSION_['uType']) != 0) && $id != getUserIdByMail($mail)[0]) 
 			return User::$INSUFFICIENT_PRIVILEGE;
 		$query = "CALL delete_user('$mail');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		$result->free();
+		$mysqli->next_result();
 		return User::$DELETE_SUCCESS;
 	}
 }

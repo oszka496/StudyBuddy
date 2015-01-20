@@ -57,7 +57,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo "$user[1] $user[2]"; ?> <span class="glyphicon glyphicon-chevron-down"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="settings.php">Settings</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul>
               </li>
@@ -67,34 +67,48 @@
         <?php endif; ?>
       </div>
       </nav>
+      <div class="content">
       <?php
         if ($user === null):
       ?>
-      <div class="jumbotron" style="text-align: left;">
-        <h1>Register</h1>
-        <p>
-          StudyBuddy is your best buddy at University!<br>
-          We keep track of your latest assignments and problem sets to help you schedule your duties.<br>
-          <span class="h5">Just drag a link to your bookmarks bar and then click it whenever you are on lecturer's
-          website to add link to your course or find it in our database.</span>
-          <br>
-          <br>
-          Study, buddy!
-        </p>
-        <?php
-          include 'registerForm.php';
-        ?>
-      </div>
+        <div class="jumbotron" style="text-align: left;">
+          <h1>Register</h1>
+          <p>
+            StudyBuddy is your best buddy at University!<br>
+            We keep track of your latest assignments and problem sets to help you schedule your duties.<br>
+            <span class="h5">Just drag a link to your bookmarks bar and then click it whenever you are on lecturer's
+            website to add link to your course or find it in our database.</span>
+            <br>
+            <br>
+            Study, buddy!
+          </p>
+          <?php
+            include 'registerForm.php';
+          ?>
+        </div>
       <?php
         else:
           include "home.php";
         endif;
       ?>
+      </div>
       <footer class="footer">
         <p>© Zuzanna Gniewaszewska, Piotr Staniów 2014</p>
       </footer>
 
     </div> <!-- /container -->
     <script src="inc/bootstrap.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $(".dropdown-menu a").click(function(e) {
+        var t = $(this);
+        var href = t.attr("href");
+        if (href == "logout.php")
+          window.location.href="logout.php";
+        $(".content").load(href);
+        e.preventDefault();
+      });
+    });
+    </script>
 </body>
 </html>

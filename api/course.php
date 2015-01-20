@@ -23,17 +23,23 @@ class Course
 
 		$id = s($_SESSION['id']);
 		$query = "CALL check_course('$address');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		/*
+		if ($stmt = $mysqli->prepare($query)){
+			$stmt->bind_param("s", $address)
+
+		}*/
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if(mysqli_fetch_row($result) != 0){		 
 			return Course::$COURSE_ALREADY_EXISTS;
 		}
-		$result->close();
+		$result->free();
 		$mysqli->next_result();
 
 		$query = "CALL insert_course('$name', '$startDate', '$endDate', '$address', '$universityId');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		$cid = $mysqli->insert_id;
-		
+		$result->free();
+		$mysqli->next_result();
 		Course::addLecturer($id, $cid);
 		return Course::$COURSE_ADDED;
 	}
@@ -48,7 +54,9 @@ class Course
 		$id = s($_SESSION['id']);
 		if(s($_SESSION['uType']) == 0){
 			$query = "CALL delete_course('$courseId');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+			$result->free();
+			$mysqli->next_result();
 		} else 
 			return User::$INSUFFICIENT_PRIVILEGE;
 
@@ -62,8 +70,8 @@ class Course
 			return User::$INVALID_DATA;
 
 		$query = "CALL change_".$field."('$cid','$value');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-		$result->close();
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		$result->free();
 		$mysqli->next_result();
 	}
 
@@ -99,14 +107,14 @@ class Course
 		$cid = s($cid);
 
 		$query = "CALL get_course('$cid');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		
 		if(mysqli_num_rows($result) == 0) 
 			return Course::$COURSE_NOT_FOUND;
 		
 		$out = mysqli_fetch_row($result)[5];
+		$result->free();
 		$mysqli->next_result();
-		$result->close();
 		return $out;
 	}
 
@@ -118,7 +126,7 @@ class Course
 			throw new Exception("Session wasn't set.");
 		
 		$query = "CALL check_course('$courseAddress');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		
 		if(mysqli_num_rows($result) == 0) 
 			return Course::$COURSE_NOT_FOUND;
@@ -126,17 +134,21 @@ class Course
 		$courseId = mysqli_fetch_row($result)[0];
 		$userId = s($_SESSION['id']);
 		
+		$result->free();
 		$mysqli->next_result();
-		$result->close();
+
 		$query = "CALL check_enroll('$userId', '$courseId');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if(mysqli_num_rows($result) != 0) 
 			return Course::$ALREADY_ENROLLED;
 
+		$result->free();
 		$mysqli->next_result();
-		$result->close();
+
 		$query = "CALL choose_course('$userId', '$courseId');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		$result->free();
+		$mysqli->next_result();
 		return Course::$COURSE_JOINED;
 	}
 
@@ -145,8 +157,8 @@ class Course
 		$stat = checkStatus($id);
 		if($stat == 1){
 			$query = "CALL change_lecturer('$cid','$id');";
-			$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
-			$result->close();
+			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+			$result->free();
 			$mysqli->next_result();
 		}
 	}
@@ -159,15 +171,17 @@ class Course
 		$cid = s($cid);
 
 		$query = "CALL check_enroll('$id', '$cid');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		if(mysqli_num_rows($result) == 0) 
 			return Course::$NOT_ENROLLED;
 
+		$result->free();
 		$mysqli->next_result();
-		$result->close();
 
 		$query = "CALL resign_from_course('$id', '$cid');";
-		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		$result->free();
+		$mysqli->next_result();
 		return Course::$COURSE_LEAVED;
 	}
 }

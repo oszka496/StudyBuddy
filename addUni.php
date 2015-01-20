@@ -8,9 +8,10 @@
 	$adr = s($_POST['uniAddress']);
 	$tags = $name;
 	$tags = $tags.s($_POST['tags']);
+	$mail = s($_POST['uniMail']);
 	$msg = "";
 	try {
-		$msg = University::createUniversity($name, $adr, $tags);
+		$msg = University::createUniversity($name, $adr, $tags, $mail);
 	}
 	catch (Exception $e)
 	{

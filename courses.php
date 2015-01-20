@@ -18,7 +18,8 @@
 				$cid = $fetch[0];
 				$name = $fetch[1];
 				$address = $fetch[2];
-				$isEnrolled = $fetch[3];
+				$lid = $fetch[3];
+				$isEnrolled = $fetch[4];
 				$courseInfo = "courseDetails.php?cid=".$cid;
 				?>
 					<li class="list-group-item clearfix">
@@ -37,8 +38,8 @@
 							</a>
 							<?php
 							endif;
-							if($_SESSION['uType'] == 1)
-								echo "<a href='confirmCourse.php?cid=<?php echo $cid; ?>' class='btn btn-xs btn-success list-action'>
+							if($_SESSION['uType'] == 1 && $id != $lid)
+								echo "<a href='confirmCourse.php?cid=$cid' class='btn btn-xs btn-success list-action'>
 								<span class='glyphicon glyphicon-star-empty'></span>
 								&nbsp;Adopt
 								</a>"

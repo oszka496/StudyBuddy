@@ -26,7 +26,7 @@ END;
 DROP PROCEDURE IF EXISTS show_course;
 CREATE PROCEDURE show_course(uid INT(11), id INT(11))
 BEGIN
-	SELECT `courses`.`id`, `courses`.`name`, `courses`.`courseAddress`, `j`.`isEnrolled`
+	SELECT `courses`.`id`, `courses`.`name`, `courses`.`courseAddress`, `courses`.`lecturerId`, `j`.`isEnrolled`
 	FROM `courses`, 
 		(
 			SELECT CASE WHEN `enrolled`.`studentId` IS NULL THEN 'N' ELSE 'Y' END isEnrolled
@@ -76,4 +76,10 @@ DROP PROCEDURE IF EXISTS change_uni;
 CREATE PROCEDURE change_uni(cid INT(11), uid INT(11))
 BEGIN
 	UPDATE `courses` SET `uniId`=uid WHERE `id`=cid;
+END;
+
+DROP PROCEDURE IF EXISTS get_course_by_lecturer;
+CREATE PROCEDURE get_course_by_lecturer(lid INT(11))
+BEGIN
+	SELECT `id`, `name`, `courseAddress` FROM `courses` WHERE `lecturerId` = lid;
 END;

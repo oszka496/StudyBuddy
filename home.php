@@ -37,7 +37,7 @@
 <script>
   $(function() {
     $('#myTab a:first').tab('show');
-    $('.listLink').click(function(e){
+    $(document).on("click", '.listLink', function(e){
       var self = $(this);
       if (!self.hasClass("loaded"))
       {

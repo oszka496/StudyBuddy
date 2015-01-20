@@ -13,8 +13,6 @@
 		mysqli_next_result($mysqli);
 		return;
 	}
-	mysqli_free_result($result);
-	mysqli_next_result($mysqli);
 	echo "<ul id='userCourses' class='list-group'>";
 	while ($fetch = mysqli_fetch_row($result)){
 		$name = $fetch[0];
@@ -41,4 +39,6 @@
 			  </li>";
 	}
 	echo "</ul>";
+	mysqli_free_result($result);
+	mysqli_next_result($mysqli);
 ?>

@@ -55,7 +55,7 @@ class ProblemSet {
 			return ProblemSet::$PS_EXISTS;
 		$query = "CALL insert_ps('$name', '$courseId', '$deadline', '$psAddress')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		mysqli_free_result($result);
+		
 		mysqli_next_result($mysqli);
 		return ProblemSet::$ADD_PS_SUCCESS;
 	}

@@ -47,7 +47,7 @@ class University {
 
 		$query = "CALL delete_uni('$universityId')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		mysqli_free_result($result);
+		//mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 		return University::$DELETE_UNI_SUCCESS;
 	}

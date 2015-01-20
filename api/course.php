@@ -9,6 +9,7 @@ class Course
 	public static $COURSE_LEAVED = 6;
 	public static $ALREADY_ENROLLED = 7;
 	public static $NOT_ENROLLED = 8;
+	public static $LECTURER_CHANGED = 9;
 
 	public static function addCourse($name, $address, $universityId, $startDate, $endDate)
 	{
@@ -153,6 +154,9 @@ class Course
 			$query = "CALL change_lecturer('$cid','$id')";
 			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 			mysqli_next_result($mysqli);
+			return Course::$LECTURER_CHANGED;
+		} else {
+			return User::$INSUFFICIENT_PRIVILEGE;
 		}
 	}
 

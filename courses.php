@@ -23,12 +23,23 @@
 				$address = $fetch[5];
 				?>
 					<li class="list-group-item clearfix">
-						<?php echo $name . " (". substr($address, 0, 50) .")"; ?>
+						<?php echo $name; ?>
 						<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
 							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success list-action'>
 								<span class='glyphicon glyphicon-star-empty'></span>
 								&nbsp;Enroll
+							</a>
+							<?php
+							if($_SESSION['uType'] == 1)
+								echo "<a href='confirmCourse.php?cid=<?php echo $cid; ?>' class='btn btn-xs btn-success list-action'>
+								<span class='glyphicon glyphicon-star-empty'></span>
+								&nbsp;Adopt
+								</a>"
+							?>
+							<a href='$address' class='btn btn-xs btn-info'>
+								<span class='glyphicon glyphicon-link'></span>
+								&nbsp;Visit
 							</a>
 							<a href="deleteCourse.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-danger list-action'>
 								<span class='glyphicon glyphicon-remove'></span>

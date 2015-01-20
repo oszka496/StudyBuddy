@@ -24,11 +24,11 @@
 				<div class='btn-group pull-right' style='margin: 0;'>
 					<a href='problemSets.php?cid=$cid' class='btn btn-xs btn-success listLink'>
 						<span class='glyphicon glyphicon-list'></span>
-						&nbsp;View Problem Sets
+						&nbsp;Problem Sets
 					</a>
 					<a href='$url' class='btn btn-xs btn-info'>
 						<span class='glyphicon glyphicon-link'></span>
-						&nbsp;Visit website
+						&nbsp;Visit
 					</a>
 					<a href='resign.php?cid=$cid' class='btn btn-xs btn-danger course-action'>
 						<span class='glyphicon glyphicon-remove'></span>

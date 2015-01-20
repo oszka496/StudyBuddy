@@ -18,13 +18,16 @@ class University {
 		if(!isSessionSet()) 
 			throw new Exception("Session wasn't set.");
 		$id = s($_SESSION['id']);
-		if(checkStatus($id) != 0) 
+		if(s($_SESSION['uType']) != 0) 
 			return User::$INSUFFICIENT_PRIVILEGE;
 
 		$query = "CALL check_uni('$uniAddress')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		if(mysqli_fetch_row($result) != 0)
+		if(mysqli_fetch_row($result) != 0){
+			mysqli_free_result($result);
+			mysqli_next_result($mysqli);
 			return University::$UNI_EXISTS;
+		}
 		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 

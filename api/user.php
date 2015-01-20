@@ -97,6 +97,23 @@ class User
 		return User::$CONFIRMATION_SUCCESS;
 	}
 
+	private static function verifyLecturerMail($email){
+		global $mysqli;
+		list($emailStart, $emailEnd) = explode("@",$email);
+		
+		$emailEnd = "@".$emailEnd;
+
+		$query = "CALL check_email_end($emailEnd)";
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		$out = true;
+		if (mysqli_num_rows($result) == 0){
+			$out = false;
+		}
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
+		return $out;
+	}
+
 	public static function register($email, $password, $password1, $firstName, $lastName, $utype)
 	{
 		global $mysqli;
@@ -107,6 +124,10 @@ class User
 		$lastName = s($lastName);
 		$conf = sha1(rand());
 		echo "$conf";
+		if($utype == 1)
+			if(!User::verifyLecturerMail($email))
+				$utype = 2;
+
 		if(User::validate($email,$password,$password1,$firstName,$lastName,$utype))
 		{
 			$ph = password_hash($password, PASSWORD_DEFAULT);

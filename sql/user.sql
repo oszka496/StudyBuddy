@@ -47,3 +47,4 @@ CREATE PROCEDURE confirm_email(csalt VARCHAR(255))
 BEGIN
 	UPDATE `user` SET `confirmed` = 1 WHERE `salt`= csalt;
 END;
+

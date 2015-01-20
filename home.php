@@ -26,7 +26,7 @@
   <div role="tabpanel" class="tab-pane active" id="observed">
     <?php include("myCourses.php");?>
   </div>
-
+  
   <div role="tabpanel" class="tab-pane" id="unis">
     <form id="searchUni">
         <div class="input-group">
@@ -37,8 +37,6 @@
         </div><!-- /input-group -->
     </form>
     <?php 
-    mysqli_next_result($mysqli);
-    $result->close();
     include("university.php");?>
   </div>  
 </div>

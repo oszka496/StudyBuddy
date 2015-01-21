@@ -269,6 +269,8 @@ class User
 		$query = "CALL delete_user_by_id('$id')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 		mysqli_next_result($mysqli);
+		if(s($_SESSION['id']) != $id)
+			logout();
 		return User::$DELETE_SUCCESS;
 	}
 

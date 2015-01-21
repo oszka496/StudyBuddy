@@ -213,10 +213,21 @@ class User
 		//Checking email
 		$query = "CALL get_user('$email')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		if(mysqli_num_rows($result) != 0) { 									//email not unique
-			$status = False;
+		if(mysqli_num_rows($result) != 0) { //email not unique
+			$fetch = mysqli_fetch_row($result);
+			if($fetch[5]==1){
+				$status = False;
+				mysqli_free_result($result);
+			}
+			else
+			{
+				mysqli_free_result($result);
+				mysqli_next_result($mysqli);
+				$query = "CALL delete_user('$email')";
+				$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+				
+			}
 		}
-		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 		// TODO: regex
 		
@@ -284,7 +295,6 @@ class User
 			return User::$INSUFFICIENT_PRIVILEGE;
 		$query = "CALL delete_user('$mail')";
 		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
-		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 		return User::$DELETE_SUCCESS;
 	}

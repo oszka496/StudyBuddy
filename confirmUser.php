@@ -17,7 +17,6 @@
 		case User::$CONFIRMATION_SUCCESS:
 			echo "Now you can log in";
 			break;
-		default:
-			echo "Oops";
 	}
+	header("Location: index.php");
 ?>

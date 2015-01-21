@@ -17,7 +17,7 @@
     and click it whenever you are at lecturer's website.<br>
     Our magnificent manager will pop up and you'll be able to add course to your <i>Observed list</i>.
     </blockquote>
-    <a title="Save to StudyBuddy 2"
+    <a title="Save to StudyBuddy"
       href="javascript:document.getElementsByTagName('body')[0]
             .appendChild(document.createElement('script'))
             .setAttribute('src','http://studybuddy-atpwr.rhcloud.com/inc/manager.js');
@@ -35,7 +35,7 @@
             document.getElementsByTagName('body')[0]
             .appendChild(eleml);
             "
-      class="btn btn-warning" style="margin: 10px auto; display: block; width: auto;">Save to StudyBuddy 2</a>
+      class="btn btn-warning" style="margin: 10px auto; display: block; width: auto;">Save to StudyBuddy</a>
   </div>
   <div role="tabpanel" class="tab-pane active" id="observed">
     <?php include("myCourses.php");?>

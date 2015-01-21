@@ -18,20 +18,7 @@
 	<div id='study-buddy-manager'>
 		<span>
 		<h1>StudyBuddy</h1>
-		<?php
-			$user = User::getUser();
-			if ($user == null)
-			{
-				echo "<p>You're not logged in.</p>";
-				echo "<a href='index.php'>Log in</a>";
-			}
-			else
-			{
-				$name = $user[1];
-				$surname = $user[2];
-				echo "<p style='text-align: center;'>Hello, : ".$name." ".$surname."</p>";
-			}
-		?>
+		<p id="name"></p>
 		</span>
 		<form id="mgrform" method="post" action="<?php echo LINK;?>/addProblemSet.php" target="manager">
 		<h4>Add assignment to course</h4>
@@ -62,7 +49,7 @@
 		
 		$("#mgrform").ajaxForm({
 			success: function(data) {
-				$("#mgrresult").text(data).show(5000).hide(4000);
+				$("#mgrresult").text(data).slideDown(5000).delay(5000).slideUp(4000);
 			},
 			beforeSerialize: function($form, options) { 
 				options.data = {
@@ -84,6 +71,7 @@
 			var login = event.data[0][0];
 			$("#userid").val(id);
 			$("#userlogin").val(login);
+			$("#name").text(login);
 			for (var i=1; i<event.data.length; i+=1) {
 				var link = $("<option />", {
 					class: 'link'

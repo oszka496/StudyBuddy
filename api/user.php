@@ -56,6 +56,8 @@ class User
 			$_SESSION['firstName'] = $fname;
 			$_SESSION['lastName'] = $lname;
 			$_SESSION['uType'] = $utype;
+			$_SESSION['hash'] = $hash;
+			$_SESSION['login'] = $login;
 			if (!$api)
 				return User::$LOGIN_SUCCESS;
 			return array(User::$LOGIN_SUCCESS, $hash);
@@ -177,6 +179,8 @@ class User
 		$tab[1] = $_SESSION['firstName'];
 		$tab[2] = $_SESSION['lastName'];
 		$tab[3] = $_SESSION['uType'];
+		$tab[4] = $_SESSION['hash'];
+		$tab[5] = $_SESSION['login'];
 		return $tab;
 	}
 

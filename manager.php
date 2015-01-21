@@ -53,6 +53,8 @@
 			<select id="links" class="form-control" name="psAddress"/>
 		</div>
 		<input type="submit" class="btn btn-success" value="Add problem set">
+		<input type="hidden" value="" name="userid" id="userid">
+		<input type="hidden" value="" name="userlogin" id="userlogin">
 		</form>
 	</div>
 	<script type="text/javascript">
@@ -80,7 +82,11 @@
 
 		function receiveMessage(event)
 		{
-			for (var i=0; i<event.data.length; i+=1) {
+			var id = event.data[0];
+			var login = event.data[1];
+			$("#userid").val(id);
+			$("#userlogin").val(login);
+			for (var i=2; i<event.data.length; i+=1) {
 				var link = $("<option />", {
 					class: 'link'
 				});

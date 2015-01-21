@@ -1,8 +1,19 @@
 <?php
 	require_once 'inc/functions.php';
-	if (!isSessionSet())
-		die("Session not found");
-		//throw new Exception("Session wasn't set.");
+	if (!isSessionSet()) {
+		if (isset($_POST['userid']) && isset($_POST['userlogin']))
+		{
+			$userid = s($_POST['userid']);
+			$userlogin = s($_POST['userlogin']);
+			$auth = User::authenticate($userlogin, $userid);
+			if ($auth != User::$AUTHENTICATION_SUCCESS) {
+				die("Malformed authentication data")
+			}
+		}
+		else {
+			die("Session not found");
+		}
+	}
 
 	if(!arePostFilled(['psAddress','courseId','psName'])){
 		echo("Unable to add Problem Set.");
@@ -12,6 +23,8 @@
 	$psadr = s($_POST['psAddress']);
 	$cid = s($_POST['courseId']);
 	$name = s($_POST['psName']);
+
+
 
 	$date = parseDate(s($_POST['psdate']));
 	$msg = "";

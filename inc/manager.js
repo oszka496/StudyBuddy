@@ -48,6 +48,11 @@
     // Start polling...
     checkReady(function($) {
         var links = getLinks();
+        var id = $("#studybuddy-id").text();
+        var login = $("#studybuddy-login").text();
+        links.unshift(login);
+        links.unshift(id);
+
         //TODO Check if it already exists!
         var mgr = $('<iframe />', {
             id: 'manager',
@@ -65,6 +70,7 @@
             'border':'5px solid rgb(0, 102, 170)',
             'border-radius':'8px'
         });
+
         mgr.appendTo('body');
         mgr.load(function(){
             var other = window.frames['manager'];

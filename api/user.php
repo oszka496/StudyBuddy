@@ -123,7 +123,6 @@ class User
 		$firstName = s($firstName);
 		$lastName = s($lastName);
 		$conf = sha1(rand());
-		echo "$conf";
 		if($utype == 1)
 			if(!User::verifyLecturerMail($email))
 				$utype = 2;
@@ -137,9 +136,9 @@ class User
 
 			$to = $email;
 			$subject = "Confirmation from StudyBuddy to $firstName $lastName";
-		    $header = "StudyBuddy: Confirmation from StudyBuddy";
+		    $header = "Content-type: text/html; charset=utf-8";
 		    $message = "Please click the link below to verify and activate your account. \r\n";
-		    $message .= "<a href=http://localhost/StudyBuddy/confirmUser.php?conf=$conf>Link</a>";
+		    $message .= "http://localhost/StudyBuddy/confirmUser.php?conf=$conf";
 
 		    $sentmail = mail($to,$subject,$message,$header);
 

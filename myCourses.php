@@ -31,7 +31,7 @@
 			  <div>
 				<small>
 				<div class='btn-group pull-right' style='margin: 0;'>
-					<a href='$url' class='btn btn-xs btn-info'>
+					<a href='$url' class='btn btn-xs btn-info' target='_blank'>
 						<span class='glyphicon glyphicon-link'></span>
 						&nbsp;Visit
 					</a>
@@ -41,6 +41,7 @@
 					</a>
 				</div>
 				</small>
+				<h4>Problem sets:</h4>
 			  	<p>Loading content...</p>
 			  </div>";
 	}

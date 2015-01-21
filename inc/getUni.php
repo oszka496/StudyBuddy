@@ -25,4 +25,22 @@ include 'functions.php';
     $( "#suggestUni" ).autocomplete({
       source: availableTags
     });
+    $("#suggestUni").on("keyup", function(e) {
+        var pattern = $(this).val().toLowerCase();
+        $("#universityList li").each(function() {
+          var self = $(this);
+          if (self.text().toLowerCase().indexOf(pattern) == -1)
+          {
+            self.hide();
+          }
+          else
+          {
+            self.show();
+          }
+        });
+      if (e.which == 13)
+      {
+        e.preventDefault();
+      }
+    });
   });

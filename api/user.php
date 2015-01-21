@@ -136,7 +136,7 @@ class User
 
 			$to = $email;
 			$subject = "Confirmation from StudyBuddy to $firstName $lastName";
-		    $header = "Content-type: text/html; charset=utf-8";
+		    $header = "";
 		    $message = "Please click the link below to verify and activate your account. \r\n";
 		    $message .= "http://localhost/StudyBuddy/confirmUser.php?conf=$conf";
 

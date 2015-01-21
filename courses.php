@@ -12,6 +12,7 @@
 		$result = mysqli_query($mysqli, $query) or die(mysqli_error($mysqli));
 
 		if(mysqli_num_rows($result) == 0) { // No universities yet
+			echo "No universities yet";
 		} else {
 			echo "<ul id='courseList' class=\"list-group accordion\">";
 			while ($fetch = mysqli_fetch_row($result)){

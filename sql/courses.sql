@@ -27,12 +27,14 @@ DROP PROCEDURE IF EXISTS show_course;
 CREATE PROCEDURE show_course(uid INT(11), id INT(11))
 BEGIN
 	SELECT `courses`.`id`, `courses`.`name`, `courses`.`courseAddress`, `courses`.`lecturerId`, `j`.`isEnrolled`
-	FROM `courses`, 
+	FROM `courses`
+	INNER JOIN
 		(
-			SELECT CASE WHEN `enrolled`.`studentId` IS NULL THEN 'N' ELSE 'Y' END isEnrolled
+			SELECT `courses`.`id`, CASE WHEN `enrolled`.`studentId` IS NULL THEN 'N' ELSE 'Y' END isEnrolled
 			FROM `courses` 
 			LEFT JOIN `enrolled` ON `courses`.`id` = `enrolled`.`courseId` AND `enrolled`.`studentId`=id
 		) j
+	ON `j`.`id` = `courses`.`id`
 	WHERE `uniId` = uid;
 END;
 

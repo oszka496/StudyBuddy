@@ -1,6 +1,6 @@
 <?php
 	require_once 'inc/functions.php';
-	
+	User::logout();
 	if(!isset($_GET['conf'])){
 		return;
 	}

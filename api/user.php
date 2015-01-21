@@ -135,6 +135,23 @@ class User
 			$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
 			mysqli_next_result($mysqli);
 
+			$to = $email;
+			$subject = "Confirmation from StudyBuddy to $firstName $lastName";
+		    $header = "StudyBuddy: Confirmation from StudyBuddy";
+		    $message = "Please click the link below to verify and activate your account. rn";
+		    $message .= "http://localhost/StudyBuddy/confirmUser.php?conf=$conf";
+
+		    $sentmail = mail($to,$subject,$message,$header);
+
+		    if($sentmail)
+		    {
+		        echo "Your Confirmation link Has Been Sent To Your Email Address.";
+		    }
+		    else
+		    {
+		    echo "Cannot send Confirmation link to your e-mail address";
+		    }
+
 			return User::$REGISTER_SUCCESS;
 		} else { 			//invalid data
 			return User::$INVALID_DATA;

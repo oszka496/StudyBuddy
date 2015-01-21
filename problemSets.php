@@ -1,18 +1,8 @@
-  <script type="text/javascript" src="https://addthisevent.com/libs/ate-latest.min.js"></script>
-<!-- AddThisEvent Settings -->
-    <script type="text/javascript">
-    addthisevent.settings({
-      mouse   : false,
-      css     : false,
-      outlook   : {show:true, text:"Outlook Calendar"},
-      google    : {show:true, text:"Google Calendar"},
-      yahoo   : {show:false, text:"Yahoo Calendar"},
-      ical    : {show:false, text:"iCal Calendar"},
-      hotmail   : {show:false, text:"Hotmail Calendar"},
-      facebook  : {show:true, text:"Facebook Calendar"}
-    });
-    </script>
 
+<!-- AddThisEvent Settings -->
+<script type="text/javascript">
+addthisevent.refresh();
+</script>
 <?php
 	require_once 'inc/functions.php';
 	if(!isSessionSet())
@@ -40,7 +30,7 @@
 				echo "$psname $psdd";
 				echo "<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
-							<a href='$psadr' title=\"Add to Calendar\" class=\"addthisevent\">
+							<a href='$psadr' title=\"Add to Calendar\" class=\"addthisevent btn btn-warning btn-xs\">
 								Add to Calendar
 								<span class=\"arrow\">&nbsp;</span>
 								<span class=\"_summary\">$psname</span>

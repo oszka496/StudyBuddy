@@ -17,3 +17,16 @@ function accordionify(what) {
     });
   }
 }
+
+addthisevent.settings({
+  mouse     : false,
+  css       : false,
+  outlook   : {show:true, text:"Add to Outlook Calendar"},
+  google    : {show:true, text:"Add to Google Calendar"},
+  hotmail   : {show:false, text:"Hotmail Calendar"},
+  yahoo   : {show:false, text:"Yahoo Calendar"},
+  ical      : {show:true, text:"Add to iCal Calendar"},
+  facebook  : {show:false, text:"Facebook Event"},
+  dropdown  : {order:"google,outlook,ical"},
+  callback  : ""
+});

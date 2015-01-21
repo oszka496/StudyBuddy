@@ -3,6 +3,7 @@
 	<meta charset="utf-8">
 	<title>StudyBuddy</title>
 	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="inc/scripts.js"></script>
 </head>
 <body>
 	<form name="courseform" action="addCourse.php" method="post" id="courseform" role="form">		
@@ -52,7 +53,9 @@
 			setTimeout(function() {
 				msg.hide(1500, function() {
 					msg.remove();
-					$("#unis").load("university.php");	
+					$("#unis").load("university.php", function(){
+						accordionify($(".accordion"));
+					});
 				});
 			}, 3000);
 		});

@@ -27,6 +27,8 @@
 		$url = $fetch[2];
 		echo "<li class='list-group-item clearfix'>
 				<a href='problemSets.php?cid=$cid' class='listLink'>".$name."</a>
+			  </li>
+			  <div>
 				<small>
 				<div class='btn-group pull-right' style='margin: 0;'>
 					<a href='$url' class='btn btn-xs btn-info'>
@@ -39,8 +41,8 @@
 					</a>
 				</div>
 				</small>
-			  </li>
-			  <div></div>";
+			  	<p>Loading content...</p>
+			  </div>";
 	}
 	echo "</ul>";
 	mysqli_free_result($result);

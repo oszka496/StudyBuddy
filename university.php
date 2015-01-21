@@ -18,7 +18,7 @@
 	if(mysqli_num_rows($result) == 0) { // No universities yet
 			echo "<div class='alert alert-danger margin'><span class=\"h4\">There are no universities in the database</span></div>";
 	} else {
-		echo "<ul id='universityList' class='list-group'>";
+		echo "<ul id='universityList' class='list-group accordion'>";
 		while ($fetch = mysqli_fetch_row($result)){
 			$uid = $fetch[0];
 			$name = $fetch[1];
@@ -38,8 +38,10 @@
 				</small>
 			  </li>";
 			}
-			else
+			else {
 				echo "<li class='list-group-item'><a href=".$courses." class='listLink'>".$name."</a></li>";
+			}
+			echo "<div><p>Loading content...</p></div>";
 		}
 		echo "</ul>";
 	}

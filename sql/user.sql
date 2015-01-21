@@ -51,6 +51,6 @@ END;
 DROP PROCEDURE IF EXISTS change_password;
 CREATE PROCEDURE change_password(uid INT(11), pass VARCHAR(255))
 BEGIN
-	UPDATE `user` SET `password`=pass;
+	UPDATE `user` SET `password` = pass WHERE `id` = uid;
 END;	
 

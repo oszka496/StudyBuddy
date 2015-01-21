@@ -31,20 +31,23 @@
 					  	</div>
 					  </small>";
 				echo "</li>";
+
+				?>
+
+					<a href=<?php echo $psadr; ?> title="Add to Calendar" class="addthisevent">
+						Add to Calendar
+						<span class="arrow">&nbsp;</span>
+						<span class="_summary"><?php echo $psname; ?></span>
+						<span class="_description">Description of the event</span>
+						<span class="_all_day_event">true</span>
+					</a>
+				<?php 
+				
 			}
 			echo "</ul>";
 			mysqli_free_result($result);
 			mysqli_next_result($mysqli);
-			?>
-
-			<a href=<?php echo $psadr; ?> title="Add to Calendar" class="addthisevent">
-				Add to Calendar
-				<span class="arrow">&nbsp;</span>
-				<span class="_summary"><?php echo $psname; ?></span>
-				<span class="_description">Description of the event</span>
-				<span class="_all_day_event">true</span>
-			</a>
-		<?php 
+			
 		}
 		include("addProblemSetForm.php");
 	}

@@ -13,7 +13,7 @@
 
 		if(mysqli_num_rows($result) == 0) { // No universities yet
 		} else {
-			echo "<ul id='courseList' class=\"list-group\">";
+			echo "<ul id='courseList' class=\"list-group accordion\">";
 			while ($fetch = mysqli_fetch_row($result)){
 				$cid = $fetch[0];
 				$name = $fetch[1];
@@ -23,7 +23,7 @@
 				$courseInfo = "courseDetails.php?cid=".$cid;
 				?>
 					<li class="list-group-item clearfix">
-						<a href="<?php echo $courseInfo ?>" class='listLink'><?php echo $name ?></a>
+						<a href="<?php echo $courseInfo ?>"><?php echo $name ?></a>
 						<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
 							<?php if ($isEnrolled == 'N'): ?>
@@ -55,6 +55,7 @@
 						</div>
 						</small>
 					</li>
+					<div><p>Loading content...</p></div>
 				<?php
 			}
 			echo "</ul>";
@@ -64,3 +65,8 @@
 		include('addCourseForm.php');
 	}
 ?>
+<script type="text/javascript">
+	$(document).ready(function(){
+		//accordionify("#courseList");
+	});
+</script>

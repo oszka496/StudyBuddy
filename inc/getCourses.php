@@ -1,8 +1,32 @@
 <?php
   require_once 'functions.php';
-  $id = s($_GET['id']);
-  $id = intval($id);
-  $query = "CALL show_my_courses($id)";
+  if (isset($_GET['id']) && isset($_GET['login']))
+  {
+    $userid = s($_GET['id']);
+    $userlogin = s($_GET['login']);
+    $autho = User::authenticate($userlogin, $userid);
+    if ($autho != User::$AUTHENTICATION_SUCCESS) {
+      header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+      header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modified
+      header ("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+      header ("Pragma: no-cache"); // HTTP/1.0
+      header("Content-Type: application/x-javascript; charset=utf-8");
+      echo "alert('Malformed credentials.');";
+      exit();
+    }
+  }
+  else {
+      header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); // Date in the past
+    header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); // always modified
+    header ("Cache-Control: no-cache, must-revalidate"); // HTTP/1.1
+    header ("Pragma: no-cache"); // HTTP/1.0
+    header("Content-Type: application/x-javascript; charset=utf-8");
+    echo "alert('Insufficent data to verify user. Link is malformed.');";
+    exit();
+  }
+  $uid = User::getUserIdByMail($userlogin);
+  $uid = intval($uid[0]);
+  $query = "CALL show_my_courses($uid)";
   $sql = mysqli_query($mysqli, $query) or die(__FILE__." (".__LINE__.")".": ".mysqli_error($mysqli));
   $i=0;
   $results = array();

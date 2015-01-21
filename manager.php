@@ -1,7 +1,6 @@
 <?php
 	header('P3P: CP="CAO PSA OUR"');
 	include 'inc/functions.php';
-	$id = $_SESSION['id'];
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -13,7 +12,6 @@
 	<script type="text/javascript" src="inc/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="inc/jquery-ui.js"></script>
 	<script type="text/javascript" src="inc/jquery.form.js"></script>
-	<script type="text/javascript" src="inc/getCourses.php?id=<?php echo $id;?>"></script>
 	<script src="inc/bootstrap.min.js"></script>
 </head>
 <body>
@@ -82,11 +80,11 @@
 
 		function receiveMessage(event)
 		{
-			var id = event.data[0];
-			var login = event.data[1];
+			var id = event.data[0][1];
+			var login = event.data[0][0];
 			$("#userid").val(id);
 			$("#userlogin").val(login);
-			for (var i=2; i<event.data.length; i+=1) {
+			for (var i=1; i<event.data.length; i+=1) {
 				var link = $("<option />", {
 					class: 'link'
 				});
@@ -94,6 +92,13 @@
 				link.attr("value", event.data[i][0]);
 				link.appendTo(list);
 			}
+
+			$.get("inc/getCourses.php", {
+				"id": id,
+				"login": login
+			}, function(data) {
+				eval(data);
+			});
 		}
 	});
 	</script>

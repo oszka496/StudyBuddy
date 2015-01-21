@@ -80,7 +80,7 @@ class User
 			return array(User::$INVALID_DATA, "");
 		}
 		$data = User::getUserIdByMail($login);
-		if($data == $USER_NOT_FOUND)
+		if($data == User::$USER_NOT_FOUND)
 			return array(User::$INCORRECT_LOGIN_OR_PASSWORD, "");
 		$dbhash = $data[1];
 		if ($hash === $dbhash)
@@ -239,7 +239,7 @@ class User
 		return $status;
 	}
 
-	private static function getUserIdByMail($login){
+	public static function getUserIdByMail($login){
 		global $mysqli;
 		$login = s($login);
 		$query = "CALL get_user('$login')";

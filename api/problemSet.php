@@ -36,8 +36,6 @@ class ProblemSet {
 
 	public static function addProblemSet($name, $courseId, $deadline, $psAddress){
 		global $mysqli;
-		if(!isSessionSet()) 
-			throw new Exception("Session wasn't set.");
 		$name = s($name);
 		$courseId = s($courseId);
 		$deadline = s($deadline);

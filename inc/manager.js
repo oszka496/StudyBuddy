@@ -50,8 +50,7 @@
         var links = getLinks();
         var id = $("#studybuddy-id").text();
         var login = $("#studybuddy-login").text();
-        links.unshift(login);
-        links.unshift(id);
+        links.unshift([login, id]);
 
         //TODO Check if it already exists!
         var mgr = $('<iframe />', {

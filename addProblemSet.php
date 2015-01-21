@@ -1,16 +1,17 @@
 <?php
 	require_once 'inc/functions.php';
-	if (!isSessionSet()) {
-		if (isset($_POST['userid']) && isset($_POST['userlogin']))
-		{
-			$userid = s($_POST['userid']);
-			$userlogin = s($_POST['userlogin']);
-			$auth = User::authenticate($userlogin, $userid);
-			if ($auth != User::$AUTHENTICATION_SUCCESS) {
-				die("Malformed authentication data")
-			}
+	
+	if (isset($_POST['userid']) && isset($_POST['userlogin']))
+	{
+		$userid = s($_POST['userid']);
+		$userlogin = s($_POST['userlogin']);
+		$auth = User::authenticate($userlogin, $userid);
+		if ($auth != User::$AUTHENTICATION_SUCCESS) {
+			die("Malformed authentication data");
 		}
-		else {
+	}
+	else {
+		if (!isSessionSet()) {
 			die("Session not found");
 		}
 	}

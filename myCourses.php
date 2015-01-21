@@ -20,19 +20,15 @@
 		mysqli_next_result($mysqli);
 		return;
 	}
-	echo "<ul id='userCourses' class='list-group'>";
+	echo "<ul id='userCourses' class='list-group accordion'>";
 	while ($fetch = mysqli_fetch_row($result)){
 		$name = $fetch[0];
 		$cid = $fetch[1];
 		$url = $fetch[2];
 		echo "<li class='list-group-item clearfix'>
-				$name
+				<a href='problemSets.php?cid=$cid' class='listLink'>".$name."</a>
 				<small>
 				<div class='btn-group pull-right' style='margin: 0;'>
-					<a href='problemSets.php?cid=$cid' class='btn btn-xs btn-success listLink'>
-						<span class='glyphicon glyphicon-list'></span>
-						&nbsp;Problem Sets
-					</a>
 					<a href='$url' class='btn btn-xs btn-info'>
 						<span class='glyphicon glyphicon-link'></span>
 						&nbsp;Visit
@@ -43,7 +39,8 @@
 					</a>
 				</div>
 				</small>
-			  </li>";
+			  </li>
+			  <div></div>";
 	}
 	echo "</ul>";
 	mysqli_free_result($result);

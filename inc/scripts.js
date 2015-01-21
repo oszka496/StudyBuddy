@@ -8,7 +8,7 @@ function accordionify(what) {
       beforeActivate: function(event, ui){
         var link = ui.newHeader.children("a");
         var href = link.attr("href");
-        ui.newPanel.load(href, function() {
+        ui.newPanel.children("p").load(href, function() {
           $(document).find(".accordion").each(function() {
             accordionify($(this));
           });

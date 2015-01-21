@@ -37,26 +37,6 @@
 <script>
   $(function() {
     $('#myTab a:first').tab('show');
-    /*$(document).on("click", '.listLink', function(e){
-      var self = $(this);
-      if (!self.hasClass("loaded"))
-      {
-        var uni = $("<div></div>").addClass('listContent');
-        var href = self.attr('href');
-        uni.load(href, function() {
-          if (!self.hasClass("btn"))
-            self.parent().append(uni);
-          else
-            self.parent().after(uni);
-        });
-        self.addClass("loaded");
-      }
-      else
-      {
-        self.nextAll(".listContent").toggle();
-      }
-      e.preventDefault();
-    });*/
     accordionify($(".accordion"));
 
     $(document).on("click", ".list-action", function(e){

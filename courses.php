@@ -25,38 +25,40 @@
 				?>
 					<li class="list-group-item clearfix">
 						<a href="<?php echo $courseInfo ?>"><?php echo $name ?></a>
-						<small>
-						<div class='btn-group pull-right' style='margin: 0;'>
-							<?php if ($isEnrolled == 'N'): ?>
-							<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success list-action'>
-								<span class='glyphicon glyphicon-star-empty'></span>
-								&nbsp;Enroll 
-							</a>
-							<?php else: ?>
-							<a href='resign.php?cid=<?php echo $cid; ?>' class='btn btn-xs btn-warning list-action'>
-								<span class='glyphicon glyphicon-remove'></span>
-								&nbsp;Withdraw
-							</a>
-							<?php
-							endif;
-							if($_SESSION['uType'] == 1 && $id != $lid)
-								echo "<a href='confirmCourse.php?cid=$cid' class='btn btn-xs btn-success list-action'>
-								<span class='glyphicon glyphicon-star-empty'></span>
-								&nbsp;Adopt
-								</a>"
-							?>
-							<a href='<?php echo $address; ?>' class='btn btn-xs btn-info'>
-								<span class='glyphicon glyphicon-link'></span>
-								&nbsp;Visit
-							</a>
-							<a href="deleteCourse.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-danger list-action'>
-								<span class='glyphicon glyphicon-remove'></span>
-								&nbsp;Delete
-							</a>
-						</div>
-						</small>
 					</li>
-					<div><p>Loading content...</p></div>
+					<div>
+						<small>
+							<div class='btn-group pull-right' style='margin: 0;'>
+								<a href='<?php echo $address; ?>' target="_blank" class='btn btn-xs btn-info'>
+									<span class='glyphicon glyphicon-link'></span>
+									&nbsp;Visit
+								</a>
+								<?php if ($isEnrolled == 'N'): ?>
+								<a href="enroll.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-success list-action'>
+									<span class='glyphicon glyphicon-star-empty'></span>
+									&nbsp;Enroll 
+								</a>
+								<?php else: ?>
+								<a href='resign.php?cid=<?php echo $cid; ?>' class='btn btn-xs btn-warning list-action'>
+									<span class='glyphicon glyphicon-remove'></span>
+									&nbsp;Withdraw
+								</a>
+								<?php
+								endif;
+								if($_SESSION['uType'] == 1 && $id != $lid)
+									echo "<a href='confirmCourse.php?cid=$cid' class='btn btn-xs btn-success list-action'>
+									<span class='glyphicon glyphicon-star-empty'></span>
+									&nbsp;Adopt
+									</a>"
+								?>
+								<a href="deleteCourse.php?cid=<?php echo $cid; ?>" class='btn btn-xs btn-danger list-action'>
+									<span class='glyphicon glyphicon-remove'></span>
+									&nbsp;Delete
+								</a>
+							</div>
+						</small>
+						<p>Loading content...</p>
+					</div>
 				<?php
 			}
 			echo "</ul>";
@@ -66,8 +68,3 @@
 		include('addCourseForm.php');
 	}
 ?>
-<script type="text/javascript">
-	$(document).ready(function(){
-		//accordionify("#courseList");
-	});
-</script>

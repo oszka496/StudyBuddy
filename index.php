@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link href="css/jquery-ui.css" rel="stylesheet">
     <title>StudyBuddy</title>
 
     <!-- Bootstrap core CSS -->

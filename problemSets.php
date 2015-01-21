@@ -33,9 +33,11 @@ addthisevent.refresh();
 							<a href='$psadr' title=\"Add to Calendar\" class=\"addthisevent btn btn-warning btn-xs\">
 								Add to Calendar
 								<span class=\"arrow\">&nbsp;</span>
+								<span class=\"_start\">$psdd</span>
+								<span class=\"_end\">$psdd</span>
 								<span class=\"_summary\">$psname</span>
-								<span class=\"_description\">Description of the event</span>
 								<span class=\"_all_day_event\">true</span>
+								<span class=\"_date_format\">YYYY/MM/DD</span>
 							</a>
 							<a href=\"$psadr\" class='btn btn-xs btn-info' target='_newtab'>
 								View&nbsp;<span class='glyphicon glyphicon-chevron-right'></span>

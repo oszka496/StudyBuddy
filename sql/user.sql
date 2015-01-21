@@ -36,6 +36,12 @@ BEGIN
 	DELETE FROM `user` WHERE `email` = em;
 END;
 
+DROP PROCEDURE IF EXISTS delete_user_by_id;
+CREATE PROCEDURE delete_user_by_id(uid INT(11))
+BEGIN
+	DELETE FROM `user` WHERE `id` = uid;
+END;
+
 DROP PROCEDURE IF EXISTS get_user_by_id;
 CREATE PROCEDURE get_user_by_id(uid INT(11))
 BEGIN
@@ -51,6 +57,6 @@ END;
 DROP PROCEDURE IF EXISTS change_password;
 CREATE PROCEDURE change_password(uid INT(11), pass VARCHAR(255))
 BEGIN
-	UPDATE `user` SET `password`=pass;
+	UPDATE `user` SET `password` = pass WHERE `id` = uid;
 END;	
 

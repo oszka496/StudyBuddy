@@ -20,19 +20,21 @@
     <a title="Save to StudyBuddy 2"
       href="javascript:document.getElementsByTagName('body')[0]
             .appendChild(document.createElement('script'))
-            .setAttribute('src','http://studybuddy-atpwr.rhcloud.com/inc/manager.js');
+            .setAttribute('src','http://localhost/StudyBuddy/inc/manager.js');
             var elemid = document.createElement('var');
             elemid.innerHTML = '<?php echo $_SESSION['hash']; ?>';
+            elemid.setAttribute('id', 'studybuddy-id');
+            elemid.setAttribute('style', 'display: none;');
             document.getElementsByTagName('body')[0]
-            .appendChild(elemid)
-            .setAttribute('id', 'studybuddy-id')
-            .setAttribute('style', 'display: none;');
+            .appendChild(elemid);
+            
             var eleml = document.createElement('var');
             eleml.innerHTML = '<?php echo $_SESSION['login']; ?>';
+            eleml.setAttribute('id', 'studybuddy-login');
+            eleml.setAttribute('style', 'display: none;');
             document.getElementsByTagName('body')[0]
-            .appendChild(eleml)
-            .setAttribute('id', 'studybuddy-login')
-            .setAttribute('style', 'display: none;');"
+            .appendChild(eleml);
+            "
       class="btn btn-warning" style="margin: 10px auto; display: block; width: auto;">Save to StudyBuddy 2</a>
   </div>
   <div role="tabpanel" class="tab-pane active" id="observed">

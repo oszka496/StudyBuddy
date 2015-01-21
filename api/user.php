@@ -21,6 +21,7 @@ class User
 
 	public static $CONFIRMATION_SUCCESS = 7;
 	public static $ACCOUNT_NOT_CONFIRMED = 8;
+	public static $CHANGE_PASSWORD_SUCCESS = 9;
 
 	public static function login($login, $password, $api = false)
 	{	
@@ -249,9 +250,10 @@ class User
 		$fetch = mysqli_fetch_row($result);
 		$fname = $fetch[0];
 		$lname = $fetch[1];
+		$pass = $fetch[2];
 		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
-		return [$fname,$lname];
+		return [$fname,$lname,$pass];
 	}
 
 	public static function deleteUser($mail){
@@ -267,6 +269,15 @@ class User
 		mysqli_free_result($result);
 		mysqli_next_result($mysqli);
 		return User::$DELETE_SUCCESS;
+	}
+
+	public static function changePassword($pass){
+
+		$query = "CALL change_password(s($_SESSION[$id]), s($pass))";
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		mysqli_free_result($result);
+		mysqli_next_result($mysqli);
+		return User::$CHANGE_PASSWORD_SUCCESS;
 	}
 }
 

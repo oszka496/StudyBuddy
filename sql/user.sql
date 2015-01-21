@@ -39,7 +39,7 @@ END;
 DROP PROCEDURE IF EXISTS get_user_by_id;
 CREATE PROCEDURE get_user_by_id(uid INT(11))
 BEGIN
-	SELECT `fname`, `lname` FROM `user` WHERE `id` = uid;
+	SELECT `fname`, `lname`, `password` FROM `user` WHERE `id` = uid;
 END;
 
 DROP PROCEDURE IF EXISTS confirm_email;
@@ -47,4 +47,10 @@ CREATE PROCEDURE confirm_email(csalt VARCHAR(255))
 BEGIN
 	UPDATE `user` SET `confirmed` = 1 WHERE `salt`= csalt;
 END;
+
+DROP PROCEDURE IF EXISTS change_password;
+CREATE PROCEDURE change_password(uid INT(11), pass VARCHAR(255))
+BEGIN
+	UPDATE `user` SET `password`=pass;
+END;	
 

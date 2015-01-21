@@ -56,7 +56,7 @@
         var mgr = $('<iframe />', {
             id: 'manager',
             name: 'manager',
-            src: 'http://localhost/StudyBuddy/manager.php'
+            src: 'http://studybuddy-atpwr.rhcloud.com/manager.php'
         });
         mgr.css({
             'display':'block',

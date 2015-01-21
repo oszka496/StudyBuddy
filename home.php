@@ -20,7 +20,7 @@
     <a title="Save to StudyBuddy 2"
       href="javascript:document.getElementsByTagName('body')[0]
             .appendChild(document.createElement('script'))
-            .setAttribute('src','http://localhost/StudyBuddy/inc/manager.js');
+            .setAttribute('src','http://studybuddy-atpwr.rhcloud.com/inc/manager.js');
             var elemid = document.createElement('var');
             elemid.innerHTML = '<?php echo $_SESSION['hash']; ?>';
             elemid.setAttribute('id', 'studybuddy-id');

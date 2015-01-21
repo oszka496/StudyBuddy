@@ -19,7 +19,7 @@
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
   
     <!-- AddThisEvent -->
-    <link href="css/add-event.css" rel="stylesheet">
+    <link type="text/css" href="css/add-event.css" rel="stylesheet">
     <script type="text/javascript" src="https://addthisevent.com/libs/1.5.8/ate.min.js"></script>
     <!-- AddThisEvent Settings -->
     <script type="text/javascript">

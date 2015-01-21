@@ -138,8 +138,8 @@ class User
 			$to = $email;
 			$subject = "Confirmation from StudyBuddy to $firstName $lastName";
 		    $header = "StudyBuddy: Confirmation from StudyBuddy";
-		    $message = "Please click the link below to verify and activate your account. rn";
-		    $message .= "http://localhost/StudyBuddy/confirmUser.php?conf=$conf";
+		    $message = "Please click the link below to verify and activate your account. \r\n";
+		    $message .= "<a href=http://localhost/StudyBuddy/confirmUser.php?conf=$conf>Link</a>";
 
 		    $sentmail = mail($to,$subject,$message,$header);
 

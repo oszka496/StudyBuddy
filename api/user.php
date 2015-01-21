@@ -260,6 +260,18 @@ class User
 		return [$fname,$lname,$pass];
 	}
 
+	public static function deleteUserById($id){
+		global $mysqli;
+		if(!isSessionSet()) 
+			throw new Exception("Session wasn't set.");
+		if((s($_SESSION['uType']) != 0) && (s($_SESSION['id']) != $id))
+			return User::$INSUFFICIENT_PRIVILEGE;
+		$query = "CALL delete_user_by_id('$id')";
+		$result = mysqli_query($mysqli, $query) or die(__FILE__.' @'.__LINE__.mysqli_error($mysqli));
+		mysqli_next_result($mysqli);
+		return User::$DELETE_SUCCESS;
+	}
+
 	public static function deleteUser($mail){
 		global $mysqli;
 		$mail = s($mail);

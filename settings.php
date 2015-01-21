@@ -11,7 +11,7 @@
       </div>
       <button type="submit" class="btn btn-success" id="login">Change password</button>
 </form>
-
+<a href='deleteUser.php'>Delete account</a>
 <script type="text/javascript">
 $(document).ready( function() {
 	$('#editDataForm').validate({

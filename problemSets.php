@@ -1,3 +1,18 @@
+  <script type="text/javascript" src="https://addthisevent.com/libs/ate-latest.min.js"></script>
+<!-- AddThisEvent Settings -->
+    <script type="text/javascript">
+    addthisevent.settings({
+      mouse   : false,
+      css     : false,
+      outlook   : {show:true, text:"Outlook Calendar"},
+      google    : {show:true, text:"Google Calendar"},
+      yahoo   : {show:false, text:"Yahoo Calendar"},
+      ical    : {show:false, text:"iCal Calendar"},
+      hotmail   : {show:false, text:"Hotmail Calendar"},
+      facebook  : {show:true, text:"Facebook Calendar"}
+    });
+    </script>
+
 <?php
 	require_once 'inc/functions.php';
 	if(!isSessionSet())
@@ -25,24 +40,19 @@
 				echo "$psname $psdd";
 				echo "<small>
 						<div class='btn-group pull-right' style='margin: 0;'>
+							<a href='$psadr' title=\"Add to Calendar\" class=\"addthisevent\">
+								Add to Calendar
+								<span class=\"arrow\">&nbsp;</span>
+								<span class=\"_summary\">$psname</span>
+								<span class=\"_description\">Description of the event</span>
+								<span class=\"_all_day_event\">true</span>
+							</a>
 							<a href=\"$psadr\" class='btn btn-xs btn-info' target='_newtab'>
 								View&nbsp;<span class='glyphicon glyphicon-chevron-right'></span>
 					  		</a>
 					  	</div>
 					  </small>";
 				echo "</li>";
-
-				?>
-
-					<a href=<?php echo $psadr; ?> title="Add to Calendar" class="addthisevent">
-						Add to Calendar
-						<span class="arrow">&nbsp;</span>
-						<span class="_summary"><?php echo $psname; ?></span>
-						<span class="_description">Description of the event</span>
-						<span class="_all_day_event">true</span>
-					</a>
-				<?php 
-				
 			}
 			echo "</ul>";
 			mysqli_free_result($result);

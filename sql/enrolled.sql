@@ -38,7 +38,10 @@ BEGIN
 	`courses`.`name` AS `cName`, `courses`.`lecturerId`, `courses`.`courseStart`, 
 	`courses`.`courseEnd`, `courses`.`courseAddress`,
 	`problemset`.`name` AS `psName`, `problemset`.`deadline`, `problemset`.`psAddress`
-	FROM `enrolled` INNER JOIN `courses` INNER JOIN `university` INNER JOIN `problemset`
-	WHERE `enrolled`.`studentId` = uid AND `courses`.`id` = `problemset`.`courseId`
-	ORDER BY `courses`.`courseStart`;
+	FROM `enrolled`
+	INNER JOIN `courses` ON `enrolled`.`courseId` = `courses`.`id`
+	INNER JOIN `university` ON `university`.`id` = `courses`.`uniId`
+	INNER JOIN `problemset` ON `problemset`.`courseId` = `courses`.`id`
+	WHERE `enrolled`.`studentId` = uid
+	ORDER BY `courses`.`id`, `courses`.`courseStart`, `problemset`.`deadline`;
 END;

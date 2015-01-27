@@ -13,6 +13,8 @@
 <tr><td><a href="shouldLogOut.html">shouldLogOut</a></td></tr>
 <tr><td><a href="shouldLogInAsStudent.html">shouldLogInAsStudent</a></td></tr>
 <tr><td><a href="shouldAddCourse.html">shouldAddCourse</a></td></tr>
+<tr><td><a href="shouldEnrollOnCourse.html">shouldEnrollOnCourse</a></td></tr>
+<tr><td><a href="shouldLogOut.html">shouldLogOut</a></td></tr>
 <tr><td><a href="tests">shouldLogInAsAdmin</a></td></tr>
 <tr><td><a href="shouldRemoveUniversity.html">shouldRemoveUniversity</a></td></tr>
 </tbody></table>

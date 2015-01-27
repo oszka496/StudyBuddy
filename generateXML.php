@@ -1,6 +1,7 @@
 <?php
 header('Content-type: application/xml; charset="utf-8"');
-error_reporting( E_ALL );
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 ?><?xml version="1.0" encoding="utf-8"?>
 <?php
 require_once 'inc/functions.php';

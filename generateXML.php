@@ -4,8 +4,8 @@ header('Content-type: application/xml; charset="utf-8"');
 <?php
 require_once 'inc/functions.php';
 
-if(filled($_GET['id']))
-	$id = s($_GET['id']);
+if(filled($_GET['email']))
+	$id = getUserIdByMail(s($_GET['id']))[0];
 else
 	exit();
 

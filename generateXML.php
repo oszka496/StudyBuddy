@@ -6,7 +6,7 @@ error_reporting( E_ALL );
 require_once 'inc/functions.php';
 
 if(filled($_GET['email']))
-	$id = getUserIdByMail(s($_GET['id']))[0];
+	$id = User::getUserIdByMail(s($_GET['email']))[0];
 else
 	exit();
 
